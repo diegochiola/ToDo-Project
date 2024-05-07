@@ -6,7 +6,7 @@ const email = ref('');
 const password = ref('');
 
 //createAccount
-async function signUp () {
+async function createAccount() {
     const {data, error} = await supabase.auth.signUp({
         email: email.value,
         password: password.value
@@ -48,7 +48,7 @@ function logOut() {
     <br />
     <br />
     <div>
-      <button @click="signUp">Sing up</button>
+      <button @click="createAccount">Sing up</button>
       <br>
       <br>
       <button @click="logOut">Log Out</button>
