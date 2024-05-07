@@ -22,7 +22,8 @@ div{
   justify-content: space-between;
   height: 60px;
   max-width: 100vw;
-  background-color: dodgerblue;
+  background-color:var(--purple);
+  color : var(--white);
 }
 li {
   list-style: none;
@@ -31,5 +32,8 @@ a {
   color: #fff;
   text-decoration: none;
   cursor: pointer;
+}
+a:hover {
+  color: var(--yellow);
 }
 </style>

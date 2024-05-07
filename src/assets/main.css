@@ -1,3 +1,13 @@
+:root {
+  --purple: #A18AFF;
+  --ligth-purle: #CA8BFE;
+  --pink: #FD99AF;
+  --sky-blue: #3FD4F4;
+  --yellow:  #FAC608;
+  --gray: #717082;
+  --white: #fff;
+}
+
 *,
 html,
 body {
