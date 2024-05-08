@@ -3,8 +3,6 @@ import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia' //coge el dato d euna store y lo convierte en ref para usarlo
 import { useRouter } from 'vue-router'
 import { useUserStore } from './stores/user.js'
-import NavBarComponent from './components/NavBarComponent.vue'
-
 
 
 const router = useRouter()
@@ -31,7 +29,6 @@ onMounted(async () => { //cuando el html haya cargado
 <template>
 
 <section>
-    <NavBarComponent />
     <router-view class="app-main" /> 
 </section>
 
