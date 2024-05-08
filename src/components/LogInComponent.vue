@@ -92,6 +92,7 @@ button:hover {
   cursor: pointer;
   color: var(--yellow);
 }
+
 .forgot {
   color: var(--purple);
   text-decoration: none;
@@ -101,4 +102,5 @@ button:hover {
   color: var(--yellow);
   cursor: pointer;
 }
+
 </style>

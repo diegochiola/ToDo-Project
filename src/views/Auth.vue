@@ -63,6 +63,7 @@ p{
 a{
   color: var(--purple);
   text-decoration: none;
+  font-size: 13px;
 }
 a:hover{
   color: var(--yellow);

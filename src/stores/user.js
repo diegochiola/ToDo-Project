@@ -25,7 +25,11 @@ export const useUserStore = defineStore('user', {
         password: password
       })
       if (error) throw error
-      if (data) this.user = data
+      if (data){
+        this.user = data
+        this.successMessage = '¡User created successfully!'
+        //router.push('/')
+      } 
     },
     async login(email, password) {
       const { data, error } = await supabase.auth.signInWithPassword({
