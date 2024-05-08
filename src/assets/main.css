@@ -1,3 +1,14 @@
+:root {
+  --purple: #A18AFF;
+  --ligth-purle: #CA8BFE;
+  --pink: #FD99AF;
+  --sky-blue: #3FD4F4;
+  --yellow:  #FAC608;
+  --gray: #717082;
+  --ligth-gray: #f1f1f1;
+  --white: #fff;
+}
+
 *,
 html,
 body {
@@ -8,9 +19,5 @@ body {
 }
 
 body {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  background-color: aliceblue;
+  background-color:#FBFBFB;
 }
