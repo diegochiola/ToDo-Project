@@ -36,7 +36,7 @@ function toggleUser() {
 
 <style scoped>
 .auth{
-  padding-top: 100px;
+  padding-top: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;

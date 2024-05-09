@@ -6,7 +6,10 @@
   --yellow:  #FAC608;
   --gray: #717082;
   --ligth-gray: #f1f1f1;
-  --white: #fff;
+  --white: #FFF;
+  --light: #EEE;
+	--grey: #888;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 *,
@@ -19,5 +22,5 @@ body {
 }
 
 body {
-  background-color:#FBFBFB;
+  background-color:var(--light);
 }

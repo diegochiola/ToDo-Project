@@ -27,8 +27,8 @@ export const useUserStore = defineStore('user', {
       if (error) throw error
       if (data){
         this.user = data
-        this.successMessage = '¡User created successfully!'
-        //router.push('/')
+        alert('¡User created successfully!'); //alert
+        router.push('/'); //que reddiriga al sign in
       } 
     },
     async login(email, password) {

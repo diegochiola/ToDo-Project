@@ -71,7 +71,7 @@ button {
   width: 400px;
   height: 500px;
   border-radius: 45px;
-  box-shadow: 0 0 15px 0 var(--gray);
+  box-shadow: var(--shadow);
   color: var(--gray);
 }
 .form-elements {
