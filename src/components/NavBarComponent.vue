@@ -28,7 +28,7 @@ div {
 .nav-list {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   height: 60px;
   max-width: 100vw;
   background-color: var(--purple);
