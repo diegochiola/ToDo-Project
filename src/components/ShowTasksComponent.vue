@@ -14,6 +14,16 @@ async function fetchTasks() {
     .order('id', { ascending: false })
   tasks.value = fetchedTasks || []
 }
+
+//detalle de color segun status
+function getTaskClass(status) {
+  const statusClassMap = {
+    'to-do': 'pink-border', // Clase de borde amarillo para estado "to-do"
+    'in-progress': 'yellow-border', // Clase de borde rosa para estado "in-progress"
+    'done': 'green-border' // Clase de borde verde para estado "done"
+  }
+  return statusClassMap[status] || '' // Devuelve la clase de borde correspondiente o una cadena vacía si no se encuentra
+}
 onMounted(fetchTasks)
 watch(() => taskStore.tasks, () => {
   fetchTasks()
@@ -29,7 +39,8 @@ watch(() => taskStore.tasks, () => {
       <div v-if="tasks.length === 0">
         <p>No tasks available</p>
       </div>
-      <div v-for="task in tasks" :key="task.id" class="todo-list">
+      <div v-for="task in tasks" :key="task.id" class="todo-list" :class="getTaskClass(task.status)"
+>
         <div class="task-details">
           <h4>{{ task.title }}</h4>
           <p>Status: {{ task.status }}</p>
@@ -48,48 +59,13 @@ watch(() => taskStore.tasks, () => {
 <style scoped > h1 {
   color: var(--purple);
 }
-.dashboard {
-  padding: 40px;
+.div-list {
+  padding-top: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-.to-dos {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--white);
-  width: 80%;
-  height: 350px;
-  border-radius: 45px;
-  box-shadow: var(--shadow);
-  color: var(--gray);
-  margin: 0 auto;
-}
-.form-elements {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-label {
-  margin-top: 20px;
-}
-input {
-  width: 100%;
-  height: 30px;
-  border-radius: 30px;
-  border: 2px solid var(--purple);
-  text-indent: 10px;
-}
-.selector {
-  width: 3;
-  height: 30px;
-  border-radius: 30px;
-  border: 2px solid var(--purple);
-  text-indent: 10px;
-  color: var(--gray);
+  gap: 2rem;
 }
 button {
   width: 500px;
@@ -113,24 +89,25 @@ button:hover {
   padding: 1rem;
   border-radius: 45px;
   box-shadow: var(--shadow);
+  color: var(--gray);
   margin-bottom: 1rem;
   justify-content: space-between;
 }
-.div-list {
-  padding-top: 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-}
-h3 {
+
+h3{
   padding: 20px;
   color: var(--purple);
   align-items: center;
 }
+h4{
+  color: var(--purple);
+}
 .task-details{
   padding-left: 20px;
+}.buttons{
+  display:flex;
+  flex-direction: row;
+  gap: 10px;
 }
 .task-button {
   width: 100px;
@@ -147,4 +124,16 @@ h3 {
   color: var(--white);
 }
 
+.yellow-border {
+  border: 3px solid var(--yellow);
+  
+}
+
+.pink-border {
+  border: 3px solid var(--pink);
+}
+
+.green-border {
+  border: 3px solid var(--sky-blue);
+}
 </style>

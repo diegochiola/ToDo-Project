@@ -92,9 +92,9 @@ const submitNewTask = () => {
           v-model="status"
           required
         >
-          <option value="to-do">To Do</option>
-          <option value="in-progress">In Progress</option>
-          <option value="done">Done</option>
+          <option value="To do">To Do</option>
+          <option value="In progress">In Progress</option>
+          <option value="Done">Done</option>
         </select>
       </div>
       <div class="form-elements">
