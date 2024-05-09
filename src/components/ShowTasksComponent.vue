@@ -1,19 +1,23 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useTaskStore } from '../stores/task.js';
-import { supabase } from '../supabase';
+import { ref, onMounted, watch } from 'vue'
+import { useTaskStore } from '../stores/task.js'
+import { supabase } from '../supabase'
 
-const tasks = ref([]);
+const taskStore = useTaskStore()
+
+const tasks = ref([])
 
 async function fetchTasks() {
   const { data: fetchedTasks } = await supabase
     .from('tasks')
     .select('*')
-    .order('id', { ascending: false });
-  tasks.value = fetchedTasks || [];
+    .order('id', { ascending: false })
+  tasks.value = fetchedTasks || []
 }
-onMounted(fetchTasks);
-
+onMounted(fetchTasks)
+watch(() => taskStore.tasks, () => {
+  fetchTasks()
+})
 </script>
 
 <template>
@@ -27,13 +31,13 @@ onMounted(fetchTasks);
       </div>
       <div v-for="task in tasks" :key="task.id" class="todo-list">
         <div class="task-details">
-          <p>Title: {{ task.title }}</p>
+          <h4>{{ task.title }}</h4>
           <p>Status: {{ task.status }}</p>
           <p>Description: {{ task.description }}</p>
         </div>
         <div class="buttons">
+          <button class="task-button">Edit</button>
           <button class="task-button pink">Delete</button>
-          <button class="task-button blue">Edit</button>
         </div>
       </div>
     </section>
@@ -125,6 +129,9 @@ h3 {
   color: var(--purple);
   align-items: center;
 }
+.task-details{
+  padding-left: 20px;
+}
 .task-button {
   width: 100px;
   height: 30px;
@@ -135,12 +142,9 @@ h3 {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.pink{
-    background-color: var(--pink);
-    color: var(--white);
+.pink {
+  background-color: var(--pink);
+  color: var(--white);
 }
-.blue{
-    background-color: var(--sky-blue);
-    color: var(--white);
-}
+
 </style>

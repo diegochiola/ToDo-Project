@@ -29,7 +29,7 @@ onMounted(async () => { //cuando el html haya cargado
 <template>
 
 <section>
-    <router-view class="app-main" /> 
+    <router-view /> 
 </section>
 
 </template>

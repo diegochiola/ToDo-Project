@@ -3,33 +3,71 @@ import { ref } from 'vue'
 
 import { useTaskStore } from '../stores/task.js'
 const taskStore = useTaskStore()
-console.log(taskStore)
 
-import { useUserStore } from '../stores/user.js' //para tomar los datos del user
+import { useUserStore } from '../stores/user.js'
 const userStore = useUserStore()
 
-
-//variables del formulario
 const title = ref('')
 const status = ref('')
 const description = ref('')
 
-async function submitNewTask(title, status, description) {
-  //console.log(userStore.user)
-  const taskData = {
-    user_id: userStore.user.data.user.id, 
-    title: title, 
-    status: status,
-    description: description
+
+/*
+async function submitNewTask() {
+  if (title.value.trim() !== '') {
+    //console.log('task submitted', title.value, status.value, description.value)
+    alert('Please add a valid task')
+    return
   }
-taskStore.addTask(taskData);
+  try {
+    await taskStore.addTask(
+      userStore.user.data.user.id,
+      title.value,
+      status.value,
+      description.value
+    )
+  } catch (error) {
+    console.error('Error adding a task:', error.message)
+    alert('Please try again. You need to add a valid task')
+  }
+}
+*/
+
+/*
+async function submitNewTask() {
+  if (title.value.trim() === '') {
+    alert('Please add a valid task title');
+    return;
+  }
+  const { data, error } = await supabase
+    .from("tasks")
+    .insert([{ 
+      user_id: userStore.user.data.user.id, 
+      title: title.value, 
+      status: status.value, 
+      description: description.value 
+    }]);
+  if (error) {
+    console.error('Error adding a task:', error.message);
+    alert('An error occurred while adding the task. Please try again later.');
+  } else {
+    title.value = '';
+    status.value = '';
+    description.value = '';
+    await taskStore.fetchTasks();
+    router.push('/');
+    //alert('Task added successfully');
+  }
+}
+*/
+const submitNewTask = () => {
+  taskStore.addTask(userStore.user.data.user.id, title.value, status.value, description.value)
 }
 </script>
 
 <template>
- 
   <section class="to-dos">
-    <form @submit.prevent="submitNewTask(title, status, description)" >
+    <form @submit.prevent="submitNewTask">
       <div class="form-elements">
         <label>What's on your ToDo list?</label>
         <input type="text" placeholder="e.g Grocery Shopping" id="title" v-model="title" required />
@@ -60,7 +98,7 @@ taskStore.addTask(taskData);
         </select>
       </div>
       <div class="form-elements">
-        <button type="submit" value="Add Task" >Add Task</button>
+        <button type="submit" value="Add Task">Add Task</button>
       </div>
     </form>
   </section>
@@ -128,15 +166,15 @@ button:hover {
 }
 .todo-list {
   display: flex;
-    flex-direction: row;
-    align-items: center;
-    background-color: var(--white);
-    width: 80%;
-    padding: 1rem;
-    border-radius: 45px;
-    box-shadow: var(--shadow);
-    margin-bottom: 1rem;
-    justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--white);
+  width: 80%;
+  padding: 1rem;
+  border-radius: 45px;
+  box-shadow: var(--shadow);
+  margin-bottom: 1rem;
+  justify-content: space-between;
 }
 .div-list {
   padding-top: 60px;

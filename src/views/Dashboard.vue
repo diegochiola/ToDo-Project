@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue'
 import NavBarComponent from '../components/NavBarComponent.vue'
 import NewTaskComponent from '../components/NewTaskComponent.vue'
 import ShowTasksComponent from '../components/ShowTasksComponent.vue'
