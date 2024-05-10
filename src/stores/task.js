@@ -16,7 +16,7 @@ export const useTaskStore = defineStore('tasks', {
         .from('tasks')
         .select('*')
         .order('id', { ascending: false })
-      this.tasks = tasks
+        this.tasks = tasks
     },
   async addTask(user_id, title, status, description) {
     if (title.trim() === '') {
@@ -52,10 +52,10 @@ export const useTaskStore = defineStore('tasks', {
       alert('Task deleted successfully')
     }
   },
-  async updateTask(id, title, status, description) {
+  async updateTask( id, updatedTitle, updatedStatus, updatedDescription) {
     const { error } = await supabase
       .from('tasks')
-      .update({ title: title, status: status, description: description })
+      .update({ title: updatedTitle, status: updatedStatus, description: updatedDescription })
       .eq('id', id)
     if (error) {
       console.error('Error updating a task:', error.message)

@@ -1,59 +1,92 @@
 <script setup>
-import { ref } from 'vue'
-
+import { onMounted, ref } from 'vue'
+import { defineProps } from 'vue'
 import { useTaskStore } from '../stores/task.js'
+
+import { storeToRefs } from 'pinia'
+
 const taskStore = useTaskStore()
+const { tasks } = storeToRefs(taskStore); // Traemos los datos del store
 
-import { useUserStore } from '../stores/user.js'
-const userStore = useUserStore()
+const currentProps = defineProps({
+    taskId: {
+        type: String,
+        required: true
+    }
+})
 
-const title = ref('')
-const status = ref('')
-const description = ref('')
+console.log(currentProps)
+const currentTaskId = currentProps.taskId
+console.log("El id es: " +currentTaskId)
 
-const submitNewTask = () => {
-  taskStore.addTask(userStore.user.data.user.id, title.value, status.value, description.value)
-  title.value = ''
-  status.value = ''
-  description.value = ''
+const updatedTitle = ref('')
+const updatedStatus = ref('')
+const updatedDescription = ref('')
+
+// Ejecutar la función al montar el componente
+onMounted(() => {
+  
+    bringTaskById(currentTaskId)
+})
+
+
+//traerme los datos asociados al id de la task
+async function bringTaskById(taskId) {
+    const tasksData = tasks.value; // Extraemos el array de tareas del store
+    console.log(tasksData)
+    const findTask = tasksData.find(task => task.id === taskId)
+    if (findTask) {
+        updatedTitle.value = findTask.title
+        updatedStatus.value = findTask.status
+        updatedDescription.value = findTask.description
+        console.log(findTask)
+    } else {
+        console.error(`No task found with id ${taskId}`)
+    }
 }
+
+
+
+async function updateTaskById() {
+    await taskStore.updateTask(currentTaskId, updatedTitle.value, updatedStatus.value, updatedDescription.value)
+}
+
 </script>
 
 <template>
   <section class="to-dos">
-    <h1>Create New Task</h1>
-    <form @submit.prevent="submitNewTask">
+    <h1>Update your Task</h1>
+    <form @submit.prevent="updateTaskById">
       <div class="form-elements">
         <label>What's on your ToDo list?</label>
-        <input type="text" placeholder="e.g Grocery Shopping" id="title" v-model="title" required />
+        <input type="text" id="updatedTitle" v-model="updatedTitle" />
       </div>
       <div class="form-elements">
         <label>Description </label>
         <input
           type="text"
-          placeholder="e.g. Buy milk, eggs, bread, and vegetables "
-          id="description"
-          v-model="description"
-          required
+         
+          id="updatedDescription"
+          v-model="updatedDescription"
+          
         />
       </div>
 
       <div class="form-elements status">
         <label>Select a status</label>
         <select
-          placeholder="Select a status"
-          id="status"
+          id="updatedStatus"
           class="selector"
-          v-model="status"
+          v-model="updatedStatus"
           required
         >
           <option value="To Do">To Do</option>
-          <option value="In Progress">In Progress</option>
+          <option value="In progress">In Progress</option>
           <option value="Done">Done</option>
         </select>
       </div>
       <div class="form-elements">
-        <button type="submit" value="Add Task">Add Task</button>
+        <button type="submit" value="Update Task">Update Task</button>
       </div>
     </form>
   </section>

@@ -1,25 +1,19 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch} from 'vue'
+import {  defineEmits } from 'vue'
 import { useTaskStore } from '../stores/task.js'
-import { supabase } from '../supabase'
+
+import { storeToRefs } from 'pinia'
 
 const taskStore = useTaskStore()
+const {tasks} = storeToRefs(taskStore);
 
-const tasks = ref([])
-
-async function fetchTasks() {
-  const { data: fetchedTasks } = await supabase
-    .from('tasks')
-    .select('*')
-    .order('id', { ascending: false })
-  tasks.value = fetchedTasks || []
-}
 
 //detalle de color segun status
 function getTaskClass(status) {
   const statusClassMap = {
-    'To do': 'pink-border', 
-    'In progress': 'yellow-border', 
+    'To Do': 'pink-border', 
+    'In Progress': 'yellow-border', 
     'Done': 'green-border' 
   }
   return statusClassMap[status] || '' // Devuelve la clase de borde correspondiente o una cadena vacía si no se encuentra
@@ -27,22 +21,19 @@ function getTaskClass(status) {
 async function deleteTaskById(taskId) {
   await taskStore.deleteTask(taskId)
 }
-async function updateTaskById(task) {
-  // Lógica para mostrar un formulario de edición y recopilar los nuevos datos
-  const updatedTitle = prompt('Enter the updated title:', task.title)
-  const updatedStatus = prompt('Enter the updated status:', task.status)
-  const updatedDescription = prompt('Enter the updated description:', task.description)
-  
-  // Llama a la función updateTask del almacén de tareas
-  if (updatedTitle !== null && updatedStatus !== null && updatedDescription !== null) {
-    await taskStore.updateTask(task.id, updatedTitle, updatedStatus, updatedDescription)
-  }
+
+//Enviar emit a Dashboard
+const emit = defineEmits(['editTask'])
+
+const emitEditTask = (taskId) => {
+  emit('editTask', taskId)
 }
+
+
   
 
-onMounted(fetchTasks)
-watch(() => taskStore.tasks, () => {
-  fetchTasks()
+onMounted(() => {
+  taskStore.fetchTasks();
 })
 </script>
 
@@ -52,7 +43,7 @@ watch(() => taskStore.tasks, () => {
       <div class="Section">
         <h3>Your tasks</h3>
       </div>
-      <div v-if="tasks.length === 0">
+      <div v-if="!tasks">
         <p>No tasks available</p>
       </div>
       <div v-for="task in tasks" :key="task.id" class="todo-list" :class="getTaskClass(task.status)">
@@ -63,7 +54,7 @@ watch(() => taskStore.tasks, () => {
           <p>Description: {{ task.description }}</p>
         </div>
         <div class="buttons">
-          <button @click= "updateTaskById(task.id, task.title, task.status, task.description)" class="task-button">Edit</button>
+          <button @click= "emitEditTask(task.id)" class="task-button">Edit</button>
           <button @click="deleteTaskById(task.id)" class="task-button pink">Delete</button>
         </div>
       </div>
@@ -150,6 +141,6 @@ h4{
 }
 
 .green-border {
-  border: 3px solid var(--sky-blue);
+  border: 3px solid greenyellow;
 }
 </style>
