@@ -18,12 +18,28 @@ async function fetchTasks() {
 //detalle de color segun status
 function getTaskClass(status) {
   const statusClassMap = {
-    'to-do': 'pink-border', // Clase de borde amarillo para estado "to-do"
-    'in-progress': 'yellow-border', // Clase de borde rosa para estado "in-progress"
-    'done': 'green-border' // Clase de borde verde para estado "done"
+    'To do': 'pink-border', 
+    'In progress': 'yellow-border', 
+    'Done': 'green-border' 
   }
   return statusClassMap[status] || '' // Devuelve la clase de borde correspondiente o una cadena vacía si no se encuentra
 }
+async function deleteTaskById(taskId) {
+  await taskStore.deleteTask(taskId)
+}
+async function updateTaskById(task) {
+  // Lógica para mostrar un formulario de edición y recopilar los nuevos datos
+  const updatedTitle = prompt('Enter the updated title:', task.title)
+  const updatedStatus = prompt('Enter the updated status:', task.status)
+  const updatedDescription = prompt('Enter the updated description:', task.description)
+  
+  // Llama a la función updateTask del almacén de tareas
+  if (updatedTitle !== null && updatedStatus !== null && updatedDescription !== null) {
+    await taskStore.updateTask(task.id, updatedTitle, updatedStatus, updatedDescription)
+  }
+}
+  
+
 onMounted(fetchTasks)
 watch(() => taskStore.tasks, () => {
   fetchTasks()
@@ -39,16 +55,16 @@ watch(() => taskStore.tasks, () => {
       <div v-if="tasks.length === 0">
         <p>No tasks available</p>
       </div>
-      <div v-for="task in tasks" :key="task.id" class="todo-list" :class="getTaskClass(task.status)"
->
+      <div v-for="task in tasks" :key="task.id" class="todo-list" :class="getTaskClass(task.status)">
+        
         <div class="task-details">
           <h4>{{ task.title }}</h4>
           <p>Status: {{ task.status }}</p>
           <p>Description: {{ task.description }}</p>
         </div>
         <div class="buttons">
-          <button class="task-button">Edit</button>
-          <button class="task-button pink">Delete</button>
+          <button @click= "updateTaskById(task.id, task.title, task.status, task.description)" class="task-button">Edit</button>
+          <button @click="deleteTaskById(task.id)" class="task-button pink">Delete</button>
         </div>
       </div>
     </section>

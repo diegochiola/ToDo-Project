@@ -11,57 +11,11 @@ const title = ref('')
 const status = ref('')
 const description = ref('')
 
-
-/*
-async function submitNewTask() {
-  if (title.value.trim() !== '') {
-    //console.log('task submitted', title.value, status.value, description.value)
-    alert('Please add a valid task')
-    return
-  }
-  try {
-    await taskStore.addTask(
-      userStore.user.data.user.id,
-      title.value,
-      status.value,
-      description.value
-    )
-  } catch (error) {
-    console.error('Error adding a task:', error.message)
-    alert('Please try again. You need to add a valid task')
-  }
-}
-*/
-
-/*
-async function submitNewTask() {
-  if (title.value.trim() === '') {
-    alert('Please add a valid task title');
-    return;
-  }
-  const { data, error } = await supabase
-    .from("tasks")
-    .insert([{ 
-      user_id: userStore.user.data.user.id, 
-      title: title.value, 
-      status: status.value, 
-      description: description.value 
-    }]);
-  if (error) {
-    console.error('Error adding a task:', error.message);
-    alert('An error occurred while adding the task. Please try again later.');
-  } else {
-    title.value = '';
-    status.value = '';
-    description.value = '';
-    await taskStore.fetchTasks();
-    router.push('/');
-    //alert('Task added successfully');
-  }
-}
-*/
 const submitNewTask = () => {
   taskStore.addTask(userStore.user.data.user.id, title.value, status.value, description.value)
+  title.value = ''
+  status.value = ''
+  description.value = ''
 }
 </script>
 
@@ -92,7 +46,7 @@ const submitNewTask = () => {
           v-model="status"
           required
         >
-          <option value="To do">To Do</option>
+          <option value="To Do">To Do</option>
           <option value="In progress">In Progress</option>
           <option value="Done">Done</option>
         </select>
