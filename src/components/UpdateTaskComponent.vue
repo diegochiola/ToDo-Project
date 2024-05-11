@@ -22,6 +22,7 @@ console.log('El id es: ' + currentTaskId)
 const updatedTitle = ref('')
 const updatedStatus = ref('')
 const updatedDescription = ref('')
+const actionDone = ref(false)
 
 // Ejecutar la función al montar el componente
 onMounted(() => {
@@ -50,6 +51,10 @@ async function updateTaskById() {
     updatedStatus.value,
     updatedDescription.value
   )
+  actionDone.value = true
+  setTimeout(() => {
+    actionDone.value = false
+  }, 2000)
 }
 </script>
 
@@ -78,6 +83,11 @@ async function updateTaskById() {
         <button type="submit" value="Update Task">Update Task</button>
       </div>
     </form>
+    <transition name="slide-fade">
+      <div v-if="actionDone" class="success-notification">
+        <p>Task updated successfully!</p>
+      </div>
+    </transition>
   </section>
 </template>
 
@@ -94,6 +104,7 @@ h1 {
   justify-content: center;
 }
 .to-dos {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -176,5 +187,27 @@ h3 {
   color: var(--white);
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.success-notification {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 45px;
+  background-color: greenyellow;
+  text-align: center;
+  color: var(--purple);
+  padding: 20px;
+}
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition:
+    transform 0.5s,
+    opacity 0.5s;
+}
+.slide-fade-enter, .slide-fade-leave-to /* .slide-fade-leave-active in <2.1.8 */ {
+  transform: translateY(-20px);
+  opacity: 0;
 }
 </style>

@@ -27,7 +27,7 @@ const submitNewTask = () => {
   actionDone.value = true; 
   setTimeout(() => {
     actionDone.value = false; 
-  }, 1000);
+  }, 2000);
 }
 </script>
 
@@ -90,6 +90,7 @@ h1 {
   justify-content: center;
 }
 .to-dos {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -175,14 +176,15 @@ h3 {
 }
 
 .success-notification {
-
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  border-radius: 45px;
   background-color: greenyellow;
   text-align: center;
-  width: 100%;
-  height: 30px;
-  border-radius: 30px;
-  padding: 5px;
-  margin-top: 10px;
+  color: var(--purple);
+  padding: 20px;
 }
 .slide-fade-enter-active, .slide-fade-leave-active {
   transition: transform 0.5s, opacity 0.5s;
