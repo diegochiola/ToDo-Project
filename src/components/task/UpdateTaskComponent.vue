@@ -196,6 +196,7 @@ h3 {
   top: 0;
   left: 0;
   width: 100%;
+  heigth: 300px;
   border-radius: 45px;
   background-color: greenyellow;
   text-align: center;
