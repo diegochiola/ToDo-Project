@@ -15,9 +15,12 @@ function toggleComponent() {
 const selectedTaskId = ref(null)
 function handleEditTask(taskId) {
   selectedTaskId.value = Number(taskId)
-  console.log(selectedTaskId.value)
+  if (!showNewTaskComponent.value) {
+    return 
+  }
   toggleComponent()
 }
+
 
 </script>
 

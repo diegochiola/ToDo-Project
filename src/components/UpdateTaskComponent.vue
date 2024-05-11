@@ -6,18 +6,18 @@ import { useTaskStore } from '../stores/task.js'
 import { storeToRefs } from 'pinia'
 
 const taskStore = useTaskStore()
-const { tasks } = storeToRefs(taskStore); // Traemos los datos del store
+const { tasks } = storeToRefs(taskStore) // Traemos los datos del store
 
 const currentProps = defineProps({
-    taskId: {
-        type: String,
-        required: true
-    }
+  taskId: {
+    type: String,
+    required: true
+  }
 })
 
 console.log(currentProps)
 const currentTaskId = currentProps.taskId
-console.log("El id es: " +currentTaskId)
+console.log('El id es: ' + currentTaskId)
 
 const updatedTitle = ref('')
 const updatedStatus = ref('')
@@ -25,37 +25,37 @@ const updatedDescription = ref('')
 
 // Ejecutar la función al montar el componente
 onMounted(() => {
-  
-    bringTaskById(currentTaskId)
+  bringTaskById(currentTaskId)
 })
-
 
 //traerme los datos asociados al id de la task
 async function bringTaskById(taskId) {
-    const tasksData = tasks.value; // Extraemos el array de tareas del store
-    console.log(tasksData)
-    const findTask = tasksData.find(task => task.id === taskId)
-    if (findTask) {
-        updatedTitle.value = findTask.title
-        updatedStatus.value = findTask.status
-        updatedDescription.value = findTask.description
-        console.log(findTask)
-    } else {
-        console.error(`No task found with id ${taskId}`)
-    }
+  const tasksData = tasks.value // Extraemos el array de tareas del store
+  console.log(tasksData)
+  const findTask = tasksData.find((task) => task.id === taskId)
+  if (findTask) {
+    updatedTitle.value = findTask.title
+    updatedStatus.value = findTask.status
+    updatedDescription.value = findTask.description
+    console.log(findTask)
+  } else {
+    console.error(`No task found with id ${taskId}`)
+  }
 }
-
-
 
 async function updateTaskById() {
-    await taskStore.updateTask(currentTaskId, updatedTitle.value, updatedStatus.value, updatedDescription.value)
+  await taskStore.updateTask(
+    currentTaskId,
+    updatedTitle.value,
+    updatedStatus.value,
+    updatedDescription.value
+  )
 }
-
 </script>
 
 <template>
   <section class="to-dos">
-    <h1>Update your Task</h1>
+    <h1>Edit your Task</h1>
     <form @submit.prevent="updateTaskById">
       <div class="form-elements">
         <label>What's on your ToDo list?</label>
@@ -63,25 +63,14 @@ async function updateTaskById() {
       </div>
       <div class="form-elements">
         <label>Description </label>
-        <input
-          type="text"
-         
-          id="updatedDescription"
-          v-model="updatedDescription"
-          
-        />
+        <input type="text" id="updatedDescription" v-model="updatedDescription" />
       </div>
 
       <div class="form-elements status">
         <label>Select a status</label>
-        <select
-          id="updatedStatus"
-          class="selector"
-          v-model="updatedStatus"
-          required
-        >
-          <option value="To Do">To Do</option>
-          <option value="In progress">In Progress</option>
+        <select id="updatedStatus" class="selector" v-model="updatedStatus" required>
+          <option value="To do">To do</option>
+          <option value="In progress">In progress</option>
           <option value="Done">Done</option>
         </select>
       </div>
@@ -95,6 +84,7 @@ async function updateTaskById() {
 <style scoped>
 h1 {
   color: var(--purple);
+  font-size: 20px;
 }
 .dashboard {
   padding: 40px;

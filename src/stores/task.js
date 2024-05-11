@@ -23,7 +23,6 @@ export const useTaskStore = defineStore('tasks', {
       alert('Please add a valid task title')
       return
     }
-
     const { error } = await supabase.from('tasks').insert([
       {
         user_id: user_id,
@@ -32,14 +31,12 @@ export const useTaskStore = defineStore('tasks', {
         description: description
       }
     ])
-
     if (error) {
       console.error('Error adding a task:', error.message)
       alert('An error occurred while adding the task. Please try again later.')
     } else {
       this.fetchTasks()
       router.push('/')
-      alert('Task added successfully')
     }
   },
   async deleteTask(id) {
@@ -49,7 +46,6 @@ export const useTaskStore = defineStore('tasks', {
       alert('An error occurred while deleting the task. Please try again later.')
     } else {
       this.fetchTasks()
-      alert('Task deleted successfully')
     }
   },
   async updateTask( id, updatedTitle, updatedStatus, updatedDescription) {
@@ -62,7 +58,6 @@ export const useTaskStore = defineStore('tasks', {
       alert('An error occurred while updating the task. Please try again later.')
     } else {
       this.fetchTasks()
-      alert('Task updated successfully')
     }
   }
 }

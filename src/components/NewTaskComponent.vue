@@ -10,12 +10,24 @@ const userStore = useUserStore()
 const title = ref('')
 const status = ref('')
 const description = ref('')
-
+const actionDone = ref(false)
+/*
 const submitNewTask = () => {
   taskStore.addTask(userStore.user.data.user.id, title.value, status.value, description.value)
   title.value = ''
   status.value = ''
   description.value = ''
+}
+*/
+const submitNewTask = () => {
+  taskStore.addTask(userStore.user.data.user.id, title.value, status.value, description.value)
+  title.value = ''
+  status.value = ''
+  description.value = ''
+  actionDone.value = true; 
+  setTimeout(() => {
+    actionDone.value = false; 
+  }, 1000);
 }
 </script>
 
@@ -39,7 +51,7 @@ const submitNewTask = () => {
       </div>
 
       <div class="form-elements status">
-        <label>Select a status</label>
+        <label>Status</label>
         <select
           placeholder="Select a status"
           id="status"
@@ -47,14 +59,20 @@ const submitNewTask = () => {
           v-model="status"
           required
         >
-          <option value="To Do">To Do</option>
-          <option value="In Progress">In Progress</option>
+          <option value="" disabled selected>Select status</option>
+          <option value="To do">To do</option>
+          <option value="In progress">In progress</option>
           <option value="Done">Done</option>
         </select>
       </div>
       <div class="form-elements">
         <button type="submit" value="Add Task">Add Task</button>
       </div>
+      <transition name="slide-fade">
+        <div v-if="actionDone" class="success-notification">
+          <p>Great job! The task has been added successfully 🎉</p>
+        </div>
+      </transition>
     </form>
   </section>
 </template>
@@ -62,6 +80,7 @@ const submitNewTask = () => {
 <style scoped>
 h1 {
   color: var(--purple);
+  font-size: 20px;
 }
 .dashboard {
   padding: 40px;
@@ -99,7 +118,7 @@ input {
   text-indent: 10px;
 }
 .selector {
-  width: 3;
+  width: 100%;
   height: 30px;
   border-radius: 30px;
   border: 2px solid var(--purple);
@@ -153,5 +172,23 @@ h3 {
   color: var(--white);
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.success-notification {
+
+  background-color: greenyellow;
+  text-align: center;
+  width: 100%;
+  height: 30px;
+  border-radius: 30px;
+  padding: 5px;
+  margin-top: 10px;
+}
+.slide-fade-enter-active, .slide-fade-leave-active {
+  transition: transform 0.5s, opacity 0.5s;
+}
+.slide-fade-enter, .slide-fade-leave-to /* .slide-fade-leave-active in <2.1.8 */ {
+  transform: translateY(-20px);
+  opacity: 0;
 }
 </style>
