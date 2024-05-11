@@ -1,27 +1,31 @@
 <script setup>
 import NavBarComponent from '../components/NavBarComponent.vue'
-import NewTaskComponent from '../components/NewTaskComponent.vue'
-import ShowTasksComponent from '../components/ShowTasksComponent.vue'
-import UpdateTaskComponent from '../components/UpdateTaskComponent.vue'
+import UpdateTaskComponent from '../components/task/UpdateTaskComponent.vue'
+import NewTaskComponent from '../components/task/NewTaskComponent.vue'
+import ShowTasksComponent from '../components/task/ShowTasksComponent.vue'
 
-import { ref, defineProps, defineEmits } from 'vue'
+import { ref } from 'vue'
+import { defineEmits } from 'vue'
 
-//LOGICA PARA QUE MUESTRE un componente o otro
 const showNewTaskComponent = ref(true)
+const selectedTaskId = ref(null)
+//const { emit } = defineEmits('update-task-complete')
+
+function handleEditTask(taskId) {
+  selectedTaskId.value = Number(taskId)
+  showNewTaskComponent.value = false
+}
+function handleUpdateTaskComplete() {
+  selectedTaskId.value = null
+  showNewTaskComponent.value = true
+  //emit('update-task-complete') 
+}
+
+/*
 function toggleComponent() {
   showNewTaskComponent.value = !showNewTaskComponent.value
 }
-
-const selectedTaskId = ref(null)
-function handleEditTask(taskId) {
-  selectedTaskId.value = Number(taskId)
-  if (!showNewTaskComponent.value) {
-    return 
-  }
-  toggleComponent()
-}
-
-
+*/
 </script>
 
 <template>
@@ -36,7 +40,10 @@ function handleEditTask(taskId) {
       <NewTaskComponent />
     </article>
     <article v-else>
-      <UpdateTaskComponent :taskId="selectedTaskId" />
+      <UpdateTaskComponent
+        :taskId="selectedTaskId"
+        @update-task-complete="handleUpdateTaskComplete"
+      />
     </article>
     <ShowTasksComponent @edit-task="handleEditTask" />
   </section>

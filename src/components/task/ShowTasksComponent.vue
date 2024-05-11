@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import { defineEmits } from 'vue'
-import { useTaskStore } from '../stores/task.js'
+import { useTaskStore } from '../../stores/task.js'
 
 import { storeToRefs } from 'pinia'
 
@@ -63,7 +63,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
 h1 {
   color: var(--purple);
   font-size: 20px;
@@ -113,6 +112,11 @@ h4 {
 }
 .task-details {
   padding-left: 20px;
+}
+.task-details p {
+  font-size: 15px;
+  color: var(--gray);
+  text-align: left;
 }
 .buttons {
   display: flex;

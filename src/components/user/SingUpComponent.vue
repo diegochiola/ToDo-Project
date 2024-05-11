@@ -1,28 +1,30 @@
 <script setup>
 import { ref } from 'vue'
-import { useUserStore } from '../stores/user.js'
-
-import { useRouter } from 'vue-router'
-const router = useRouter()
+import { useUserStore } from '../../stores/user.js'
 
 const userStore = useUserStore()
 
+const name = ref('')
 const email = ref('')
 const password = ref('')
-
+const confirmPassword = ref('')
 </script>
 
 <template>
-  <form @submit.prevent="userStore.login(email, password)" class="login">
-    <h1>Sing In</h1>
+  <form @submit.prevent="userStore.signUp(name, email, password, confirmPassword)" class="login">
+    <h1>Sing Up</h1>
+    <div class="form-elements">
+      <label>Name:</label>
+      <input type="text" placeholder="Enter your Name" id="name" v-model="name" required />
+    </div>
 
     <div class="form-elements">
       <label>Email:</label>
       <input type="email" placeholder="Enter your email" id="email" v-model="email" required />
     </div>
+
     <div class="form-elements">
       <label>Password:</label>
-
       <input
         type="password"
         placeholder="Enter your password"
@@ -30,21 +32,28 @@ const password = ref('')
         v-model="password"
         required
       />
-      <div>
-        <a href="#" class="forgot">Forgot password?</a>
-      </div>
+    </div>
+    <div class="form-elements">
+      <label>Confirm Password:</label>
+
+      <input
+        type="password"
+        placeholder="Confirm your password"
+        id="confirmPassword"
+        v-model="confirmPassword"
+        required
+      />
     </div>
     <div>
-      <button type="submit">Log in</button>
+      <button type="submit">Sing Up</button>
     </div>
   </form>
 </template>
 
 <style scoped>
-h1{
+h1 {
   color: var(--purple);
   font-size: 25px;
-  
 }
 button {
   margin: 5px 0;
@@ -67,17 +76,16 @@ button {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  
 }
 input {
   width: 300px;
   height: 30px;
   border-radius: 30px;
   border: 2px solid var(--purple);
-  text-indent: 10px; 
+  text-indent: 10px;
 }
 input::placeholder {
-    color: lightgray; 
+  color: lightgray;
 }
 
 button {
@@ -92,7 +100,6 @@ button:hover {
   cursor: pointer;
   color: var(--yellow);
 }
-
 .forgot {
   color: var(--purple);
   text-decoration: none;
@@ -102,5 +109,4 @@ button:hover {
   color: var(--yellow);
   cursor: pointer;
 }
-
 </style>

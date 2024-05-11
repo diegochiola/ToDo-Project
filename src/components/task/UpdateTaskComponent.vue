@@ -1,79 +1,94 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref, defineEmits } from 'vue'
+import { defineProps } from 'vue'
+import { useTaskStore } from '../../stores/task.js'
 
-import { useTaskStore } from '../stores/task.js'
+import { storeToRefs } from 'pinia'
+
 const taskStore = useTaskStore()
+const { tasks } = storeToRefs(taskStore)
+const emit = defineEmits(['update-task-complete'])
+const currentProps = defineProps({
+  taskId: {
+    type: Number,
+    required: true
+  }
+})
 
-import { useUserStore } from '../stores/user.js'
-const userStore = useUserStore()
+//console.log(currentProps)
+const currentTaskId = currentProps.taskId
+//console.log('El id es: ' + currentTaskId)
 
-const title = ref('')
-const status = ref('')
-const description = ref('')
+const updatedTitle = ref('')
+const updatedStatus = ref('')
+const updatedDescription = ref('')
 const actionDone = ref(false)
-/*
-const submitNewTask = () => {
-  taskStore.addTask(userStore.user.data.user.id, title.value, status.value, description.value)
-  title.value = ''
-  status.value = ''
-  description.value = ''
+
+// Ejecutar la función al montar el componente
+onMounted(() => {
+  bringTaskById(currentTaskId)
+})
+
+//traerme los datos asociados al id de la task
+async function bringTaskById(taskId) {
+  const tasksData = tasks.value 
+  const findTask = tasksData.find((task) => task.id === taskId)
+  if (findTask) {
+    updatedTitle.value = findTask.title
+    updatedStatus.value = findTask.status
+    updatedDescription.value = findTask.description
+  } else {
+    console.error(`No task found with id ${taskId}`)
+  }
 }
-*/
-const submitNewTask = () => {
-  taskStore.addTask(userStore.user.data.user.id, title.value, status.value, description.value)
-  title.value = ''
-  status.value = ''
-  description.value = ''
-  actionDone.value = true; 
+
+async function updateTaskById() {
+  
+  await taskStore.updateTask(
+    currentTaskId,
+    updatedTitle.value,
+    updatedStatus.value,
+    updatedDescription.value
+  )
+  actionDone.value = true
   setTimeout(() => {
-    actionDone.value = false; 
-  }, 2000);
+    actionDone.value = false
+  }, 2000)
+  emit('update-task-complete')
+
 }
 </script>
 
 <template>
   <section class="to-dos">
-    <h1>Create New Task</h1>
-    <form @submit.prevent="submitNewTask">
+    <h1>Edit your Task</h1>
+    <form @submit.prevent="updateTaskById">
       <div class="form-elements">
         <label>What's on your ToDo list?</label>
-        <input type="text" placeholder="e.g Grocery Shopping" id="title" v-model="title" required />
+        <input type="text" id="updatedTitle" v-model="updatedTitle" />
       </div>
       <div class="form-elements">
         <label>Description </label>
-        <input
-          type="text"
-          placeholder="e.g. Buy milk, eggs, bread, and vegetables "
-          id="description"
-          v-model="description"
-          required
-        />
+        <input type="text" id="updatedDescription" v-model="updatedDescription" />
       </div>
 
       <div class="form-elements status">
-        <label>Status</label>
-        <select
-          placeholder="Select a status"
-          id="status"
-          class="selector"
-          v-model="status"
-          required
-        >
-          <option value="" disabled selected>Select status</option>
+        <label>Select a status</label>
+        <select id="updatedStatus" class="selector" v-model="updatedStatus" required>
           <option value="To do">To do</option>
           <option value="In progress">In progress</option>
           <option value="Done">Done</option>
         </select>
       </div>
       <div class="form-elements">
-        <button type="submit" value="Add Task">Add Task</button>
+        <button type="submit" value="Update Task">Update Task</button>
       </div>
-      <transition name="slide-fade">
-        <div v-if="actionDone" class="success-notification">
-          <p>Great job! The task has been added successfully 🎉</p>
-        </div>
-      </transition>
     </form>
+    <transition name="slide-fade">
+      <div v-if="actionDone" class="success-notification">
+        <p>Task updated successfully!</p>
+      </div>
+    </transition>
   </section>
 </template>
 
@@ -119,7 +134,7 @@ input {
   text-indent: 10px;
 }
 .selector {
-  width: 100%;
+  width: 3;
   height: 30px;
   border-radius: 30px;
   border: 2px solid var(--purple);
@@ -176,18 +191,22 @@ h3 {
 }
 
 .success-notification {
-  position: absolute;
-  top: 0; 
-  left: 0; 
-  width: 100%; 
+  position: absolute; 
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
   border-radius: 45px;
   background-color: greenyellow;
   text-align: center;
   color: var(--purple);
   padding: 20px;
 }
-.slide-fade-enter-active, .slide-fade-leave-active {
-  transition: transform 0.5s, opacity 0.5s;
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition:
+    transform 0.5s,
+    opacity 0.5s;
 }
 .slide-fade-enter, .slide-fade-leave-to /* .slide-fade-leave-active in <2.1.8 */ {
   transform: translateY(-20px);
