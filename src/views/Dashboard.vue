@@ -12,41 +12,36 @@ const showNewTaskComponent = ref(true)
 const selectedTaskId = ref(null)
 const updateTaskComponent = ref(null)
 
+import { useUserStore } from './../stores/user.js'
+const userStore = useUserStore()
+const userEmail = ref('guest@example.com') //por defecto
+
 function handleEditTask(taskId) {
   selectedTaskId.value = Number(taskId)
   showNewTaskComponent.value = false
-   if (updateTaskComponent.value) {
-    updateTaskComponent.value.scrollIntoView({ behavior: "smooth", block: "start" }); 
+  if (updateTaskComponent.value) {
+    updateTaskComponent.value.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
-
-
 }
 function handleUpdateTaskComplete() {
   selectedTaskId.value = null
   showNewTaskComponent.value = true
-  //emit('update-task-complete') 
 }
-
-/*
-function toggleComponent() {
-  showNewTaskComponent.value = !showNewTaskComponent.value
-}
-*/
 </script>
 
 <template>
   <NavBarComponent />
 
-  <section >
+  <section>
     <div class="dashboard">
-      <h1>Welcom to TaskList</h1>
+      <h1>Welcom {{ userEmail }} !</h1>
       <p>Nice to have you here again.</p>
     </div>
     <article v-if="showNewTaskComponent">
-      <NewTaskComponent  />
+      <NewTaskComponent />
     </article>
     <article ref="updateTaskComponent" v-else>
-      <UpdateTaskComponent 
+      <UpdateTaskComponent
         :taskId="selectedTaskId"
         @update-task-complete="handleUpdateTaskComplete"
       />
@@ -67,7 +62,7 @@ h1 {
   align-items: center;
   justify-content: center;
 }
-.update-task-component{
+.update-task-component {
   margin-top: 60px;
 }
 </style>

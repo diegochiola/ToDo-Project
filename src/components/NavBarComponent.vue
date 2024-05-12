@@ -1,22 +1,24 @@
 <script setup>
-
 import { useUserStore } from '../stores/user.js'
-import { useRouter} from 'vue-router';
+import { useRouter } from 'vue-router'
 
-
-const router = useRouter();
-const userStore = useUserStore();
-
-
-
+const router = useRouter()
+const userStore = useUserStore()
 </script>
 
 <template>
   <div class="nav-bar">
     <ul class="nav-list">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Tasks</a></li>
-      <li><a href="#" @click="userStore.logOut">Log Out</a></li>
+      <li>
+        <a href="#"><img src="../assets/tasklist_logo_white.png" alt="tasklist logo" /></a>
+      </li>
+      <li><a href="#">MyTasks</a></li>
+      <li><a href="#">MyProfile</a></li>
+      <li>
+        <a href="#" @click="userStore.logOut" class="logout-link">
+          <img src="../assets/tasklist_logOut.png" alt="logout" />
+        </a>
+      </li>
     </ul>
   </div>
 </template>
@@ -38,11 +40,18 @@ li {
   list-style: none;
 }
 a {
-  color:var(--ligth-gray);
+  color: var(--ligth-gray);
   text-decoration: none;
   cursor: pointer;
 }
 a:hover {
   color: var(--yellow);
+}
+.logout-link {
+  filter: saturate(0%);
+}
+.logout-link:hover img {
+  filter: saturate(100%);
+  cursor: pointer;
 }
 </style>

@@ -11,20 +11,14 @@ const title = ref('')
 const status = ref('')
 const description = ref('')
 const actionDone = ref(false)
-/*
-const submitNewTask = () => {
-  taskStore.addTask(userStore.user.data.user.id, title.value, status.value, description.value)
-  title.value = ''
-  status.value = ''
-  description.value = ''
-}
-*/
+
 const submitNewTask = () => {
   taskStore.addTask(userStore.user.data.user.id, title.value, status.value, description.value)
   title.value = ''
   status.value = ''
   description.value = ''
   actionDone.value = true
+  console.log(userStore.user.data.user.id)
   setTimeout(() => {
     actionDone.value = false
   }, 2000)
@@ -34,7 +28,7 @@ const submitNewTask = () => {
 <template>
   <section class="to-dos">
     <p class="component-name">Create New Task</p>
-    <form class= "form" @submit.prevent="submitNewTask">
+    <form class="form" @submit.prevent="submitNewTask">
       <div class="form-elements">
         <label>What's on your ToDo list?</label>
         <input type="text" placeholder="e.g Grocery Shopping" id="title" v-model="title" required />
@@ -102,18 +96,17 @@ const submitNewTask = () => {
   color: var(--gray);
   margin: 0 auto;
 }
-.form{
+.form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 60%;
-  
 }
 .form-elements {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width:100%;
+  width: 100%;
 }
 label {
   margin-top: 20px;
