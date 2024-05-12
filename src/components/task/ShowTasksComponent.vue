@@ -8,6 +8,7 @@ import { storeToRefs } from 'pinia'
 const taskStore = useTaskStore()
 const { tasks } = storeToRefs(taskStore)
 
+
 //detalle de color segun status
 function getTaskClass(status) {
   const statusClassMap = {
@@ -34,10 +35,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <section>
-    <section class="div-list">
+
+    <article class="div-list">
       <div class="Section">
-        <h1>Your tasks</h1>
+        <p class="component-name">Your tasks</p>
       </div>
       <div v-if="!tasks">
         <p>No tasks available</p>
@@ -58,23 +59,34 @@ onMounted(() => {
           <button @click="deleteTaskById(task.id)" class="task-button pink">Delete</button>
         </div>
       </div>
-    </section>
-  </section>
+    </article>
+
 </template>
 
 <style scoped>
-h1 {
-  color: var(--purple);
+.component-name {
+  margin-top: 0px;
+  color: var(--white);
   font-size: 20px;
+  text-align: center;
+  background-color: var(--purple);
+  border-radius: 0 0 45px 45px;
+  padding: 15px;
+
 }
 .div-list {
-  padding-top: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 2rem;
+  margin: 0 auto;
+  gap: 1rem;
+  padding: 0px 20px 20px 20px;
+  border-radius: 45px;
+  width: 80%;
+  background-color: var(--white);
+  box-shadow: var(--shadow);
 }
+
 button {
   width: 500px;
   height: 30px;
@@ -100,6 +112,7 @@ button:hover {
   color: var(--gray);
   margin-bottom: 1rem;
   justify-content: space-between;
+
 }
 
 h3 {

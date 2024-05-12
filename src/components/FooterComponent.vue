@@ -10,7 +10,7 @@ const userStore = useUserStore();
 
 <template>
   <div class="nav-bar">
-    <ul class="nav-list">
+    <ul class="footer">
       <li><a href="#">About</a></li>
       <li><a href="#">Contact</a></li>
       <li><a href="#">Privacy</a></li>
@@ -23,20 +23,20 @@ const userStore = useUserStore();
 div {
   width: 100vw;
 }
-.nav-list {
+.footer {
   display: flex;
   align-items: center;
   justify-content: space-around;
   height: 60px;
   max-width: 100vw;
-  background-color: var(--purple);
+  background-color: var(--dark-blue);
   color: var(--white);
 }
 li {
   list-style: none;
 }
 a {
-  color: #fff;
+  color: var(--ligth-gray);
   text-decoration: none;
   cursor: pointer;
 }

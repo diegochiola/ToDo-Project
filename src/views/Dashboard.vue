@@ -3,17 +3,23 @@ import NavBarComponent from '../components/NavBarComponent.vue'
 import UpdateTaskComponent from '../components/task/UpdateTaskComponent.vue'
 import NewTaskComponent from '../components/task/NewTaskComponent.vue'
 import ShowTasksComponent from '../components/task/ShowTasksComponent.vue'
+import FooterComponent from '../components/FooterComponent.vue'
 
 import { ref } from 'vue'
-import { defineEmits } from 'vue'
+import { defineExpose } from 'vue'
 
 const showNewTaskComponent = ref(true)
 const selectedTaskId = ref(null)
-//const { emit } = defineEmits('update-task-complete')
+const updateTaskComponent = ref(null)
 
 function handleEditTask(taskId) {
   selectedTaskId.value = Number(taskId)
   showNewTaskComponent.value = false
+   if (updateTaskComponent.value) {
+    updateTaskComponent.value.scrollIntoView({ behavior: "smooth", block: "start" }); 
+  }
+
+
 }
 function handleUpdateTaskComplete() {
   selectedTaskId.value = null
@@ -31,21 +37,22 @@ function toggleComponent() {
 <template>
   <NavBarComponent />
 
-  <section>
+  <section >
     <div class="dashboard">
       <h1>Welcom to TaskList</h1>
       <p>Nice to have you here again.</p>
     </div>
     <article v-if="showNewTaskComponent">
-      <NewTaskComponent />
+      <NewTaskComponent  />
     </article>
-    <article v-else>
-      <UpdateTaskComponent
+    <article ref="updateTaskComponent" v-else>
+      <UpdateTaskComponent 
         :taskId="selectedTaskId"
         @update-task-complete="handleUpdateTaskComplete"
       />
     </article>
-    <ShowTasksComponent @edit-task="handleEditTask" />
+    <ShowTasksComponent class="update-task-component" @edit-task="handleEditTask" />
+    <FooterComponent />
   </section>
 </template>
 
@@ -59,5 +66,8 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.update-task-component{
+  margin-top: 60px;
 }
 </style>

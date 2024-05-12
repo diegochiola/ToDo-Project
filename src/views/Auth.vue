@@ -11,22 +11,36 @@ function toggleUser() {
 
 <template>
   <section class="auth">
-    <h1>Welcome to TaskList!</h1>
-    <article v-if="hasUser">
+    <div class="welcome">
+      <h1>Welcome to </h1>
+    <img src="../assets/tasklist_logo_color.png" alt="logo tasklist color">
+    </div>
+    
+    <article class="login-components">
+      <div>
+        <img src="../assets/tasklist_login.png" alt="image of a man with tasklist">
+      </div>
+      <div v-if="hasUser">
       <LogInComponent />
       <div class="change-component">
         <p>Don't have an account?</p>
         <a href="#" @click="toggleUser">Create</a>
       </div>
-    </article>
+    </div>
 
-    <article v-else="!hasUser">
+    <div v-else="!hasUser">
       <SingUpComponent />
       <div class="change-component">
         <p>Already have an account?</p>
         <a href="#" @click="toggleUser">Log In</a>
       </div>
+    </div>
+
+
+
+
     </article>
+    
   </section>
 </template>
 
@@ -39,9 +53,27 @@ function toggleUser() {
   justify-content: center;
   gap: 60px;
 }
+.welcome {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.welcome img {
+  width: 130px;
+  height: auto;
+}
 h1 {
   color: var(--purple);
   font-size: 35px;
+}
+.login-components {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
 }
 .change-component {
   display: flex;

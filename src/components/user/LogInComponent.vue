@@ -12,34 +12,45 @@ const password = ref('')
 </script>
 
 <template>
-  <form @submit.prevent="userStore.login(email, password)" class="login">
-    <h1>Sing In</h1>
+  <article>
 
-    <div class="form-elements">
-      <label>Email:</label>
-      <input type="email" placeholder="Enter your email" id="email" v-model="email" required />
-    </div>
-    <div class="form-elements">
-      <label>Password:</label>
+      <form @submit.prevent="userStore.login(email, password)" class="login">
+        <h1>Sing In</h1>
 
-      <input
-        type="password"
-        placeholder="Enter your password"
-        id="password"
-        v-model="password"
-        required
-      />
-      <div>
-        <a href="#" class="forgot">Forgot password?</a>
-      </div>
-    </div>
-    <div>
-      <button type="submit">Log in</button>
-    </div>
-  </form>
+        <div class="form-elements">
+          <label>Email:</label>
+          <input type="email" placeholder="Enter your email" id="email" v-model="email" required />
+        </div>
+        <div class="form-elements">
+          <label>Password:</label>
+
+          <input
+            type="password"
+            placeholder="Enter your password"
+            id="password"
+            v-model="password"
+            required
+          />
+
+          <div>
+            <a href="#" class="forgot">Forgot password?</a>
+          </div>
+        </div>
+        <div>
+          <button type="submit">Log in</button>
+        </div>
+      </form>
+  </article>
 </template>
 
 <style scoped>
+.login-article {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
 h1 {
   color: var(--purple);
   font-size: 25px;

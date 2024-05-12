@@ -1,14 +1,16 @@
 :root {
-  --purple: #A18AFF;
   --ligth-purle: #CA8BFE;
+  --purple: #A18AFF;
+  --purple-dark: #7C5BF1;
   --pink: #FD99AF;
   --sky-blue: #3FD4F4;
   --yellow:  #FAC608;
+  --ligth-gray: #F6FAFF;
   --gray: #717082;
-  --ligth-gray: #f1f1f1;
+  --dark-gray: #2F2C2D;
   --white: #FFF;
   --light: #EEE;
-	--grey: #888;
+  --dark-blue: #0A184C;
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 

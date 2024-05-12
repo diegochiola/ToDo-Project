@@ -33,8 +33,8 @@ const submitNewTask = () => {
 
 <template>
   <section class="to-dos">
-    <h1>Create New Task</h1>
-    <form @submit.prevent="submitNewTask">
+    <p class="component-name">Create New Task</p>
+    <form class= "form" @submit.prevent="submitNewTask">
       <div class="form-elements">
         <label>What's on your ToDo list?</label>
         <input type="text" placeholder="e.g Grocery Shopping" id="title" v-model="title" required />
@@ -78,35 +78,42 @@ const submitNewTask = () => {
 </template>
 
 <style scoped>
-h1 {
-  color: var(--purple);
+.component-name {
+  margin-top: 0px;
+  color: var(--white);
   font-size: 20px;
+  text-align: center;
+  width: 25%;
+  background-color: var(--purple);
+  border-radius: 0 0 45px 45px;
+  padding: 15px;
 }
-.dashboard {
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+
 .to-dos {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   background-color: var(--white);
   width: 80%;
-  height: 350px;
+  height: 400px;
   border-radius: 45px;
   box-shadow: var(--shadow);
   color: var(--gray);
   margin: 0 auto;
 }
+.form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+  
+}
 .form-elements {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width:100%;
 }
 label {
   margin-top: 20px;
@@ -127,7 +134,7 @@ input {
   color: var(--gray);
 }
 button {
-  width: 500px;
+  width: 60%px;
   height: 30px;
   border-radius: 30px;
   border: none;

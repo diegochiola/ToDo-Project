@@ -31,14 +31,14 @@ div {
   justify-content: space-around;
   height: 60px;
   max-width: 100vw;
-  background-color: var(--purple);
+  background-color: var(--purple-dark);
   color: var(--white);
 }
 li {
   list-style: none;
 }
 a {
-  color: #fff;
+  color:var(--ligth-gray);
   text-decoration: none;
   cursor: pointer;
 }

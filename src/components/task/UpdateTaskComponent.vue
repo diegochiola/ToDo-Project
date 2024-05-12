@@ -16,7 +16,8 @@ const currentProps = defineProps({
 })
 
 //console.log(currentProps)
-const currentTaskId = currentProps.taskId
+//const currentTaskId = currentProps.taskId
+const currentTaskId = ref(currentProps.taskId)
 //console.log('El id es: ' + currentTaskId)
 
 const updatedTitle = ref('')
@@ -26,7 +27,7 @@ const actionDone = ref(false)
 
 // Ejecutar la función al montar el componente
 onMounted(() => {
-  bringTaskById(currentTaskId)
+  bringTaskById(currentTaskId.value)
 })
 
 //traerme los datos asociados al id de la task
@@ -43,9 +44,8 @@ async function bringTaskById(taskId) {
 }
 
 async function updateTaskById() {
-  
   await taskStore.updateTask(
-    currentTaskId,
+    currentTaskId.value,
     updatedTitle.value,
     updatedStatus.value,
     updatedDescription.value
@@ -55,16 +55,20 @@ async function updateTaskById() {
     actionDone.value = false
   }, 2000)
   emit('update-task-complete')
-
 }
+
+const updateCurrentTaskId = (taskId) => {
+  currentTaskId.value = taskId 
+}
+
 </script>
 
 <template>
   <section class="to-dos">
-    <h1>Edit your Task</h1>
-    <form @submit.prevent="updateTaskById">
+    <p class="component-name" >Edit your Task</p>
+    <form class= "form" @submit.prevent="updateTaskById">
       <div class="form-elements">
-        <label>What's on your ToDo list?</label>
+        <label>ToDo List Item</label>
         <input type="text" id="updatedTitle" v-model="updatedTitle" />
       </div>
       <div class="form-elements">
@@ -93,30 +97,37 @@ async function updateTaskById() {
 </template>
 
 <style scoped>
-h1 {
-  color: var(--purple);
+.component-name {
+  margin-top: 0px;
+  color: var(--white);
   font-size: 20px;
+  text-align: center;
+  width: 25%;
+  background-color: var(--purple);
+  border-radius: 0 0 45px 45px;
+  padding: 15px;
 }
-.dashboard {
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+
 .to-dos {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   background-color: var(--white);
   width: 80%;
-  height: 350px;
+  height: 400px;
   border-radius: 45px;
   box-shadow: var(--shadow);
   color: var(--gray);
   margin: 0 auto;
+  
+}
+.form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+  
 }
 .form-elements {
   display: flex;
@@ -142,7 +153,7 @@ input {
   color: var(--gray);
 }
 button {
-  width: 500px;
+  width: 100%;
   height: 30px;
   border-radius: 30px;
   border: none;
@@ -196,7 +207,7 @@ h3 {
   top: 0;
   left: 0;
   width: 100%;
-  heigth: 300px;
+  height: 300px; 
   border-radius: 45px;
   background-color: greenyellow;
   text-align: center;
