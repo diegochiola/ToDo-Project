@@ -8,7 +8,6 @@ import { storeToRefs } from 'pinia'
 const taskStore = useTaskStore()
 const { tasks } = storeToRefs(taskStore)
 
-
 //detalle de color segun status
 function getTaskClass(status) {
   const statusClassMap = {
@@ -16,51 +15,44 @@ function getTaskClass(status) {
     'In progress': 'yellow-border',
     Done: 'green-border'
   }
-  return statusClassMap[status] || '' // Devuelve la clase de borde correspondiente o una cadena vacía si no se encuentra
+  return statusClassMap[status] || ''
 }
 async function deleteTaskById(taskId) {
   await taskStore.deleteTask(taskId)
 }
-
 //Enviar emit a Dashboard
 const emit = defineEmits(['editTask'])
 
 const emitEditTask = (taskId) => {
   emit('editTask', taskId)
 }
-
-onMounted(() => {
-  taskStore.fetchTasks()
-})
 </script>
 
 <template>
-
-    <article class="div-list">
-      <div class="Section">
-        <p class="component-name">Your tasks</p>
+  <article class="div-list">
+    <div class="Section">
+      <p class="component-name">Your tasks</p>
+    </div>
+    <div v-if="!tasks">
+      <p>No tasks available</p>
+    </div>
+    <div v-for="task in tasks" :key="task.id" class="todo-list" :class="getTaskClass(task.status)">
+      <div class="task-details">
+        <h4>{{ task.title }}</h4>
+        <p>Description: {{ task.description }}</p>
+        <p>Status: {{ task.status }}</p>
+        <p>Created by: {{ task.user_id }}</p>
       </div>
-      <div v-if="!tasks">
-        <p>No tasks available</p>
+      <div class="buttons">
+        <button @click="emitEditTask(task.id)" class="green link">
+          <img src="@/assets/edit_imago_yellow.png" alt="edit imago" />
+        </button>
+        <button @click="deleteTaskById(task.id)" class="red link">
+          <img src="@/assets/delete_imago_yellow.png" alt="delete imago" />
+        </button>
       </div>
-      <div
-        v-for="task in tasks"
-        :key="task.id"
-        class="todo-list"
-        :class="getTaskClass(task.status)"
-      >
-        <div class="task-details">
-          <h4>{{ task.title }}</h4>
-          <p>Status: {{ task.status }}</p>
-          <p>Description: {{ task.description }}</p>
-        </div>
-        <div class="buttons">
-          <button @click="emitEditTask(task.id)" class="task-button">Edit</button>
-          <button @click="deleteTaskById(task.id)" class="task-button pink">Delete</button>
-        </div>
-      </div>
-    </article>
-
+    </div>
+  </article>
 </template>
 
 <style scoped>
@@ -72,7 +64,6 @@ onMounted(() => {
   background-color: var(--purple);
   border-radius: 0 0 45px 45px;
   padding: 15px;
-
 }
 .div-list {
   display: flex;
@@ -103,7 +94,6 @@ button:hover {
 .todo-list {
   display: flex;
   flex-direction: row;
-  align-items: center;
   background-color: var(--white);
   width: 80%;
   padding: 1rem;
@@ -112,7 +102,6 @@ button:hover {
   color: var(--gray);
   margin-bottom: 1rem;
   justify-content: space-between;
-
 }
 
 h3 {
@@ -137,18 +126,34 @@ h4 {
   gap: 10px;
 }
 .task-button {
-  width: 100px;
-  height: 30px;
-  border-radius: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
   border: none;
   background-color: var(--purple);
   color: var(--white);
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.pink {
-  background-color: var(--pink);
-  color: var(--white);
+.red{
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--red);
+  
+}
+.green{
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--green);
+ 
 }
 
 .yellow-border {
@@ -160,6 +165,13 @@ h4 {
 }
 
 .green-border {
-  border: 3px solid greenyellow;
+  border: 3px solid var(--green);
+}
+.link img {
+  filter: saturate(0%);
+}
+.link:hover img {
+  filter: saturate(100%);
+  cursor: pointer;
 }
 </style>

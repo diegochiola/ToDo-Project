@@ -12,13 +12,14 @@ const status = ref('')
 const description = ref('')
 const actionDone = ref(false)
 
-const submitNewTask = () => {
-  taskStore.addTask(userStore.user.data.user.id, title.value, status.value, description.value)
+const submitNewTask = async () => {
+  await taskStore.addTask(userStore.user.data.user.id, title.value, status.value, description.value)
   title.value = ''
   status.value = ''
   description.value = ''
   actionDone.value = true
   console.log(userStore.user.data.user.id)
+  await taskStore.fetchTasks(userStore.user.data.user.id)
   setTimeout(() => {
     actionDone.value = false
   }, 2000)

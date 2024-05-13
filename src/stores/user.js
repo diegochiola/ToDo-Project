@@ -7,7 +7,8 @@ import router from '@/router'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    user: null
+    user: null,
+    //profile: null
   }),
 
   actions: {

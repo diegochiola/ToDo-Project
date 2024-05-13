@@ -1,4 +1,5 @@
 <script setup>
+import { storeToRefs } from 'pinia'
 import NavBarComponent from '../components/NavBarComponent.vue'
 import UpdateTaskComponent from '../components/task/UpdateTaskComponent.vue'
 import NewTaskComponent from '../components/task/NewTaskComponent.vue'
@@ -14,7 +15,7 @@ const updateTaskComponent = ref(null)
 
 import { useUserStore } from './../stores/user.js'
 const userStore = useUserStore()
-const userEmail = ref('guest@example.com') //por defecto
+
 
 function handleEditTask(taskId) {
   selectedTaskId.value = Number(taskId)
@@ -34,8 +35,9 @@ function handleUpdateTaskComplete() {
 
   <section>
     <div class="dashboard">
-      <h1>Welcom {{ userEmail }} !</h1>
-      <p>Nice to have you here again.</p>
+      <h1>Welcome to</h1>
+      <img src="../assets/tasklist_logo_color.png" alt="tasklist logo" />
+      <p class="slogan">Nice to have you here again.</p>
     </div>
     <article v-if="showNewTaskComponent">
       <NewTaskComponent />
@@ -53,7 +55,7 @@ function handleUpdateTaskComplete() {
 
 <style scoped>
 h1 {
-  color: var(--purple);
+  color: var(--purple-dark);
 }
 .dashboard {
   padding: 40px;
@@ -71,6 +73,12 @@ footer {
   bottom: 0;
   width: 100%;
   height: 60px;
-  
+}
+img {
+  width: 130px;
+  height: auto;
+}
+.slogan {
+  font-size: 12px;
 }
 </style>

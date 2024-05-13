@@ -2,7 +2,6 @@
 
 import { defineStore } from 'pinia'
 import { supabase } from '../supabase'
-import router from '@/router'
 
 //declaramos la store como: "tasks"
 export const useTaskStore = defineStore('tasks', {
@@ -10,13 +9,20 @@ export const useTaskStore = defineStore('tasks', {
     tasks: null
   }),
   actions: {
-    async fetchTasks() {
-      //función para traer todas las tareas de la base de datos
-      const { data: tasks } = await supabase //se conecta con supabase
-        .from('tasks')
-        .select('*')
-        .order('id', { ascending: false })
-        this.tasks = tasks
+    async fetchTasks(user_id) {
+      try {
+        const { data: tasks, error } = await supabase
+          .from('tasks')
+          .select('*')
+          .eq('user_id', user_id)
+          .order('id', { ascending: false })
+        if (error) {
+          throw error;
+        }
+        this.tasks = tasks;
+      } catch (error) {
+        console.error('Error fetching tasks:', error.message);
+      }
     },
   async addTask(user_id, title, status, description) {
     if (title.trim() === '') {
@@ -34,9 +40,6 @@ export const useTaskStore = defineStore('tasks', {
     if (error) {
       console.error('Error adding a task:', error.message)
       alert('An error occurred while adding the task. Please try again later.')
-    } else {
-      this.fetchTasks()
-      router.push('/')
     }
   },
   async deleteTask(id) {
@@ -44,8 +47,6 @@ export const useTaskStore = defineStore('tasks', {
     if (error) {
       console.error('Error deleting a task:', error.message)
       alert('An error occurred while deleting the task. Please try again later.')
-    } else {
-      this.fetchTasks()
     }
   },
   async updateTask( id, updatedTitle, updatedStatus, updatedDescription) {
@@ -56,8 +57,6 @@ export const useTaskStore = defineStore('tasks', {
     if (error) {
       console.error('Error updating a task:', error.message)
       alert('An error occurred while updating the task. Please try again later.')
-    } else {
-      this.fetchTasks()
     }
   }
 }

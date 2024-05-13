@@ -7,7 +7,6 @@
   --pink: #FD99AF;
 
   --sky-blue: #3FD4F4;
-  --green: #009B4D;
   --yellow:  #FAC608;
   --ligth-gray: #F6FAFF;
   --gray: #717082;
@@ -15,6 +14,9 @@
   --white: #FFF;
   --light: #EEE;
   --dark-blue: #0A184C;
+  --red: #fb7369;
+  --green: #50b884;
+
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 

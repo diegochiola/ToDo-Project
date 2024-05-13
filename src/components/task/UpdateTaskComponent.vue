@@ -2,11 +2,14 @@
 import { onMounted, ref, defineEmits } from 'vue'
 import { defineProps } from 'vue'
 import { useTaskStore } from '../../stores/task.js'
-
+import { useUserStore } from '../../stores/user.js'
 import { storeToRefs } from 'pinia'
 
+const userStore = useUserStore()
 const taskStore = useTaskStore()
+const { user } = storeToRefs(userStore)
 const { tasks } = storeToRefs(taskStore)
+
 const emit = defineEmits(['update-task-complete'])
 const currentProps = defineProps({
   taskId: {
@@ -44,12 +47,15 @@ async function bringTaskById(taskId) {
 }
 
 async function updateTaskById() {
+  //const user_id = user.value.id
   await taskStore.updateTask(
     currentTaskId.value,
     updatedTitle.value,
     updatedStatus.value,
     updatedDescription.value
+    //user_id
   )
+  await taskStore.fetchTasks(user.value.data.user.id)
   actionDone.value = true
   setTimeout(() => {
     actionDone.value = false
