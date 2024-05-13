@@ -74,7 +74,7 @@ const updateCurrentTaskId = (taskId) => {
     <p class="component-name" >Edit your Task</p>
     <form class= "form" @submit.prevent="updateTaskById">
       <div class="form-elements">
-        <label>ToDo List Item</label>
+        <label>Task</label>
         <input type="text" id="updatedTitle" v-model="updatedTitle" />
       </div>
       <div class="form-elements">
@@ -121,7 +121,7 @@ const updateCurrentTaskId = (taskId) => {
   align-items: center;
   background-color: var(--white);
   width: 80%;
-  height: 400px;
+  height: 450px;
   border-radius: 45px;
   box-shadow: var(--shadow);
   color: var(--gray);
@@ -160,7 +160,7 @@ input {
 }
 button {
   width: 100%;
-  height: 30px;
+  height: 60px;
   border-radius: 30px;
   border: none;
   background-color: var(--purple);
@@ -215,7 +215,7 @@ h3 {
   width: 100%;
   height: 300px; 
   border-radius: 45px;
-  background-color: greenyellow;
+  background-color: var(--green);
   text-align: center;
   color: var(--purple);
   padding: 20px;

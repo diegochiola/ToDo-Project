@@ -91,7 +91,7 @@ const submitNewTask = async () => {
   align-items: center;
   background-color: var(--white);
   width: 80%;
-  height: 400px;
+  height: 450px;
   border-radius: 45px;
   box-shadow: var(--shadow);
   color: var(--gray);
@@ -128,8 +128,8 @@ input {
   color: var(--gray);
 }
 button {
-  width: 60%px;
-  height: 30px;
+  width: 50%px;
+  height: 60px;
   border-radius: 30px;
   border: none;
   background-color: var(--purple);
@@ -182,7 +182,7 @@ h3 {
   left: 0;
   width: 100%;
   border-radius: 45px;
-  background-color: greenyellow;
+  background-color: var(--green);
   text-align: center;
   color: var(--purple);
   padding: 20px;

@@ -1,45 +1,59 @@
 <script setup>
 import { ref } from 'vue'
 import { useUserStore } from '../../stores/user.js'
-
+import { useTaskStore } from '../../stores/task.js'
 import { useRouter } from 'vue-router'
-const router = useRouter()
 
+const router = useRouter()
+const taskStore = useTaskStore()
 const userStore = useUserStore()
 
 const email = ref('')
 const password = ref('')
+
+const handleSubmit = async () => {
+  try {
+    await userStore.login(email.value, password.value)
+    console.log(userStore.user.user.id)
+    if (userStore.user.user.id) {
+      //await userStore.fetchProfile(); agregar el perfil al logearme
+      await taskStore.fetchTasks(userStore.user.user.id)
+    }
+  } catch (error) {
+    console.log(error)
+    alert('You dont have an account yet. Please sign up')
+  }
+}
 </script>
 
 <template>
   <article>
+    <form @submit.prevent="handleSubmit(email, password)" class="login">
+      <h1>Sing In</h1>
 
-      <form @submit.prevent="userStore.login(email, password)" class="login">
-        <h1>Sing In</h1>
+      <div class="form-elements">
+        <label>Email:</label>
+        <input type="email" placeholder="Enter your email" id="email" v-model="email" required />
+      </div>
+      <div class="form-elements">
+        <label>Password:</label>
 
-        <div class="form-elements">
-          <label>Email:</label>
-          <input type="email" placeholder="Enter your email" id="email" v-model="email" required />
-        </div>
-        <div class="form-elements">
-          <label>Password:</label>
+        <input
+          type="password"
+          placeholder="Enter your password"
+          id="password"
+          v-model="password"
+          required
+        />
 
-          <input
-            type="password"
-            placeholder="Enter your password"
-            id="password"
-            v-model="password"
-            required
-          />
-
-          <div>
-            <a href="#" class="forgot">Forgot password?</a>
-          </div>
-        </div>
         <div>
-          <button type="submit">Log in</button>
+          <a href="#" class="forgot">Forgot password?</a>
         </div>
-      </form>
+      </div>
+      <div>
+        <button type="submit">Log in</button>
+      </div>
+    </form>
   </article>
 </template>
 

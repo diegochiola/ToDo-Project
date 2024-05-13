@@ -39,7 +39,6 @@ export const useUserStore = defineStore('user', {
       })
       if (error) throw error
       if (data) this.user = data
-      
       router.push('/' )
       //return this.user //devolver usuario
     },
