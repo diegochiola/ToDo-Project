@@ -2,9 +2,11 @@
 import { ref, onMounted, watch } from 'vue'
 import { defineEmits } from 'vue'
 import { useTaskStore } from '../../stores/task.js'
-
+import { useUserStore } from '../../stores/user.js'
 import { storeToRefs } from 'pinia'
 
+const userStore = useUserStore()
+const { user } = storeToRefs(userStore)
 const taskStore = useTaskStore()
 const { tasks } = storeToRefs(taskStore)
 
@@ -19,6 +21,7 @@ function getTaskClass(status) {
 }
 async function deleteTaskById(taskId) {
   await taskStore.deleteTask(taskId)
+  await taskStore.fetchTasks(user.value.data.user.id)
 }
 //Enviar emit a Dashboard
 const emit = defineEmits(['editTask'])
@@ -72,9 +75,9 @@ const emitEditTask = (taskId) => {
   margin: 0 auto;
   gap: 1rem;
   padding: 0px 20px 20px 20px;
-  border-radius: 45px;
-  width: 80%;
-  background-color: var(--white);
+ 
+  width: 100%;
+  background-color: var(--purple);
   box-shadow: var(--shadow);
 }
 
@@ -136,8 +139,8 @@ h4 {
   margin-bottom: 20px;
 }
 .red{
-  width: 50px;
-  height: 50px;
+  width:40px;
+  height: 40px;
   border-radius: 50px;
   display: flex;
   align-items: center;
@@ -146,8 +149,8 @@ h4 {
   
 }
 .green{
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50px;
   display: flex;
   align-items: center;

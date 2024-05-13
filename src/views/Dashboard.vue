@@ -34,9 +34,11 @@ function handleUpdateTaskComplete() {
   <NavBarComponent />
 
   <section>
-    <div class="dashboard">
-      <h1>Welcome to</h1>
+    <div class="dashboard-container">
+      <div class="dashboard">
+        <h1>Welcome to</h1>
       <img src="../assets/tasklist_logo_color.png" alt="tasklist logo" />
+      </div>
       <p class="slogan">Nice to have you here again.</p>
     </div>
     <article v-if="showNewTaskComponent">
@@ -57,16 +59,25 @@ function handleUpdateTaskComplete() {
 h1 {
   color: var(--purple-dark);
 }
-.dashboard {
-  padding: 40px;
+
+.dashboard-container {
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap:5px;
+}
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 .update-task-component {
   margin-top: 60px;
-  margin-bottom: 30px;
+  
 }
 footer {
   position: fixed;

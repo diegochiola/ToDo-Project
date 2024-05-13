@@ -49,7 +49,7 @@ div {
   justify-content: space-around;
   height: 60px;
   max-width: 100vw;
-  background-color: var(--purple-dark);
+  background-color: var(--white);
   color: var(--white);
 }
 li {

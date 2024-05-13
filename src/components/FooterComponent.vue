@@ -29,7 +29,7 @@ div {
   justify-content: space-around;
   height: 60px;
   max-width: 100vw;
-  background-color: var(--gray);
+  background-color: var(--purple);
   color: var(--white);
 }
 li {
