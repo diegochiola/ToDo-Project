@@ -10,13 +10,29 @@ const userStore = useUserStore()
   <div class="nav-bar">
     <ul class="nav-list">
       <li>
-        <a href="#"><img src="../assets/tasklist_logo_white.png" alt="tasklist logo" /></a>
+        <router-link to="/">
+          <a href="#" class="link"
+            ><img src="../assets/tasklist_logo_yellow.png" alt="tasklist logo"
+          /></a>
+        </router-link>
       </li>
-      <li><a href="#">MyTasks</a></li>
-      <li><a href="#">MyProfile</a></li>
       <li>
-        <a href="#" @click="userStore.logOut" class="logout-link">
-          <img src="../assets/tasklist_logOut.png" alt="logout" />
+        <router-link to="/">
+          <a href="#" class="link"
+            ><img src="../assets/task_imago_yellow.png" alt="task imago"
+          /></a>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/profile">
+          <a href="#" class="link"
+            ><img src="../assets/profile_imago_yellow.png" alt="profile imago"
+          /></a>
+        </router-link>
+      </li>
+      <li>
+        <a href="#" @click="userStore.logOut" class="link">
+          <img src="../assets/tasklist_logout_yellow.png" alt="logout" />
         </a>
       </li>
     </ul>
@@ -47,10 +63,10 @@ a {
 a:hover {
   color: var(--yellow);
 }
-.logout-link {
+.link img {
   filter: saturate(0%);
 }
-.logout-link:hover img {
+.link:hover img {
   filter: saturate(100%);
   cursor: pointer;
 }

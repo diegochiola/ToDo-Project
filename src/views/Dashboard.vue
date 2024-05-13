@@ -64,5 +64,13 @@ h1 {
 }
 .update-task-component {
   margin-top: 60px;
+  margin-bottom: 30px;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  
 }
 </style>

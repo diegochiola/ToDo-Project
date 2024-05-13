@@ -34,6 +34,7 @@ div {
 }
 li {
   list-style: none;
+  font-size: 12px;
 }
 a {
   color: var(--ligth-gray);
