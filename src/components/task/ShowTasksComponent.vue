@@ -10,6 +10,8 @@ const { user } = storeToRefs(userStore)
 const taskStore = useTaskStore()
 const { tasks } = storeToRefs(taskStore)
 
+const actionDone = ref(false)
+
 //detalle de color segun status
 function getTaskClass(status) {
   const statusClassMap = {
@@ -22,6 +24,10 @@ function getTaskClass(status) {
 async function deleteTaskById(taskId) {
   await taskStore.deleteTask(taskId)
   await taskStore.fetchTasks(user.value.data.user.id)
+  actionDone.value = true
+  setTimeout(() => {
+    actionDone.value = false
+  }, 2000)
 }
 //Enviar emit a Dashboard
 const emit = defineEmits(['editTask'])
@@ -44,7 +50,6 @@ const emitEditTask = (taskId) => {
         <h4>{{ task.title }}</h4>
         <p>Description: {{ task.description }}</p>
         <p>Status: {{ task.status }}</p>
-        <p>Created by: {{ task.user_id }}</p>
       </div>
       <div class="buttons">
         <button @click="emitEditTask(task.id)" class="green link">
@@ -53,6 +58,12 @@ const emitEditTask = (taskId) => {
         <button @click="deleteTaskById(task.id)" class="red link">
           <img src="@/assets/delete_imago_yellow.png" alt="delete imago" />
         </button>
+        <transition name="slide-fade">
+          <div v-if="actionDone" class="success-notification">
+            <img src="@/assets/check_imago_color.png" alt="check" />
+            <p>Task deleted successfully!</p>
+          </div>
+        </transition>
       </div>
     </div>
   </article>
@@ -74,8 +85,6 @@ const emitEditTask = (taskId) => {
   align-items: center;
   margin: 0 auto;
   gap: 1rem;
-  padding: 0px 20px 20px 20px;
- 
   width: 100%;
   background-color: var(--purple);
   box-shadow: var(--shadow);
@@ -100,7 +109,7 @@ button:hover {
   background-color: var(--white);
   width: 80%;
   padding: 1rem;
-  border-radius: 45px;
+  border-radius: 30px;
   box-shadow: var(--shadow);
   color: var(--gray);
   margin-bottom: 1rem;
@@ -124,6 +133,7 @@ h4 {
   text-align: left;
 }
 .buttons {
+  padding: 0px;
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -138,17 +148,16 @@ h4 {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.red{
-  width:40px;
+.red {
+  width: 40px;
   height: 40px;
   border-radius: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: var(--red);
-  
 }
-.green{
+.green {
   width: 40px;
   height: 40px;
   border-radius: 50px;
@@ -156,19 +165,18 @@ h4 {
   align-items: center;
   justify-content: center;
   background-color: var(--green);
- 
 }
 
 .yellow-border {
-  border: 3px solid var(--yellow);
+  border: 5px solid var(--yellow);
 }
 
 .pink-border {
-  border: 3px solid var(--pink);
+  border: 5px solid var(--pink);
 }
 
 .green-border {
-  border: 3px solid var(--green);
+  border: 5px solid var(--green);
 }
 .link img {
   filter: saturate(0%);
@@ -176,5 +184,34 @@ h4 {
 .link:hover img {
   filter: saturate(100%);
   cursor: pointer;
+}
+
+.success-notification {
+  position: fixed;
+  z-index: 11100;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(161, 138, 255, 0.9);
+  color: var(--white);
+  
+.success-notification p {
+  font-size: 20px;
+}
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition:
+    transform 0.5s,
+    opacity 0.5s;
+}
+.slide-fade-enter, .slide-fade-leave-to /* .slide-fade-leave-active in <2.1.8 */ {
+  transform: translateY(-20px);
+  opacity: 0;
 }
 </style>

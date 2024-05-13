@@ -63,24 +63,25 @@ const submitNewTask = async () => {
       <div class="form-elements">
         <button type="submit" value="Add Task">Add Task</button>
       </div>
-      <transition name="slide-fade">
-        <div v-if="actionDone" class="success-notification">
-          <p>Great job! The task has been added successfully 🎉</p>
-        </div>
-      </transition>
     </form>
   </section>
+  <transition name="slide-fade">
+    <div v-if="actionDone" class="success-notification">
+      <img src="@/assets/check_imago_color.png" alt="check" />
+      <p>The task has been added successfully!</p>
+    </div>
+  </transition>
 </template>
 
 <style scoped>
 .component-name {
   margin-top: 0px;
   color: var(--white);
+  height: 60px;
   font-size: 20px;
   text-align: center;
-  width: 25%;
+  width: 100%;
   background-color: var(--purple);
-  border-radius: 0 0 45px 45px;
   padding: 15px;
 }
 
@@ -92,7 +93,8 @@ const submitNewTask = async () => {
   background-color: var(--white);
   width: 80%;
   height: 450px;
-  border-radius: 45px;
+  border: solid 4px var(--purple);
+  border-radius: 0px 0px 30px 30px;
   box-shadow: var(--shadow);
   color: var(--gray);
   margin: 0 auto;
@@ -177,15 +179,22 @@ h3 {
 }
 
 .success-notification {
-  position: absolute;
+  position: fixed;
+  z-index: 11100;
   top: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   width: 100%;
-  border-radius: 45px;
-  background-color: var(--green);
-  text-align: center;
-  color: var(--purple);
-  padding: 20px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(161, 138, 255, 0.9);
+  color: var(--white);
+}
+.success-notification p {
+  font-size: 20px;
 }
 .slide-fade-enter-active,
 .slide-fade-leave-active {

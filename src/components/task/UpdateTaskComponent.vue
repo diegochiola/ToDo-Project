@@ -61,6 +61,8 @@ async function updateTaskById() {
     actionDone.value = false
   }, 2000)
   emit('update-task-complete')
+  //console.log('upadet!')
+  
 }
 
 const updateCurrentTaskId = (taskId) => {
@@ -70,6 +72,7 @@ const updateCurrentTaskId = (taskId) => {
 </script>
 
 <template>
+  
   <section class="to-dos">
     <p class="component-name" >Edit your Task</p>
     <form class= "form" @submit.prevent="updateTaskById">
@@ -94,23 +97,25 @@ const updateCurrentTaskId = (taskId) => {
         <button type="submit" value="Update Task">Update Task</button>
       </div>
     </form>
-    <transition name="slide-fade">
+   
+  </section>
+  <transition name="slide-fade">
       <div v-if="actionDone" class="success-notification">
+        <img src="@/assets/check_imago_color.png" alt="check">
         <p>Task updated successfully!</p>
       </div>
     </transition>
-  </section>
 </template>
 
 <style scoped>
 .component-name {
   margin-top: 0px;
   color: var(--white);
+  height: 60px;
   font-size: 20px;
   text-align: center;
-  width: 25%;
+  width: 100%;
   background-color: var(--purple);
-  border-radius: 0 0 45px 45px;
   padding: 15px;
 }
 
@@ -122,11 +127,11 @@ const updateCurrentTaskId = (taskId) => {
   background-color: var(--white);
   width: 80%;
   height: 450px;
-  border-radius: 45px;
+  border: solid 4px var(--purple);
+  border-radius: 0px 0px 30px 30px;;
   box-shadow: var(--shadow);
   color: var(--gray);
   margin: 0 auto;
-  
 }
 .form{
   display: flex;
@@ -178,7 +183,7 @@ button:hover {
   background-color: var(--white);
   width: 80%;
   padding: 1rem;
-  border-radius: 45px;
+  border-radius: 30px;
   box-shadow: var(--shadow);
   margin-bottom: 1rem;
   justify-content: space-between;
@@ -206,19 +211,23 @@ h3 {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-
 .success-notification {
-  position: absolute; 
-  z-index: 1000;
+  position: fixed;
+  z-index: 11100;
   top: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   width: 100%;
-  height: 300px; 
-  border-radius: 45px;
-  background-color: var(--green);
-  text-align: center;
-  color: var(--purple);
-  padding: 20px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(161, 138, 255, 0.9);
+  color: var(--white);
+}
+.success-notification p {
+  font-size: 20px;
 }
 .slide-fade-enter-active,
 .slide-fade-leave-active {

@@ -26,7 +26,11 @@ function handleEditTask(taskId) {
 }
 function handleUpdateTaskComplete() {
   selectedTaskId.value = null
-  showNewTaskComponent.value = true
+  //showNewTaskComponent.value = true
+  setTimeout(() => {
+    showNewTaskComponent.value = true
+  }, 2000)
+
 }
 </script>
 
