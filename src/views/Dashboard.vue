@@ -19,6 +19,7 @@ const userStore = useUserStore()
 
 function handleEditTask(taskId) {
   selectedTaskId.value = Number(taskId)
+  console.log(selectedTaskId.value)
   showNewTaskComponent.value = false
   if (updateTaskComponent.value) {
     updateTaskComponent.value.scrollIntoView({ behavior: 'smooth', block: 'start' })

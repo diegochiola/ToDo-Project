@@ -8,7 +8,7 @@ import router from '@/router'
 export const useUserStore = defineStore('user', {
   state: () => ({
     user: null,
-    //profile: null
+    profile: null
   }),
 
   actions: {
@@ -49,6 +49,7 @@ export const useUserStore = defineStore('user', {
         } else {
           console.log('Log Out has been successfully')
           router.push('/auth' )
+          this.user = null;
         }
     },
     persist: {

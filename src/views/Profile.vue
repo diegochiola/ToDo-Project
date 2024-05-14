@@ -1,6 +1,20 @@
 <script setup>
 import NavBarComponent from '@/components/NavBarComponent.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
+
+import { useUserStore } from '@/stores/user.js'
+import { storeToRefs } from 'pinia';
+const userStore = useUserStore()
+const {profile} = storeToRefs(userStore);
+
+const name = ref('');
+const username = ref('');
+const website = ref('');
+const email = ref('');
+const avatar_url = ref('');
+
+
+
 </script>
 
 <template>
@@ -20,6 +34,10 @@ import FooterComponent from '@/components/FooterComponent.vue'
         <p>Location:</p>
         <p>Age:</p>
       </div>
+      <form action="">
+
+        
+      </form>
     </article>
 
     <FooterComponent />

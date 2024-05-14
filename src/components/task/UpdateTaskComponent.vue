@@ -11,16 +11,16 @@ const { user } = storeToRefs(userStore)
 const { tasks } = storeToRefs(taskStore)
 
 const emit = defineEmits(['update-task-complete'])
-const currentProps = defineProps({
+const props = defineProps({
   taskId: {
     type: Number,
     required: true
   }
 })
 
-//console.log(currentProps)
-//const currentTaskId = currentProps.taskId
-const currentTaskId = ref(currentProps.taskId)
+//console.log(props)
+//const currentTaskId = props.taskId
+const currentTaskId = ref(props.taskId)
 //console.log('El id es: ' + currentTaskId)
 
 const updatedTitle = ref('')
@@ -55,7 +55,9 @@ async function updateTaskById() {
     updatedDescription.value
     //user_id
   )
+
   await taskStore.fetchTasks(user.value.data.user.id)
+  
   actionDone.value = true
   setTimeout(() => {
     actionDone.value = false
@@ -63,10 +65,6 @@ async function updateTaskById() {
   emit('update-task-complete')
   //console.log('upadet!')
   
-}
-
-const updateCurrentTaskId = (taskId) => {
-  currentTaskId.value = taskId 
 }
 
 </script>

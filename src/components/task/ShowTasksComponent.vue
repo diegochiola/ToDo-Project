@@ -200,7 +200,7 @@ h4 {
   justify-content: center;
   background-color: rgba(161, 138, 255, 0.9);
   color: var(--white);
-  
+}
 .success-notification p {
   font-size: 20px;
 }
