@@ -55,7 +55,7 @@ export const useUserStore = defineStore('user', {
     async createProfile(profileData) {
       try {
         console.log(profileData);
-        const { error } = await supabase
+        const { data, error } = await supabase
         .from('profiles')
         .insert(profileData)
         .single()
@@ -67,14 +67,26 @@ export const useUserStore = defineStore('user', {
       }
     },
 
-    async fetchProfile() {
+    async fetchProfile(user_id) {
       try {
-        const { data, error } = await supabase.from('profiles').select('*').single()
+        const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('user_id', user_id);
+
         if (error) {
           throw new Error(error.message)
         }
-        this.profile = data
-        console.log(data)
+        this.profile = data [0];
+        console.log("El perfil es: " + this.profile)
+        console.log(this.profile[0].name)
+        console.log(this.profile[0].username)
+        console.log(this.profile[0].email)
+        console.log(this.profile[0].avatar_url)
+        console.log(this.profile[0].user_id)
+
+
+
       } catch (error) {
         throw new Error('Failed to fetch profile')
       }

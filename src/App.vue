@@ -25,6 +25,11 @@ onMounted(async () => {
       const user_email = user.value.data.user.email 
       console.log("El id del usuario es:" + user_id + " y el email es: " + user_email)
       await taskStore.fetchTasks(user_id) //agregar la llamada a las tasks
+      if (!userStore.profile) {
+        await userStore.fetchProfile(user_id)
+      }
+      await userStore.fetchProfile(user_id) //importo el profile
+      console.log("El profile es: " + userStore.profile)
       router.push({ path: '/' })
     }
   } catch (e) {

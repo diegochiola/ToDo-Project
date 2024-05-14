@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref} from 'vue'
 import { defineEmits } from 'vue'
 import { useTaskStore } from '../../stores/task.js'
 import { useUserStore } from '../../stores/user.js'

@@ -6,19 +6,21 @@ import { ref } from 'vue'
 const userStore = useUserStore()
 const { profile } = storeToRefs(userStore)
 
+//console.log(profile.value);
+
 const name = ref('')
 const username = ref('')
 const website = ref('')
-const email = ref(userStore.user.data.user.email)
+const email = ref('') //profile.value.email
 const avatar_url = ref('')
 
 
 const actionDone = ref(false)
 
 //Console log del usuario
-console.log('El id del usuario es:' + userStore.user.data.user.id)
-console.log('El email del usuario es:' + userStore.user.data.user.email)
-//console.log("El name del usuario es:" + userStore.user.data.user.name)
+//console.log('El id del usuario es:' + useUserStore().user.data.user.id)
+//console.log('El email del usuario es:' + useUserStore().user.data.user.email)
+
 const submitNewProfile = async () => {
   try {
     const newProfileData = {
