@@ -18,7 +18,7 @@ const submitNewTask = async () => {
   status.value = ''
   description.value = ''
   actionDone.value = true
-  console.log(userStore.user.data.user.id)
+  //console.log(userStore.user.data.user.id)
   await taskStore.fetchTasks(userStore.user.data.user.id)
   setTimeout(() => {
     actionDone.value = false

@@ -35,12 +35,7 @@ function toggleUser() {
         <a href="#" @click="toggleUser">Log In</a>
       </div>
     </div>
-
-
-
-
-    </article>
-    
+    </article> 
   </section>
 </template>
 

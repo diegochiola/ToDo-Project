@@ -52,6 +52,53 @@ export const useUserStore = defineStore('user', {
           this.user = null;
         }
     },
+    async createProfile(profileData) {
+      try {
+        const { data, error } = await supabase.from('profiles').insert(profileData).single()
+        if (error) {
+          throw new Error(error.message)
+        }
+        return data
+      } catch (error) {
+        throw new Error('Failed to create profile')
+      }
+    },
+
+    async fetchProfile() {
+      try {
+        const { data, error } = await supabase.from('profiles').select('*').single()
+        if (error) {
+          throw new Error(error.message)
+        }
+        this.profile = data
+      } catch (error) {
+        throw new Error('Failed to fetch profile')
+      }
+    },
+
+    async updateProfile(profileData) {
+      try {
+        const { data, error } = await supabase.from('profiles').update(profileData).single()
+        if (error) {
+          throw new Error(error.message)
+        }
+        return data
+      } catch (error) {
+        throw new Error('Failed to update profile')
+      }
+    },
+
+    async deleteProfile() {
+      try {
+        const { error } = await supabase.from('profiles').delete().single()
+        if (error) {
+          throw new Error(error.message)
+        }
+      } catch (error) {
+        throw new Error('Failed to delete profile')
+      }
+    },
+
     persist: {
       enabled: true,
       strategies: [

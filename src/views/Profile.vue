@@ -1,17 +1,14 @@
 <script setup>
 import NavBarComponent from '@/components/NavBarComponent.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
+import NewProfileComponent from '@/components/user/NewProfileComponent.vue'
 
 import { useUserStore } from '@/stores/user.js'
-import { storeToRefs } from 'pinia';
+//import { storeToRefs } from 'pinia';
 const userStore = useUserStore()
-const {profile} = storeToRefs(userStore);
+//const {profile} = storeToRefs(userStore);
 
-const name = ref('');
-const username = ref('');
-const website = ref('');
-const email = ref('');
-const avatar_url = ref('');
+
 
 
 
@@ -20,46 +17,11 @@ const avatar_url = ref('');
 <template>
   <section>
     <NavBarComponent />
-    <article class="profile-section">
-      <div>
-        <img src="../assets/profile_image.png" alt="profile image" />
-        <h1>Profile</h1>
-      </div>
-
-      <div class="profile">
-        <p>Photo:</p>
-        <p>Name:</p>
-        <p>Email:</p>
-        <p>Phone:</p>
-        <p>Location:</p>
-        <p>Age:</p>
-      </div>
-      <form action="">
-
-        
-      </form>
-    </article>
-
+   <NewProfileComponent />
     <FooterComponent />
   </section>
 </template>
 
 <style scoped>
-.profile-section {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 4rem;
-  padding-top: 60px;
-  padding-bottom: 60px;
-}
-.profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding-top: 60px;
-}
+
 </style>
