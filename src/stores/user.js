@@ -7,7 +7,8 @@ import router from '@/router'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    user: null
+    user: null,
+    profile: null
   }),
 
   actions: {
@@ -27,8 +28,8 @@ export const useUserStore = defineStore('user', {
       if (error) throw error
       if (data){
         this.user = data
-        this.successMessage = '¡User created successfully!'
-        //router.push('/')
+        alert('¡User created successfully!'); //alert
+        router.push('/'); //que reddiriga al sign in
       } 
     },
     async login(email, password) {
@@ -38,7 +39,6 @@ export const useUserStore = defineStore('user', {
       })
       if (error) throw error
       if (data) this.user = data
-      
       router.push('/' )
       //return this.user //devolver usuario
     },
@@ -49,6 +49,7 @@ export const useUserStore = defineStore('user', {
         } else {
           console.log('Log Out has been successfully')
           router.push('/auth' )
+          this.user = null;
         }
     },
     persist: {

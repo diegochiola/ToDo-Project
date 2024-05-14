@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { useUserStore } from '../stores/user.js'
+import { useUserStore } from '../../stores/user.js'
 
 const userStore = useUserStore()
 
@@ -47,15 +47,13 @@ const confirmPassword = ref('')
     <div>
       <button type="submit">Sing Up</button>
     </div>
-
   </form>
 </template>
 
 <style scoped>
-h1{
+h1 {
   color: var(--purple);
   font-size: 25px;
-  
 }
 button {
   margin: 5px 0;
@@ -71,24 +69,23 @@ button {
   width: 400px;
   height: 500px;
   border-radius: 45px;
-  box-shadow: 0 0 15px 0 var(--gray);
+  box-shadow: var(--shadow);
   color: var(--gray);
 }
 .form-elements {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  
 }
 input {
   width: 300px;
   height: 30px;
   border-radius: 30px;
   border: 2px solid var(--purple);
-  text-indent: 10px; 
+  text-indent: 10px;
 }
 input::placeholder {
-    color: lightgray; 
+  color: lightgray;
 }
 
 button {
