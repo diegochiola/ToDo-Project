@@ -54,11 +54,14 @@ export const useUserStore = defineStore('user', {
     },
     async createProfile(profileData) {
       try {
-        const { data, error } = await supabase.from('profiles').insert(profileData).single()
+        console.log(profileData);
+        const { error } = await supabase
+        .from('profiles')
+        .insert(profileData)
+        .single()
         if (error) {
           throw new Error(error.message)
         }
-        return data
       } catch (error) {
         throw new Error('Failed to create profile')
       }
@@ -71,6 +74,7 @@ export const useUserStore = defineStore('user', {
           throw new Error(error.message)
         }
         this.profile = data
+        console.log(data)
       } catch (error) {
         throw new Error('Failed to fetch profile')
       }

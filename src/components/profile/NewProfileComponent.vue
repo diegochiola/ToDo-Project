@@ -9,14 +9,20 @@ const { profile } = storeToRefs(userStore)
 const name = ref('')
 const username = ref('')
 const website = ref('')
-const email = ref('')
+const email = ref(userStore.user.data.user.email)
 const avatar_url = ref('')
+
 
 const actionDone = ref(false)
 
+//Console log del usuario
+console.log('El id del usuario es:' + userStore.user.data.user.id)
+console.log('El email del usuario es:' + userStore.user.data.user.email)
+//console.log("El name del usuario es:" + userStore.user.data.user.name)
 const submitNewProfile = async () => {
   try {
     const newProfileData = {
+      user_id: useUserStore().user.data.user.id,
       name: name.value,
       username: username.value,
       website: website.value,
@@ -24,19 +30,17 @@ const submitNewProfile = async () => {
       avatar_url: avatar_url.value
     }
     await userStore.createProfile(newProfileData)
-      name.value = '',
-      username.value = '',
-      website.value = '',
-      email.value = '',
-      avatar_url.value = ''
-      actionDone.value = true
-      setTimeout(() => {
-    actionDone.value = false
-  }, 2000)
-  
+    name.value = ''
+    username.value = ''
+    website.value = ''
+    email.value = ''
+    avatar_url.value = ''
+    actionDone.value = true
+    setTimeout(() => {
+      actionDone.value = false
+    }, 2000)
   } catch (error) {
     console.error(error)
-   
   }
 }
 </script>
@@ -44,40 +48,52 @@ const submitNewProfile = async () => {
 <template>
   <section>
     <article class="profile">
-    <p class="component-name"> Create a Profile</p>
-    <form class="form" @submit.prevent="submitNewProfile">
-      <div class="form-elements">
-        <label>Name</label>
-        <input type="text" placeholder="Your name" id="name" v-model="name" required />
+      <p class="component-name">Create a Profile</p>
+      <form class="form" @submit.prevent="submitNewProfile">
+        <div class="form-elements">
+          <label>Name</label>
+          <input type="text" placeholder="Your name" id="name" v-model="name" required />
+        </div>
+        <div class="form-elements">
+          <label>Username</label>
+          <input
+            type="text"
+            placeholder="Your username"
+            id="username"
+            v-model="username"
+            required
+          />
+        </div>
+        <div class="form-elements">
+          <label>Website</label>
+          <input type="text" placeholder="Your website" id="website" v-model="website" />
+        </div>
+        <div class="form-elements">
+          <label>Email</label>
+          <input type="email" placeholder="Your email" id="email" v-model="email" required />
+        </div>
+        <div class="form-elements">
+          <label>Avatar URL</label>
+          <input
+            type="text"
+            placeholder="Your avatar"
+            id="avatar_url"
+            v-model="avatar_url"
+            required
+          />
+        </div>
+        <div class="form-elements">
+          <button type="submit" value="Create Profile">Create Profile</button>
+        </div>
+      </form>
+    </article>
+    <transition name="slide-fade">
+      <div v-if="actionDone" class="success-notification">
+        <img src="@/assets/check_imago_color.png" alt="check" />
+        <p>Profile created successfully!</p>
       </div>
-      <div class="form-elements">
-        <label>Username</label>
-        <input type="text" placeholder="Your username" id="username" v-model="username" required />
-      </div>
-      <div class="form-elements">
-        <label>Website</label>
-        <input type="text" placeholder="Your website" id="website" v-model="website"/>
-      </div>
-      <div class="form-elements">
-        <label>Email</label>
-        <input type="email" placeholder="Your email" id="email" v-model="email" required />
-      </div>
-      <div class="form-elements">
-        <label>Avatar URL</label>
-        <input type="text" placeholder="Your avatar" id="avatar_url" v-model="avatar_url" required />
-      </div>
-      <div class="form-elements">
-        <button type="submit" value="Create Profile">Create Profile</button>
-      </div>
-    </form>
-  </article>
-  <transition name="slide-fade">
-    <div v-if="actionDone" class="success-notification">
-      <img src="@/assets/check_imago_color.png" alt="check" />
-      <p>Profile created successfully!</p>
-    </div>
-  </transition>
-</section>
+    </transition>
+  </section>
 </template>
 
 <style scoped>
@@ -90,10 +106,6 @@ const submitNewProfile = async () => {
   width: 100%;
   background-color: var(--white);
   padding: 15px;
-}
-.component-name img {
-  width: 30px;
-  height: auto;
 }
 
 .profile {
@@ -132,7 +144,6 @@ input {
   border: none;
   box-shadow: var(--shadow);
   text-indent: 10px;
-
 }
 
 button {
@@ -194,6 +205,4 @@ h3 {
   transform: translateY(-20px);
   opacity: 0;
 }
-
-
 </style>

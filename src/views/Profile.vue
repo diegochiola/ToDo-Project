@@ -1,7 +1,8 @@
 <script setup>
 import NavBarComponent from '@/components/NavBarComponent.vue'
 import FooterComponent from '@/components/FooterComponent.vue'
-import NewProfileComponent from '@/components/user/NewProfileComponent.vue'
+import NewProfileComponent from '@/components/profile/NewProfileComponent.vue'
+import ShowProfileComponent from '@/components/profile/ShowProfileComponent.vue'
 
 import { useUserStore } from '@/stores/user.js'
 //import { storeToRefs } from 'pinia';
@@ -17,7 +18,10 @@ const userStore = useUserStore()
 <template>
   <section>
     <NavBarComponent />
-   <NewProfileComponent />
+   
+    <NewProfileComponent />
+    <ShowProfileComponent /> 
+    
     <FooterComponent />
   </section>
 </template>
