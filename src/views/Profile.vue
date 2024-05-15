@@ -51,6 +51,13 @@ function handleProfileDeleted() {
 <template>
   <section>
     <NavBarComponent />
+    <article>
+      <div class="component">
+        <img src="../assets/profile_imago_yellow.png" alt="profile imago" />
+        <p>My Profile</p>
+      </div>
+
+    </article>
     <ShowProfileComponent
       @update-profile-complete="handleUpdateProfile()"
       @profile-deleted="handleProfileDeleted()"
@@ -68,6 +75,25 @@ function handleProfileDeleted() {
 </template>
 
 <style scoped>
+.component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--purple);
+  height:120px;
+  font-size: 20px;
+  text-align: center;
+  width: 100%;
+  background-color: var(--light);
+  padding: 60px;
+  gap: 5px;
+}
+.component img {
+  width: 30px;
+  height: 30px;
+  filter: saturate(0%);
+}
 footer {
   position: fixed;
   bottom: 0;

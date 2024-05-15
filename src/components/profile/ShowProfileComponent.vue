@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineEmits } from 'vue'
+import { ref, defineEmits, defineProps } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '../../stores/user.js'
 
@@ -11,7 +11,12 @@ const emit = defineEmits(['update-profile-complete', 'profile-deleted'])
 const emitUpdateProfile = () => {
   emit('update-profile-complete')
 }
-
+const props = defineProps({
+  showContent: {
+    type: Boolean,
+    default: true
+  }
+})
 async function deleteProfileById() {
   try {
     await userStore.deleteProfile(useUserStore().user.data.user.id)
@@ -26,30 +31,36 @@ async function deleteProfileById() {
     console.error('Failed to delete profile:', error)
   }
 }
-
 </script>
 
 <template>
   <section>
     <article class="show-profile" v-if="profile">
-      <div class="component-name">
-        <img src="../../assets/profile_imago_yellow.png" alt="profile imago" />
-        <p>My Profile</p>
-      </div>
-
       <div class="profile-details">
         <div class="profile-image">
           <img class="profile-picture" :src="profile.avatar_url" alt="profile picture" />
         </div>
         <div class="profile-info">
           <div>
-            <p>Name: {{ profile.name }}</p>
-            <p>Username: {{ profile.username }}</p>
-            <p>Website: {{ profile.website }}</p>
-            <p>Email: {{ profile.email }}</p>
+            <div class="profile-detail">
+              <p class="label" v-if="showContent">Name:</p>
+              <p v-if="showContent">{{ profile.name }}</p>
+            </div>
+            <div class="profile-detail">
+              <p class="label" >Username:</p>
+              <p>{{ profile.username }}</p>
+            </div>
+            <div class="profile-detail">
+              <p  class="label" v-if="showContent">Website:</p>
+              <p v-if="showContent">{{ profile.website }}</p>
+            </div>
+            <div class="profile-detail">
+              <p class="label" >Email:</p>
+              <p>{{ profile.email }}</p>
+            </div>
           </div>
 
-          <div class="buttons">
+          <div class="buttons" v-if="showContent">
             <button @click="emitUpdateProfile" class="button-profile link">
               <img src="@/assets/edit_imago_yellow.png" alt="edit imago" />
             </button>
@@ -62,8 +73,6 @@ async function deleteProfileById() {
     </article>
     <article v-else>
       <div class="component-name">
-        <img src="../../assets/profile_imago_yellow.png" alt="profile imago" />
-        <p>My Profile</p>
         <p class="no-profile">No profile found</p>
       </div>
     </article>
@@ -91,11 +100,7 @@ async function deleteProfileById() {
   padding: 60px;
   gap: 5px;
 }
-.component-name img {
-  width: 30px;
-  height: 30px;
-  filter: saturate(0%);
-}
+
 .show-profile {
   display: flex;
   flex-direction: column;
@@ -104,7 +109,7 @@ async function deleteProfileById() {
   width: 100%;
   height: auto;
   color: var(--white);
-  padding: 0px 0 60px 0;
+  padding: 20px 0 20px 0;
 }
 .profile-details {
   display: flex;
@@ -116,6 +121,7 @@ async function deleteProfileById() {
   border-radius: 30px;
   color: var(--purple);
   width: 80%;
+  font-size: 15px;
 }
 .profile-image {
   display: flex;
@@ -126,8 +132,8 @@ async function deleteProfileById() {
   padding: 20px;
 }
 .profile-picture {
-  width: 90px;
-  height: 90px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   overflow: hidden;
   border: solid 4px var(--purple);
@@ -143,23 +149,36 @@ async function deleteProfileById() {
   border-radius: 0 30px 30px 0;
   justify-content: space-between;
 }
+.profile-detail{
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+.label {
+  font-weight: lighter;
+
+}
 .buttons {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-content: space-between;
+  justify-content: center;
+  gap: 15px;
 }
 .button-profile {
-  width: 40px;
-  height: 40px;
-  border-radius: 40px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--white);
+  background-color: var(--purple);
+
   border: none;
 }
 .link img {
   filter: saturate(0%);
+  width: 30px;
+  height: 30px;
 }
 .link:hover img {
   filter: saturate(100%);
