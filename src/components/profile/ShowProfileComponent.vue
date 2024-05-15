@@ -4,37 +4,29 @@ import { storeToRefs } from 'pinia'
 import { useUserStore } from '../../stores/user.js'
 
 const userStore = useUserStore()
-//const { profile } = useUserStore()
 const { profile } = storeToRefs(userStore)
-//console.log(profile)
 const actionDone = ref(false)
+const emit = defineEmits(['update-profile-complete', 'profile-deleted'])
 
-const emit = defineEmits(['update-profile-complete'])
 const emitUpdateProfile = () => {
   emit('update-profile-complete')
 }
-//delete profile
+
 async function deleteProfileById() {
   try {
-    //console.log(useUserStore().user.data.user.id)
     await userStore.deleteProfile(useUserStore().user.data.user.id)
     console.log('Se ha eliminado el perfil')
     await userStore.fetchProfile(useUserStore().user.data.user.id)
-    //console.log(useUserStore().profile)
     actionDone.value = true
     setTimeout(() => {
       actionDone.value = false
     }, 2000)
+    emit('profile-deleted')
   } catch (error) {
     console.error('Failed to delete profile:', error)
   }
 }
 
-/*
-setTimeout(() => {
-    console.log(profile.value);
-}, 3000);
-*/
 </script>
 
 <template>

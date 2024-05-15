@@ -1,14 +1,15 @@
 <script setup>
-import { ref, defineEmits } from 'vue'
+import { ref, onMounted} from 'vue'
 import { useUserStore } from '../../stores/user.js'
+import { defineEmits } from 'vue';
 
 const userStore = useUserStore()
 
-const emit = defineEmits(['update-profile-complete'])
 
 //actions
 const actionDone = ref(false)
 const loaded = ref(false)
+const emit = defineEmits(['update-profile-complete'])
 
 const updatedName = ref('')
 const updatedUsername = ref('')
@@ -35,7 +36,7 @@ async function loadProfileData() {
     console.error('Failed to load profile data: ', error)
   }
 }
-loadProfileData()
+onMounted(loadProfileData)
 
 async function submitUpdateProfile() {
   console.log('Updating profile...')
@@ -51,18 +52,22 @@ async function submitUpdateProfile() {
     email: updatedEmail.value,
     avatar_url: updatedAvatar_url.value
   }
-  console.log(profileData)
+  
 
-  await useUserStore().updateProfile(profileData)
-  console.log('hasta aca')
-  console.log('Profile updated successfully')
-  const user_id = useUserStore().user.data.user.id
-  await userStore.fetchProfile(user_id)
-  actionDone.value = true
-  setTimeout(() => {
-    actionDone.value = false
-  }, 2000)
-  emit('update-profile-complete')
+  try {
+    await useUserStore().updateProfile(profileData)
+    console.log('Profile updated successfully')
+    const user_id = useUserStore().user.data.user.id
+    await userStore.fetchProfile(user_id)
+    actionDone.value = true
+    setTimeout(() => {
+      actionDone.value = false
+    }, 2000)
+    // Emitir el evento 'update-profile-complete'
+    emit('update-profile-complete')
+  } catch (error) {
+    console.error('Failed to update profile:', error)
+  }
 }
 </script>
 

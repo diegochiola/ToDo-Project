@@ -1,12 +1,12 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '../../stores/user.js'
-import { ref } from 'vue'
+import { ref} from 'vue'
 
 const userStore = useUserStore()
 const { profile } = storeToRefs(userStore)
 //console.log(profile.value);
-
+const emit = defineEmits(['profile-created'])
 const name = ref('')
 const username = ref('')
 const website = ref('')
@@ -27,6 +27,7 @@ const submitNewProfile = async () => {
       avatar_url: avatar_url.value
     }
     await userStore.createProfile(newProfileData)
+    emit('profile-created')
     name.value = ''
     username.value = ''
     website.value = ''
@@ -34,7 +35,8 @@ const submitNewProfile = async () => {
     avatar_url.value = ''
     actionDone.value = true
     const user_id = useUserStore().user.data.user.id
-    await userStore.fetchProfile(user_id)
+    await useUserStore().fetchProfile(user_id)
+    
     setTimeout(() => {
       actionDone.value = false
     }, 2000)
@@ -81,7 +83,7 @@ setTimeout(() => {
           <input type="text" placeholder="Your avatar" id="avatar_url" v-model="avatar_url" />
         </div>
         <div class="form-elements">
-          <button type="submit" value="Create Profile">Create Profile</button>
+          <button @click="createProfile" type="submit" value="Create Profile">Create Profile</button>
         </div>
       </form>
     </article>
