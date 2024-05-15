@@ -20,16 +20,12 @@ onMounted(async () => {
       // redirect them to logout if the user is not there
       router.push({ path: '/auth' })
     } else {
-      // continue to dashboard
-      const user_id = user.value.data.user.id
-      const user_email = user.value.data.user.email 
-      console.log("El id del usuario es:" + user_id + " y el email es: " + user_email)
-      await taskStore.fetchTasks(user_id) //agregar la llamada a las tasks
+      await taskStore.fetchTasks(useUserStore().user.data.user.id) //agregar la llamada a las tasks
       if (!userStore.profile) {
-        await userStore.fetchProfile(user_id)
+      await userStore.fetchProfile(useUserStore().user.data.user.id)
       }
-      await userStore.fetchProfile(user_id) //importo el profile
-      console.log("El profile es: " + userStore.profile)
+      await userStore.fetchProfile(useUserStore().user.data.user.id) //importo el profile
+      //console.log("El profile es: " + userStore.profile)
       router.push({ path: '/' })
     }
   } catch (e) {

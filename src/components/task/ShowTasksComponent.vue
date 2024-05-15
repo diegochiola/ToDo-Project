@@ -52,10 +52,10 @@ const emitEditTask = (taskId) => {
         <p>Status: {{ task.status }}</p>
       </div>
       <div class="buttons">
-        <button @click="emitEditTask(task.id)" class="green link">
+        <button @click="emitEditTask(task.id)" class="button-profile  link">
           <img src="@/assets/edit_imago_yellow.png" alt="edit imago" />
         </button>
-        <button @click="deleteTaskById(task.id)" class="red link">
+        <button @click="deleteTaskById(task.id)" class="button-profile  link">
           <img src="@/assets/delete_imago_yellow.png" alt="delete imago" />
         </button>
         <transition name="slide-fade">
@@ -148,24 +148,7 @@ h4 {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.red {
-  width: 40px;
-  height: 40px;
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--red);
-}
-.green {
-  width: 40px;
-  height: 40px;
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--green);
-}
+
 
 .yellow-border {
   border: 5px solid var(--yellow);
@@ -177,6 +160,16 @@ h4 {
 
 .green-border {
   border: 5px solid var(--green);
+}
+.button-profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white);
+  border: none;
 }
 .link img {
   filter: saturate(0%);

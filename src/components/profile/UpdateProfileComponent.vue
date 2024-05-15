@@ -1,94 +1,133 @@
 <script setup>
-import { storeToRefs } from 'pinia'
+import { ref, defineEmits } from 'vue'
 import { useUserStore } from '../../stores/user.js'
-import { ref } from 'vue'
 
 const userStore = useUserStore()
-const { profile } = storeToRefs(userStore)
-//console.log(profile.value);
 
-const name = ref('')
-const username = ref('')
-const website = ref('')
-const email = ref('') //profile.value.email
-const avatar_url = ref('')
+const emit = defineEmits(['update-profile-complete'])
 
+//actions
 const actionDone = ref(false)
+const loaded = ref(false)
 
+const updatedName = ref('')
+const updatedUsername = ref('')
+const updatedWebsite = ref('')
+const updatedEmail = ref('')
+const updatedAvatar_url = ref('')
 
-const submitNewProfile = async () => {
+async function loadProfileData() {
   try {
-    const newProfileData = {
-      user_id: useUserStore().user.data.user.id,
-      name: name.value,
-      username: username.value,
-      website: website.value,
-      email: email.value,
-      avatar_url: avatar_url.value
+    if (useUserStore().profile) {
+      const profile = useUserStore().profile
+      const user_id = useUserStore().user.data.user.id
+      await userStore.fetchProfile(user_id)
+      updatedName.value = profile.name
+      updatedUsername.value = profile.username
+      updatedWebsite.value = profile.website
+      updatedEmail.value = profile.email
+      updatedAvatar_url.value = profile.avatar_url
+      loaded.value = true; 
+    } else {
+      console.log('Profile not loaded')
     }
-    await userStore.createProfile(newProfileData)
-    name.value = ''
-    username.value = ''
-    website.value = ''
-    email.value = ''
-    avatar_url.value = ''
-    actionDone.value = true
-    const user_id = useUserStore().user.data.user.id
-    await userStore.fetchProfile(user_id)
-    setTimeout(() => {
-      actionDone.value = false
-    }, 2000)
   } catch (error) {
-    console.error(error)
+    console.error('Failed to load profile data: ', error)
   }
 }
-/*
-setTimeout(() => {
-    console.log(profile.value);
-}, 3000);
-*/
+loadProfileData()
+
+async function submitUpdateProfile() {
+  console.log('Updating profile...')
+  if (!loaded.value) {
+    console.log('Profile not loaded yet')
+    return;
+  }
+  const profileData = {
+    user_id: useUserStore().user.data.user.id,
+    name: updatedName.value,
+    username: updatedUsername.value,
+    website: updatedWebsite.value,
+    email: updatedEmail.value,
+    avatar_url: updatedAvatar_url.value
+  }
+  console.log(profileData)
+
+  await useUserStore().updateProfile(profileData)
+  console.log('hasta aca')
+  console.log('Profile updated successfully')
+  const user_id = useUserStore().user.data.user.id
+  await userStore.fetchProfile(user_id)
+  actionDone.value = true
+  setTimeout(() => {
+    actionDone.value = false
+  }, 2000)
+  emit('update-profile-complete')
+}
 </script>
 
 <template>
   <section>
-    <article class="profile">
-      <p class="component-name">Create a Profile</p>
-      <form class="form" @submit.prevent="submitNewProfile">
+    <article v-if="loaded" class="profile">
+      <p class="component-name">Update Profile</p>
+      <form class="form" @submit.prevent="submitUpdateProfile">
         <div class="form-elements">
           <label>Name</label>
-          <input type="text" placeholder="Your name" id="name" v-model="name" required />
+          <input
+            type="text"
+            placeholder="Your name"
+            id="updatedName"
+            v-model="updatedName"
+            required
+          />
         </div>
         <div class="form-elements">
           <label>Username</label>
           <input
             type="text"
             placeholder="Your username"
-            id="username"
-            v-model="username"
+            id="updatedUsername"
+            v-model="updatedUsername"
             required
           />
         </div>
         <div class="form-elements">
           <label>Website</label>
-          <input type="text" placeholder="Your website" id="website" v-model="website" />
+          <input
+            type="text"
+            placeholder="Your website"
+            id="updatedWebsite"
+            v-model="updatedWebsite"
+          />
         </div>
         <div class="form-elements">
           <label>Email</label>
-          <input type="email" placeholder="Your email" id="email" v-model="email" required />
+          <input
+            type="email"
+            placeholder="Your email"
+            id="updatedEmail"
+            v-model="updatedEmail"
+            required
+          />
         </div>
         <div class="form-elements">
           <label>Avatar URL</label>
-          <input type="text" placeholder="Your avatar" id="avatar_url" v-model="avatar_url" />
+          <input
+            type="text"
+            placeholder="Your avatar"
+            id="updatedAvatar_url"
+            v-model="updatedAvatar_url"
+          />
         </div>
         <div class="form-elements">
-          <button type="submit" value="Create Profile">Create Profile</button>
+          <button type="submit" value="Save">Save</button>
         </div>
       </form>
     </article>
     <transition name="slide-fade">
       <div v-if="actionDone" class="success-notification">
         <img src="@/assets/check_imago_color.png" alt="check" />
-        <p>Profile created successfully!</p>
+        <p>Profile updated successfully!</p>
       </div>
     </transition>
   </section>

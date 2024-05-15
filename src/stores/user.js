@@ -15,6 +15,7 @@ export const useUserStore = defineStore('user', {
     async fetchUser() {
       const user = await supabase.auth.getUser() //trae la informacion del usuario
       this.user = user
+      console.log(this.user)
     },
     async signUp(name, email, password, confirmPassword) {
       if (password !== confirmPassword) {
@@ -40,7 +41,7 @@ export const useUserStore = defineStore('user', {
       if (error) throw error
       if (data) this.user = data
       router.push('/' )
-      //return this.user //devolver usuario
+   
     },
     async logOut() {
         const { error } = await supabase.auth.signOut()
@@ -68,45 +69,45 @@ export const useUserStore = defineStore('user', {
     },
 
     async fetchProfile(user_id) {
+      console.log(user_id)
       try {
         const { data, error } = await supabase
         .from('profiles')
         .select('*')
-        .eq('user_id', user_id);
-
+        .eq('user_id', user_id)
         if (error) {
           throw new Error(error.message)
         }
         this.profile = data [0];
         console.log("El perfil es: " + this.profile)
-        console.log(this.profile[0].name)
-        console.log(this.profile[0].username)
-        console.log(this.profile[0].email)
-        console.log(this.profile[0].avatar_url)
-        console.log(this.profile[0].user_id)
-
-
-
       } catch (error) {
-        throw new Error('Failed to fetch profile')
+        throw new Error('Failed to fetch profile or not profile created yet')
       }
     },
 
     async updateProfile(profileData) {
+      console.log(profileData)
       try {
-        const { data, error } = await supabase.from('profiles').update(profileData).single()
+        const {data,  error } = await supabase
+        .from('profiles')
+        .update(profileData)
+        .eq('user_id', profileData.user_id)
         if (error) {
           throw new Error(error.message)
         }
-        return data
+        this.profile = data
       } catch (error) {
         throw new Error('Failed to update profile')
       }
     },
 
-    async deleteProfile() {
+    async deleteProfile(user_id) {
       try {
-        const { error } = await supabase.from('profiles').delete().single()
+        const { error } = await supabase
+        .from('profiles')
+        .delete()
+        .eq('user_id', user_id)
+        .single()
         if (error) {
           throw new Error(error.message)
         }
