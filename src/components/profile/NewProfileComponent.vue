@@ -58,7 +58,7 @@ setTimeout(() => {
       <form class="form" @submit.prevent="submitNewProfile">
         <div class="form-elements">
           <label>Name</label>
-          <input type="text" placeholder="Your name" id="name" v-model="name" required />
+          <input type="text" placeholder="Your name" id="name" v-model="name"/>
         </div>
         <div class="form-elements">
           <label>Username</label>

@@ -37,7 +37,7 @@ function handleUpdateTaskComplete() {
 
 <template>
   <NavBarComponent />
-  <ShowProfileComponent :showContent="false" />
+ 
   <section>
     <div class="dashboard-container">
       <div class="dashboard">
@@ -46,7 +46,9 @@ function handleUpdateTaskComplete() {
       </div>
       <p class="slogan">Nice to have you here again.</p>
     </div>
-
+  </section>
+  <ShowProfileComponent :showContent="false" />
+  <section>
     <article v-if="showNewTaskComponent">
       <NewTaskComponent />
     </article>
@@ -68,7 +70,7 @@ h1 {
 }
 
 .dashboard-container {
-  padding: 20px;
+  padding: 40px 40px 0px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;

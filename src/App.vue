@@ -10,30 +10,23 @@ const userStore = useUserStore()
 const taskStore = useTaskStore()
 const { user } = storeToRefs(userStore)
 
-
 onMounted(async () => {
-  //cuando el html haya cargado
   try {
-    await userStore.fetchUser() // here we call fetch user
-    //console.log(user.value);
+    await userStore.fetchUser()
+
     if (!user.value.data.user) {
-      // redirect them to logout if the user is not there
       router.push({ path: '/auth' })
     } else {
-      await taskStore.fetchTasks(useUserStore().user.data.user.id) //agregar la llamada a las tasks
       if (!userStore.profile) {
-      await userStore.fetchProfile(useUserStore().user.data.user.id)
+        await userStore.fetchProfile(useUserStore().user.data.user.id)
+        await taskStore.fetchTasks(useUserStore().user.data.user.id) //agregar la llamada a las tasks
+        router.push({ path: '/' })
       }
-      await userStore.fetchProfile(useUserStore().user.data.user.id) //importo el profile
-      //console.log("El profile es: " + userStore.profile)
-      router.push({ path: '/' })
     }
   } catch (e) {
     console.log(e)
   }
 })
-
-
 </script>
 
 <template>

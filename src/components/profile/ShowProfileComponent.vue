@@ -17,6 +17,8 @@ const props = defineProps({
     default: true
   }
 })
+const showName = ref(false)
+const showWebsite = ref(false)
 async function deleteProfileById() {
   try {
     await userStore.deleteProfile(useUserStore().user.data.user.id)
@@ -31,11 +33,20 @@ async function deleteProfileById() {
     console.error('Failed to delete profile:', error)
   }
 }
+function zoomIn() {
+  showName.value = true
+  showWebsite.value = true
+}
+
+function zoomOut() {
+  showName.value = false
+  showWebsite.value = false
+}
 </script>
 
 <template>
   <section>
-    <article class="show-profile" v-if="profile">
+    <article class="show-profile" v-if="profile" @mouseover="zoomIn" @mouseout="zoomOut">
       <div class="profile-details">
         <div class="profile-image">
           <img class="profile-picture" :src="profile.avatar_url" alt="profile picture" />
@@ -43,16 +54,16 @@ async function deleteProfileById() {
         <div class="profile-info">
           <div>
             <div class="profile-detail">
-              <p class="label" v-if="showContent">Name:</p>
-              <p v-if="showContent">{{ profile.name }}</p>
+              <p class="label" v-if="showName">Name:</p>
+              <p v-if="showName">{{ profile.name }}</p>
             </div>
             <div class="profile-detail">
               <p class="label" >Username:</p>
               <p>{{ profile.username }}</p>
             </div>
             <div class="profile-detail">
-              <p  class="label" v-if="showContent">Website:</p>
-              <p v-if="showContent">{{ profile.website }}</p>
+              <p  class="label" v-if="showWebsite">Website:</p>
+              <p v-if="showWebsite">{{ profile.website }}</p>
             </div>
             <div class="profile-detail">
               <p class="label" >Email:</p>
@@ -110,6 +121,10 @@ async function deleteProfileById() {
   height: auto;
   color: var(--white);
   padding: 20px 0 20px 0;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.show-profile:hover {
+  transform: scale(1.05);
 }
 .profile-details {
   display: flex;
@@ -140,14 +155,16 @@ async function deleteProfileById() {
 }
 .profile-info {
   display: flex;
-  align-items: center;
+ flex-direction: column;
+  justify-content: space-between;
   background-color: var(--purple);
   width: 100%;
   padding: 15px;
   color: var(--white);
   border: solid 4px var(--white);
   border-radius: 0 30px 30px 0;
-  justify-content: space-between;
+  
+  gap: 15px;
 }
 .profile-detail{
   display: flex;
@@ -160,15 +177,14 @@ async function deleteProfileById() {
 }
 .buttons {
   display: flex;
-  flex-direction: column;
-  align-content: space-between;
-  justify-content: center;
+  flex-direction: row;
   gap: 15px;
 }
 .button-profile {
   width: 30px;
   height: 30px;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   background-color: var(--purple);

@@ -4,7 +4,7 @@ import { useUserStore } from '../../stores/user.js'
 
 const userStore = useUserStore()
 
-const name = ref('')
+const username = ref('')
 const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
@@ -14,8 +14,8 @@ const confirmPassword = ref('')
   <form @submit.prevent="userStore.signUp(name, email, password, confirmPassword)" class="login">
     <h1>Sing Up</h1>
     <div class="form-elements">
-      <label>Name:</label>
-      <input type="text" placeholder="Enter your Name" id="name" v-model="name" required />
+      <label>Username:</label>
+      <input type="text" placeholder="Enter your Username" id="username" v-model="username" required />
     </div>
 
     <div class="form-elements">

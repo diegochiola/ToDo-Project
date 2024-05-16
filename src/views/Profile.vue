@@ -35,7 +35,9 @@ function handleUpdateProfile() {
 }
 
 function handleUpdateProfileComplete() {
-  showUpdateProfileComponent.value = false
+  setTimeout(() => {
+    showUpdateProfileComponent.value = false
+    }, 2000)
 }
 
 function handleProfileCreated() {
@@ -70,7 +72,7 @@ function handleProfileDeleted() {
       v-if="showUpdateProfileComponent"
       @update-profile-complete="handleUpdateProfileComplete()"
     />
-    <FooterComponent />
+    <FooterComponent class="footer" />
   </section>
 </template>
 
@@ -94,7 +96,7 @@ function handleProfileDeleted() {
   height: 30px;
   filter: saturate(0%);
 }
-footer {
+.footer{
   position: fixed;
   bottom: 0;
   width: 100%;

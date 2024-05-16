@@ -115,6 +115,13 @@ button:hover {
   margin-bottom: 1rem;
   justify-content: space-between;
 }
+.todo-list {
+  transition: transform 0.3s ease; 
+}
+
+.todo-list:hover {
+  transform: scale(1.1); 
+}
 
 h3 {
   padding: 20px;

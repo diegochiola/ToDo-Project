@@ -18,6 +18,7 @@ const handleSubmit = async () => {
     if (userStore.user.user.id) {
       //await userStore.fetchProfile(); agregar el perfil al logearme
       await taskStore.fetchTasks(userStore.user.user.id)
+      await userStore.fetchProfile(userStore.user.user.id)
     }
   } catch (error) {
     console.log(error)

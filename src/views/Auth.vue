@@ -7,6 +7,7 @@ const hasUser = ref(true)
 function toggleUser() {
   hasUser.value = !hasUser.value
 }
+
 </script>
 
 <template>

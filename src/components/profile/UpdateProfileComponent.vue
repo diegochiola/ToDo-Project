@@ -63,7 +63,6 @@ async function submitUpdateProfile() {
     setTimeout(() => {
       actionDone.value = false
     }, 2000)
-    // Emitir el evento 'update-profile-complete'
     emit('update-profile-complete')
   } catch (error) {
     console.error('Failed to update profile:', error)
