@@ -21,25 +21,30 @@ export const useUserStore = defineStore('user', {
       }
       try {
         const { data, error } = await supabase.auth.signUp({
-          username: username,
           email: email,
           password: password
         })
         if (error) throw error
         if (data) {
-          this.user = data
-          console.log(data.id)
-          await this.createProfile({
-            user_id: data.id,
+          alert('User created successfully! Check your email for verification')
+          console.log(data.user.id)
+          console.log(data.username)
+          console.log(data.email)
+        
+          /*await this.createProfile({
+            user_id: user.user.id,
             username: username,
             email: email
           })
-          alert('User and profile created successfully!')
+          */
+          this.user = data.user
+          console.log(this.user)
+          console.log(this.profile)
           router.push('/')
+          alert('User and profile created successfully!')
         }
       } catch (error) {
-        console.error('Error al crear usuario:', error.message)
-        throw new Error('Error al crear usuario:', error.message)
+        throw new Error('Error creating user:', error.message)
       }
     },
     async login(email, password) {
@@ -49,7 +54,7 @@ export const useUserStore = defineStore('user', {
       })
       if (error) throw error
       if (data) {
-        
+
         this.user = data
         console.log('User:', this.user)
       }
@@ -73,7 +78,10 @@ export const useUserStore = defineStore('user', {
     async createProfile(profileData) {
       try {
         console.log(profileData)
-        const { data, error } = await supabase.from('profiles').insert(profileData).single()
+        const { data, error } = await supabase
+        .from('profiles')
+        .insert(profileData)
+        .single()
         if (error) {
           throw new Error(error.message)
         }

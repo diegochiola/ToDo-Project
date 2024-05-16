@@ -72,7 +72,7 @@ function handleProfileDeleted() {
       v-if="showUpdateProfileComponent"
       @update-profile-complete="handleUpdateProfileComplete()"
     />
-    <FooterComponent class="footer" />
+    <FooterComponent class="footer-component" />
   </section>
 </template>
 
@@ -96,7 +96,7 @@ function handleProfileDeleted() {
   height: 30px;
   filter: saturate(0%);
 }
-.footer{
+.footer-component {
   position: fixed;
   bottom: 0;
   width: 100%;
