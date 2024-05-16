@@ -5,7 +5,7 @@ import UpdateTaskComponent from '../components/task/UpdateTaskComponent.vue'
 import NewTaskComponent from '../components/task/NewTaskComponent.vue'
 import ShowTasksComponent from '../components/task/ShowTasksComponent.vue'
 import FooterComponent from '../components/FooterComponent.vue'
-
+import ShowProfileComponent from '../components/profile/ShowProfileComponent.vue'
 import { ref } from 'vue'
 import { defineExpose } from 'vue'
 
@@ -37,7 +37,7 @@ function handleUpdateTaskComplete() {
 
 <template>
   <NavBarComponent />
-
+ 
   <section>
     <div class="dashboard-container">
       <div class="dashboard">
@@ -46,6 +46,9 @@ function handleUpdateTaskComplete() {
       </div>
       <p class="slogan">Nice to have you here again.</p>
     </div>
+  </section>
+  <ShowProfileComponent :showContent="false" />
+  <section>
     <article v-if="showNewTaskComponent">
       <NewTaskComponent />
     </article>
@@ -56,6 +59,7 @@ function handleUpdateTaskComplete() {
       />
     </article>
     <ShowTasksComponent class="update-task-component" @edit-task="handleEditTask" />
+    
     <FooterComponent />
   </section>
 </template>
@@ -66,7 +70,7 @@ h1 {
 }
 
 .dashboard-container {
-  padding: 20px;
+  padding: 40px 40px 0px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;

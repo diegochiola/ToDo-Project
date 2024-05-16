@@ -1,65 +1,105 @@
 <script setup>
-import NavBarComponent from '@/components/NavBarComponent.vue'
-import FooterComponent from '@/components/FooterComponent.vue'
+import NavBarComponent from '../components/NavBarComponent.vue'
+import FooterComponent from '../components/FooterComponent.vue'
+import NewProfileComponent from '../components/profile/NewProfileComponent.vue'
+import ShowProfileComponent from '../components/profile/ShowProfileComponent.vue'
+import UpdateProfileComponent from '../components/profile/UpdateProfileComponent.vue'
+import { ref } from 'vue'
+import { useUserStore } from './../stores/user.js'
 
-import { useUserStore } from '@/stores/user.js'
-import { storeToRefs } from 'pinia';
+const showUpdateProfileComponent = ref(false)
+const showNewProfileComponent = ref(false)
+const profileLoaded = ref(false)
 const userStore = useUserStore()
-const {profile} = storeToRefs(userStore);
 
-const name = ref('');
-const username = ref('');
-const website = ref('');
-const email = ref('');
-const avatar_url = ref('');
+async function loadProfileData() {
+  try {
+    if (useUserStore().profile) {
+      const user_id = useUserStore().user.data.user.id
+      await useUserStore().fetchProfile(user_id)
+      profileLoaded.value = true
+      if (!useUserStore().profile) {
+        showNewProfileComponent.value = true
+      }
+    } else {
+      console.log('Profile not loaded')
+    }
+  } catch (error) {
+    console.error('Failed to load profile data: ', error)
+  }
+}
+loadProfileData()
 
+function handleUpdateProfile() {
+  showUpdateProfileComponent.value = true
+}
 
+function handleUpdateProfileComplete() {
+  setTimeout(() => {
+    showUpdateProfileComponent.value = false
+    }, 2000)
+}
 
+function handleProfileCreated() {
+  showNewProfileComponent.value = false
+  profileLoaded.value = true
+}
+function handleProfileDeleted() {
+  showNewProfileComponent.value = true
+  profileLoaded.value = false
+}
 </script>
 
 <template>
   <section>
     <NavBarComponent />
-    <article class="profile-section">
-      <div>
-        <img src="../assets/profile_image.png" alt="profile image" />
-        <h1>Profile</h1>
+    <article>
+      <div class="component">
+        <img src="../assets/profile_imago_yellow.png" alt="profile imago" />
+        <p>My Profile</p>
       </div>
 
-      <div class="profile">
-        <p>Photo:</p>
-        <p>Name:</p>
-        <p>Email:</p>
-        <p>Phone:</p>
-        <p>Location:</p>
-        <p>Age:</p>
-      </div>
-      <form action="">
-
-        
-      </form>
     </article>
-
-    <FooterComponent />
+    <ShowProfileComponent
+      @update-profile-complete="handleUpdateProfile()"
+      @profile-deleted="handleProfileDeleted()"
+    />
+    <NewProfileComponent
+      v-if="!profileLoaded"
+      @profile-created="handleProfileCreated()"
+    />
+    <UpdateProfileComponent
+      v-if="showUpdateProfileComponent"
+      @update-profile-complete="handleUpdateProfileComplete()"
+    />
+    <FooterComponent class="footer-component" />
   </section>
 </template>
 
 <style scoped>
-.profile-section {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 4rem;
-  padding-top: 60px;
-  padding-bottom: 60px;
-}
-.profile {
+.component {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  gap: 1rem;
-  padding-top: 60px;
+  align-items: center;
+  color: var(--purple);
+  height:120px;
+  font-size: 20px;
+  text-align: center;
+  width: 100%;
+  background-color: var(--light);
+  padding: 60px;
+  gap: 5px;
+}
+.component img {
+  width: 30px;
+  height: 30px;
+  filter: saturate(0%);
+}
+.footer-component {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
 }
 </style>
