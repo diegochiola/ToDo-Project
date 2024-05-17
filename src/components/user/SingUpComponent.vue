@@ -8,10 +8,13 @@ const username = ref('')
 const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
+
+
+
 </script>
 
 <template>
-  <form @submit.prevent="userStore.signUp(name, email, password, confirmPassword)" class="login">
+  <form @submit.prevent="userStore.signUp(username, email, password, confirmPassword)" class="login">
     <h1>Sing Up</h1>
     <div class="form-elements">
       <label>Username:</label>

@@ -28,19 +28,19 @@ export const useUserStore = defineStore('user', {
         if (data) {
           alert('User created successfully! Check your email for verification')
           console.log(data.user.id)
-          console.log(data.username)
-          console.log(data.email)
-        
-          /*await this.createProfile({
-            user_id: user.user.id,
+          await this.createProfile({
+            user_id: data.user.id,
+            name: null,
             username: username,
-            email: email
+            website: null,
+            email: email,
+            avatar_url: null
           })
-          */
+          
           this.user = data.user
           console.log(this.user)
-          console.log(this.profile)
           router.push('/')
+          console.log(this.profile)
           alert('User and profile created successfully!')
         }
       } catch (error) {
