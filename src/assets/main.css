@@ -12,6 +12,7 @@
   --gray: #717082;
   --dark-gray: #2F2C2D;
   --white: #FFF;
+  --white-transparent: rgba(255, 255, 255, 0.6);
   --light: #EEE;
   --dark-blue: #0A184C;
   --red: #F15C6E;
