@@ -101,4 +101,25 @@ img {
 .slogan {
   font-size: 12px;
 }
+@media only screen and (max-width: 768px){
+.dashboard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h1{
+  font-size: 15px;
+}
+.dashboard img{
+  width: 80px;
+  height: auto;
+}
+.slogan {
+  font-size: 10px;
+  text-align: center;
+}
+
+
+
+}
 </style>

@@ -52,7 +52,7 @@ const handleSubmit = async () => {
         </div>
       </div>
       <div>
-        <button type="submit">Log in</button>
+        <button type="submit form-elements">Log in</button>
       </div>
     </form>
   </article>
@@ -81,7 +81,7 @@ button {
   gap: 20px;
   padding: 20px;
   background-color: var(--white);
-  width: 400px;
+  width: 300px;
   height: 500px;
   border-radius: 45px;
   box-shadow: var(--shadow);
@@ -91,9 +91,10 @@ button {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
 }
 input {
-  width: 300px;
+  width: 100%;
   height: 30px;
   border-radius: 30px;
   border: 2px solid var(--purple);
@@ -104,12 +105,13 @@ input::placeholder {
 }
 
 button {
-  width: 300px;
+  width: 100px;
   height: 30px;
   border-radius: 30px;
   border: none;
   background-color: var(--purple);
   color: var(--white);
+  font-size: 14px;
 }
 button:hover {
   cursor: pointer;
@@ -124,5 +126,17 @@ button:hover {
 .forgot:hover {
   color: var(--yellow);
   cursor: pointer;
+}
+@media only screen and  (max-width: 768px) {
+
+  .login{
+  width: 100%;
+
+  }
+
+
+
+
+
 }
 </style>

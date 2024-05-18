@@ -33,6 +33,7 @@ const submitNewProfile = async () => {
     website.value = ''
     email.value = ''
     avatar_url.value = ''
+    
     actionDone.value = true
     const user_id = useUserStore().user.data.user.id
     await useUserStore().fetchProfile(user_id)

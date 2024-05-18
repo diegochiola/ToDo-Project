@@ -70,6 +70,7 @@ h1 {
   align-items: center;
   justify-content: center;
   gap: 50px;
+  width: 100%;
 }
 .change-component {
   display: flex;
@@ -90,5 +91,44 @@ a {
 }
 a:hover {
   color: var(--yellow);
+}
+
+@media only screen and  (max-width: 768px) {
+  .auth {
+  gap: 0px;
+ 
+}
+  .welcome{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  h1 {
+  color: var(--purple);
+  font-size: 25px;
+}
+.welcome img {
+  width: 100px;
+  height: auto;
+}
+  .login-components{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+  }
+  .login-components img {
+    display: none;
+
+}
+
+
+
+
+
 }
 </style>

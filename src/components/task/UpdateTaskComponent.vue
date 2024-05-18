@@ -237,4 +237,31 @@ h3 {
   transform: translateY(-20px);
   opacity: 0;
 }
+@media only screen and  (max-width: 768px){
+
+ 
+.component-name{
+  font-size: 15px;
+  align-content: center;
+}
+.to-dos{
+  height: 400px;
+  
+}
+button{
+  height: 30px;
+  font-size: 12px;
+}
+label {
+  font-size: 12px;;
+}
+input {
+font-size: 9px;
+}
+.selector{
+  font-size: 9px;
+}
+
+
+}
 </style>

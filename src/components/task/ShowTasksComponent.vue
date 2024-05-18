@@ -1,5 +1,5 @@
 <script setup>
-import { ref} from 'vue'
+import { ref } from 'vue'
 import { defineEmits } from 'vue'
 import { useTaskStore } from '../../stores/task.js'
 import { useUserStore } from '../../stores/user.js'
@@ -52,10 +52,10 @@ const emitEditTask = (taskId) => {
         <p>Status: {{ task.status }}</p>
       </div>
       <div class="buttons">
-        <button @click="emitEditTask(task.id)" class="button-profile  link">
+        <button @click="emitEditTask(task.id)" class="button-profile link">
           <img src="@/assets/edit_imago_yellow.png" alt="edit imago" />
         </button>
-        <button @click="deleteTaskById(task.id)" class="button-profile  link">
+        <button @click="deleteTaskById(task.id)" class="button-profile link">
           <img src="@/assets/delete_imago_yellow.png" alt="delete imago" />
         </button>
         <transition name="slide-fade">
@@ -116,11 +116,11 @@ button:hover {
   justify-content: space-between;
 }
 .todo-list {
-  transition: transform 0.3s ease; 
+  transition: transform 0.3s ease;
 }
 
 .todo-list:hover {
-  transform: scale(1.1); 
+  transform: scale(1.1);
 }
 
 h3 {
@@ -155,7 +155,6 @@ h4 {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-
 
 .yellow-border {
   border: 5px solid var(--yellow);
@@ -213,5 +212,43 @@ h4 {
 .slide-fade-enter, .slide-fade-leave-to /* .slide-fade-leave-active in <2.1.8 */ {
   transform: translateY(-20px);
   opacity: 0;
+}
+@media only screen and (max-width: 768px) {
+  .component-name {
+    font-size: 15px;
+  }
+  .todo-list {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  h4 {
+    font-size: 14px;
+  }
+  .task-details p {
+    font-size: 12px;
+  }
+  .task-details {
+    padding-left: 0px;
+  }
+  .task-button {
+    width: 25px;
+    height: auto;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .yellow-border {
+    border: 3px solid var(--yellow);
+  }
+
+  .pink-border {
+    border: 3px solid var(--pink);
+  }
+
+  .green-border {
+    border: 3px solid var(--green);
+  }
 }
 </style>

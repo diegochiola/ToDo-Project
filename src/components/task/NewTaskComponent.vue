@@ -31,7 +31,7 @@ const submitNewTask = async () => {
     <p class="component-name">Create New Task</p>
     <form class="form" @submit.prevent="submitNewTask">
       <div class="form-elements">
-        <label>What's on your ToDo list?</label>
+        <label>What's on your task list?</label>
         <input type="text" placeholder="e.g Grocery Shopping" id="title" v-model="title" required />
       </div>
       <div class="form-elements">
@@ -137,6 +137,7 @@ button {
   background-color: var(--purple);
   color: var(--white);
   margin-top: 20px;
+  
 }
 button:hover {
   cursor: pointer;
@@ -205,5 +206,32 @@ h3 {
 .slide-fade-enter, .slide-fade-leave-to /* .slide-fade-leave-active in <2.1.8 */ {
   transform: translateY(-20px);
   opacity: 0;
+}
+@media only screen and  (max-width: 768px){
+
+ 
+.component-name{
+  font-size: 15px;
+  align-content: center;
+}
+.to-dos{
+  height: 400px;
+  
+}
+button{
+  height: 30px;
+  font-size: 12px;
+}
+label {
+  font-size: 12px;;
+}
+input {
+font-size: 9px;
+}
+.selector{
+  font-size: 9px;
+}
+
+
 }
 </style>
