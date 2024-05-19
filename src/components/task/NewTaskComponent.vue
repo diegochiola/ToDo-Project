@@ -13,11 +13,19 @@ const description = ref('')
 const actionDone = ref(false)
 
 const submitNewTask = async () => {
+  const currentUser = useUserStore().user;
+  if (!currentUser || !currentUser.data || !currentUser.data.user) {
+    console.error('User data is not available');
+    return;
+  }
+  const upperTitle = title.value.charAt(0).toUpperCase() + title.value.slice(1);
+  const upperDescription = description.value.charAt(0).toUpperCase() + description.value.slice(1);
+
   await taskStore.addTask(
     useUserStore().user.data.user.id,
-    title.value,
+    upperTitle,
     status.value,
-    description.value
+    upperDescription
   )
   title.value = ''
   status.value = ''

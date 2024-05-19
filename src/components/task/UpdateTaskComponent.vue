@@ -18,17 +18,13 @@ const props = defineProps({
   }
 })
 
-//console.log(props)
-//const currentTaskId = props.taskId
 const currentTaskId = ref(props.taskId)
-//console.log('El id es: ' + currentTaskId)
 
 const updatedTitle = ref('')
 const updatedStatus = ref('')
 const updatedDescription = ref('')
 const actionDone = ref(false)
 
-// Ejecutar la función al montar el componente
 onMounted(() => {
   bringTaskById(currentTaskId.value)
 })
@@ -47,14 +43,11 @@ async function bringTaskById(taskId) {
 }
 
 async function updateTaskById() {
-  //const user_id = user.value.id
-  await taskStore.updateTask(
-    currentTaskId.value,
-    updatedTitle.value,
-    updatedStatus.value,
-    updatedDescription.value
-    //user_id
-  )
+  const upperTitle = updatedTitle.value.charAt(0).toUpperCase() + updatedTitle.value.slice(1)
+  const upperDescription =
+    updatedDescription.value.charAt(0).toUpperCase() + updatedDescription.value.slice(1)
+
+  await taskStore.updateTask(currentTaskId.value, upperTitle, updatedStatus.value, upperDescription)
 
   await taskStore.fetchTasks(user.value.data.user.id)
 

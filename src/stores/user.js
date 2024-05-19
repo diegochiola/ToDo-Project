@@ -74,6 +74,7 @@ export const useUserStore = defineStore('user', {
           router.push('/auth')
           this.user = null
           this.profile = null
+          this.$store.tasks.tasks = null;
         }
       } catch (error) {
         console.error('Error al cerrar sesión:', error)

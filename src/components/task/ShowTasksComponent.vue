@@ -11,8 +11,36 @@ const taskStore = useTaskStore()
 const { tasks } = storeToRefs(taskStore)
 
 const actionDone = ref(false)
+const actionMarkAsDone = ref(false)
+const  isDone = ref(false)
+const isTaskDone = (status) => status === 'Done';
 
-//detalle de color segun status
+const formatDate = (createdAt) => {
+  const date = new Date(createdAt)
+  const options = {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric'
+  }
+  return date.toLocaleDateString('en-US', options)
+}
+async function markAsDone(taskId) {
+  const success = await taskStore.updateTaskStatus(taskId, 'Done');
+  if (success) {
+    await taskStore.fetchTasks(user.value.data.user.id);
+    actionMarkAsDone.value = true;
+    isDone.value = true;
+    setTimeout(() => {
+      actionMarkAsDone.value = false;
+    }, 2000);
+  } else {
+    console.error('Failed to mark task as done');
+  
+  }
+}
+
 function getTaskClass(status) {
   const statusClassMap = {
     'To do': 'pink-border',
@@ -50,8 +78,12 @@ const emitEditTask = (taskId) => {
         <h4>{{ task.title }}</h4>
         <p>Description: {{ task.description }}</p>
         <p>Status: {{ task.status }}</p>
+        <p>Created at: {{ formatDate(task.created_at) }}</p>
       </div>
       <div class="buttons">
+        <button @click="markAsDone(task.id)" class="button-profile link" :class="{ 'done': isTaskDone(task.status) }">
+          <img src="@/assets/markAsDone.png" alt="mark as done" />
+        </button>
         <button @click="emitEditTask(task.id)" class="button-profile link">
           <img src="@/assets/edit_imago_yellow.png" alt="edit imago" />
         </button>
@@ -61,6 +93,12 @@ const emitEditTask = (taskId) => {
       </div>
     </div>
   </article>
+  <transition name="slide-fade">
+    <div v-if="actionMarkAsDone" class="success-notification">
+      <img src="@/assets/check_imago_color.png" alt="check" />
+      <p>Task Done!</p>
+    </div>
+  </transition>
   <transition name="slide-fade">
     <div v-if="actionDone" class="success-notification">
       <img src="@/assets/check_imago_color.png" alt="check" />
@@ -103,6 +141,10 @@ button:hover {
   cursor: pointer;
   color: var(--yellow);
 }
+button.done {
+  background-color: var(--green); 
+  
+}
 .todo-list {
   display: flex;
   flex-direction: row;
@@ -138,6 +180,10 @@ h4 {
   font-size: 15px;
   color: var(--gray);
   text-align: left;
+}
+.task-details p.created-at {
+  font-size: 12px;
+  color: var(--light-gray);
 }
 .buttons {
   padding: 0px;
