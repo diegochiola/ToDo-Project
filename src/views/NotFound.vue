@@ -10,11 +10,12 @@ import FooterComponent from '../components/FooterComponent.vue'
     
     <article class="error">
       <div class="not-found">
+        <p class="title">We lost this page. </p>
         <img src="../assets/notFound.png" alt="not found image" />
         <p>
           We searched high and low but couldn't find what you`re looking for.
         </p>
-        <p>Let`s find a better
+        <p class="find">Let`s find a better
           place for you to go.</p>
       </div>
       <div class="logo">
@@ -34,9 +35,10 @@ import FooterComponent from '../components/FooterComponent.vue'
 .error{
  display: flex;
  flex-direction: column;
+ justify-content: space-around;
  align-items: center;
- gap: 20px;
  padding: 60px;
+ height: 90vh;
 }
 .not-found {
   display: flex;
@@ -44,12 +46,29 @@ import FooterComponent from '../components/FooterComponent.vue'
   justify-content: center;
   align-items: center;
   color: var(--purple);
-  font-size: 20px;
+  font-size: 17px;
   text-align: center;
   width: 100%;
   background-color: var(--light);
   padding: 20px;
-  gap: 5px;
+  gap: 10px;
+}
+.title{
+  color:var(--purple-dark);
+  font-size: 20px;
+}
+.find{
+  color: var(--purple-dark)
+}
+.logo{
+    display: flex;
+    align-items: flex-start;
+    background-color: var(--white);
+    padding: 10px;
+    height: 50px;
+    border-radius: 60px;
+    box-shadow: var(--shadow);
+
 }
 .link img {
     filter: saturate(0%);

@@ -235,7 +235,6 @@ h3 {
   background-color: rgba(161, 138, 255, 0.9);
   color: var(--white);
   padding: 20px;
-
   word-break: break-word;
   text-align: center;
 }

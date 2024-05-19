@@ -103,6 +103,7 @@ const submitNewTask = async () => {
   box-shadow: var(--shadow);
   color: var(--gray);
   margin: 0 auto;
+  margin-bottom: 30px;
 }
 .form {
   display: flex;

@@ -58,15 +58,15 @@ const emitEditTask = (taskId) => {
         <button @click="deleteTaskById(task.id)" class="button-profile link">
           <img src="@/assets/delete_imago_yellow.png" alt="delete imago" />
         </button>
-        <transition name="slide-fade">
-          <div v-if="actionDone" class="success-notification">
-            <img src="@/assets/check_imago_color.png" alt="check" />
-            <p>Task deleted successfully!</p>
-          </div>
-        </transition>
       </div>
     </div>
   </article>
+  <transition name="slide-fade">
+    <div v-if="actionDone" class="success-notification">
+      <img src="@/assets/check_imago_color.png" alt="check" />
+      <p>Task deleted successfully!</p>
+    </div>
+  </transition>
 </template>
 
 <style scoped>

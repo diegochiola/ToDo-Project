@@ -7,7 +7,7 @@ const userStore = useUserStore()
 </script>
 
 <template>
-  <div class="nav-bar">
+  <article >
     <ul class="footer">
       <li>
         <router-link to="/notfound">
@@ -30,7 +30,7 @@ const userStore = useUserStore()
         </router-link>
       </li>
     </ul>
-  </div>
+  </article>
   <div class="logo">
     <router-link to="/">
       <a href="#" class="link off"
@@ -45,6 +45,7 @@ div {
   width: 100vw;
 }
 .footer {
+  
   display: flex;
   align-items: center;
   justify-content: space-around;
