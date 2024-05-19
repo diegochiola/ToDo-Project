@@ -114,7 +114,7 @@ a:hover {
   filter: saturate(100%);
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .nav-list{
     gap: 10px;
   }

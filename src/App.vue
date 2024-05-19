@@ -30,9 +30,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section>
-    <router-view />
-  </section>
+  <router-view />
 </template>
 
 <style scoped></style>

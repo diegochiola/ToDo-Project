@@ -11,6 +11,7 @@ const confirmPassword = ref('')
 
 
 
+
 </script>
 
 <template>
@@ -51,6 +52,7 @@ const confirmPassword = ref('')
       <button type="submit">Sing Up</button>
     </div>
   </form>
+
 </template>
 
 <style scoped>
@@ -69,7 +71,7 @@ button {
   gap: 20px;
   padding: 20px;
   background-color: var(--white);
-  width: 400px;
+  width:300px;
   height: 500px;
   border-radius: 45px;
   box-shadow: var(--shadow);
@@ -79,9 +81,11 @@ button {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
+
 }
 input {
-  width: 300px;
+  width: 100%;
   height: 30px;
   border-radius: 30px;
   border: 2px solid var(--purple);
@@ -92,12 +96,13 @@ input::placeholder {
 }
 
 button {
-  width: 300px;
+  width: 100px;
   height: 30px;
   border-radius: 30px;
   border: none;
   background-color: var(--purple);
   color: var(--white);
+  font-size: 14px;
 }
 button:hover {
   cursor: pointer;
@@ -112,4 +117,30 @@ button:hover {
   color: var(--yellow);
   cursor: pointer;
 }
+
+@media only screen and  (max-width: 720px) {
+
+.login{
+width: 250px;
+height: 450px;
+
+}
+h1 {
+  font-size: 15px;
+}
+label{
+  font-size: 12px;
+}
+input{
+  font-size: 10px;
+}
+button {
+  font-size: 12px;
+}
+
+
+
+}
+
+
 </style>

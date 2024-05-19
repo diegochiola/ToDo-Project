@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { supabase } from '../supabase'
 import router from '@/router'
+import defaultAvatar from '@/assets/defaultAvatar.png'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -21,32 +22,35 @@ export const useUserStore = defineStore('user', {
       }
       try {
         const { data, error } = await supabase.auth.signUp({
-          email: email,
-          password: password
+          email,
+          password
         })
         if (error) throw error
         if (data) {
-          alert('User created successfully! Check your email for verification')
-          console.log(data.user.id)
-          await this.createProfile({
+        console.log('User created successfully! Check your email for verification')
+         const profileData= {
             user_id: data.user.id,
             name: null,
             username: username,
             website: null,
             email: email,
-            avatar_url: null
-          })
-          
+            avatar_url: defaultAvatar
+          }
+          console.log('Default Avatar URL:', defaultAvatar);
+          await this.createProfile(profileData)
+          this.profile = profileData
           this.user = data.user
           console.log(this.user)
-          router.push('/')
           console.log(this.profile)
-          alert('User and profile created successfully!')
+          router.push('/')
+         console.log('User and profile created successfully!')
         }
       } catch (error) {
-        throw new Error('Error creating user:', error.message)
+        console.error('Error creating user:', error.message)
+        throw new Error('Error creating user: ' + error.message)
       }
     },
+
     async login(email, password) {
       const { data, error } = await supabase.auth.signInWithPassword({
         email: email,

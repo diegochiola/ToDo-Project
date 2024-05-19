@@ -11,6 +11,8 @@ const showUpdateProfileComponent = ref(false)
 const showNewProfileComponent = ref(false)
 const profileLoaded = ref(false)
 const userStore = useUserStore()
+console.log(userStore)
+
 
 async function loadProfileData() {
   try {
@@ -60,7 +62,7 @@ function handleProfileDeleted() {
       </div>
 
     </article>
-    <ShowProfileComponent
+    <ShowProfileComponent class="showProfile"
       @update-profile-complete="handleUpdateProfile()"
       @profile-deleted="handleProfileDeleted()"
     />
@@ -72,11 +74,13 @@ function handleProfileDeleted() {
       v-if="showUpdateProfileComponent"
       @update-profile-complete="handleUpdateProfileComplete()"
     />
-    <FooterComponent class="footer-component" />
+   
   </section>
+  <FooterComponent  />
 </template>
 
 <style scoped>
+
 .component {
   display: flex;
   flex-direction: column;
@@ -96,10 +100,16 @@ function handleProfileDeleted() {
   height: 30px;
   filter: saturate(0%);
 }
-.footer-component {
+
+footer {
   position: fixed;
   bottom: 0;
   width: 100%;
   height: 60px;
+}
+@media only screen and (max-width: 768px){
+  .component{
+    font-size: 15px;
+  }
 }
 </style>

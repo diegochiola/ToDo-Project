@@ -10,6 +10,7 @@ const userStore = useUserStore()
 
 const email = ref('')
 const password = ref('')
+const actionDone = ref(false)
 
 const handleSubmit = async () => {
   try {
@@ -19,6 +20,11 @@ const handleSubmit = async () => {
       //await userStore.fetchProfile(); agregar el perfil al logearme
       await taskStore.fetchTasks(userStore.user.user.id)
       await userStore.fetchProfile(userStore.user.user.id)
+      actionDone.value = true
+      console.log('Login successful, actionDone set to true')
+      setTimeout(() => {
+        actionDone.value = false
+      }, 2000)
     }
   } catch (error) {
     console.log(error)
@@ -46,16 +52,18 @@ const handleSubmit = async () => {
           v-model="password"
           required
         />
-
-        <div>
-          <a href="#" class="forgot">Forgot password?</a>
-        </div>
       </div>
       <div>
-        <button type="submit">Log in</button>
+        <button type="submit form-elements">Log in</button>
       </div>
     </form>
   </article>
+  <transition name="slide-fade">
+    <div v-if="actionDone" class="success-notification">
+      <img src="@/assets/check_imago_color.png" alt="check" />
+      <p>Login successfully!</p>
+    </div>
+  </transition>
 </template>
 
 <style scoped>
@@ -81,7 +89,7 @@ button {
   gap: 20px;
   padding: 20px;
   background-color: var(--white);
-  width: 400px;
+  width: 300px;
   height: 500px;
   border-radius: 45px;
   box-shadow: var(--shadow);
@@ -91,9 +99,10 @@ button {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
 }
 input {
-  width: 300px;
+  width: 100%;
   height: 30px;
   border-radius: 30px;
   border: 2px solid var(--purple);
@@ -104,25 +113,78 @@ input::placeholder {
 }
 
 button {
-  width: 300px;
+  width: 100px;
   height: 30px;
   border-radius: 30px;
   border: none;
   background-color: var(--purple);
   color: var(--white);
+  font-size: 14px;
 }
 button:hover {
   cursor: pointer;
   color: var(--yellow);
 }
 
-.forgot {
-  color: var(--purple);
-  text-decoration: none;
-  font-size: 12px;
+
+
+.success-notification {
+  position: fixed;
+  z-index: 11100;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(161, 138, 255, 0.9);
+  color: var(--white);
+  padding: 20px;
+
+  word-break: break-word;
+  text-align: center;
 }
-.forgot:hover {
-  color: var(--yellow);
-  cursor: pointer;
+.success-notification p {
+  font-size: 20px;
+}
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition:
+    transform 0.5s,
+    opacity 0.5s;
+}
+.slide-fade-enter, .slide-fade-leave-to /* .slide-fade-leave-active in <2.1.8 */ {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+@media only screen and (max-width: 720px) {
+  .login {
+    width: 250px;
+height: 450px;
+  }
+  h1 {
+    font-size: 15px;
+  }
+  label {
+    font-size: 12px;
+  }
+  input {
+    font-size: 10px;
+  }
+  button {
+    font-size: 12px;
+  }
+  .success-notification {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+  .success-notification p {
+    font-size: 12px;
+  }
 }
 </style>

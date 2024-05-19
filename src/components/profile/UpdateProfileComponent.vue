@@ -1,10 +1,9 @@
 <script setup>
-import { ref, onMounted} from 'vue'
+import { ref, onMounted } from 'vue'
 import { useUserStore } from '../../stores/user.js'
-import { defineEmits } from 'vue';
+import { defineEmits } from 'vue'
 
 const userStore = useUserStore()
-
 
 //actions
 const actionDone = ref(false)
@@ -28,7 +27,7 @@ async function loadProfileData() {
       updatedWebsite.value = profile.website
       updatedEmail.value = profile.email
       updatedAvatar_url.value = profile.avatar_url
-      loaded.value = true; 
+      loaded.value = true
     } else {
       console.log('Profile not loaded')
     }
@@ -42,7 +41,7 @@ async function submitUpdateProfile() {
   console.log('Updating profile...')
   if (!loaded.value) {
     console.log('Profile not loaded yet')
-    return;
+    return
   }
   const profileData = {
     user_id: useUserStore().user.data.user.id,
@@ -52,7 +51,6 @@ async function submitUpdateProfile() {
     email: updatedEmail.value,
     avatar_url: updatedAvatar_url.value
   }
-  
 
   try {
     await useUserStore().updateProfile(profileData)
@@ -185,6 +183,8 @@ input {
   border: none;
   box-shadow: var(--shadow);
   text-indent: 10px;
+  font-size: 12px;
+  color: var(--gray);
 }
 
 button {
@@ -234,6 +234,9 @@ h3 {
   justify-content: center;
   background-color: rgba(161, 138, 255, 0.9);
   color: var(--white);
+  padding: 20px;
+  word-break: break-word;
+  text-align: center;
 }
 .success-notification p {
   font-size: 20px;
@@ -247,5 +250,32 @@ h3 {
 .slide-fade-enter, .slide-fade-leave-to /* .slide-fade-leave-active in <2.1.8 */ {
   transform: translateY(-20px);
   opacity: 0;
+}
+
+@media only screen and  (max-width: 720px){
+  .component-name {
+    font-size: 15px;
+    align-content: center;
+  }
+  .profile {
+    font-size: 12px;
+    height: 550px;
+  }
+  button {
+    font-size: 12px;
+    height: 30px;
+  }
+  input {
+    font-size: 10px;
+  }
+  .success-notification {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+  .success-notification p {
+    font-size: 12px;
+  }
 }
 </style>

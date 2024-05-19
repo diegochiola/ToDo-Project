@@ -55,19 +55,19 @@ function zoomOut() {
           <div>
             <div class="profile-detail">
               <p class="label" v-if="showName">Name:</p>
-              <p v-if="showName">{{ profile.name }}</p>
+              <p class="text-content"  v-if="showName">{{ profile.name }}</p>
             </div>
             <div class="profile-detail">
               <p class="label" >Username:</p>
-              <p>{{ profile.username }}</p>
+              <p class="text-content" >{{ profile.username }}</p>
             </div>
             <div class="profile-detail">
               <p  class="label" v-if="showWebsite">Website:</p>
-              <p v-if="showWebsite">{{ profile.website }}</p>
+              <p class="text-content"  v-if="showWebsite">{{ profile.website }}</p>
             </div>
             <div class="profile-detail">
               <p class="label" >Email:</p>
-              <p>{{ profile.email }}</p>
+              <p class="text-content"  >{{ profile.email }}</p>
             </div>
           </div>
 
@@ -147,11 +147,11 @@ function zoomOut() {
   padding: 20px;
 }
 .profile-picture {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   overflow: hidden;
-  border: solid 4px var(--purple);
+  border: solid 3px var(--purple);
 }
 .profile-info {
   display: flex;
@@ -163,17 +163,23 @@ function zoomOut() {
   color: var(--white);
   border: solid 4px var(--white);
   border-radius: 0 30px 30px 0;
-  
+  overflow-wrap: break-word;
   gap: 15px;
 }
 .profile-detail{
   display: flex;
   align-items: baseline;
   gap: 5px;
+  overflow-wrap: break-word;
 }
 .label {
   font-weight: lighter;
 
+}
+
+.text-content {
+  overflow-wrap: break-word;
+  word-break: break-all;
 }
 .buttons {
   display: flex;
@@ -181,15 +187,18 @@ function zoomOut() {
   gap: 15px;
 }
 .button-profile {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   background-color: var(--purple);
-
   border: none;
+}
+.button-profile img{
+  width:10px;
+  height: auto;
 }
 .link img {
   filter: saturate(0%);
@@ -231,5 +240,30 @@ function zoomOut() {
 .slide-fade-enter, .slide-fade-leave-to /* .slide-fade-leave-active in <2.1.8 */ {
   transform: translateY(-20px);
   opacity: 0;
+}
+@media only screen and  (max-width: 720px){
+  .profile-details{
+    flex-direction: column;
+    justify-content: center;
+  }
+  .profile-info{
+  font-size: 10px;
+  border-radius: 0 0px 30px 0;
+}
+.profile-detail{
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-profile img{
+  width:20px;
+  height: auto;
+}
+.buttons {
+    justify-content: center;
+  }
+
+
+
 }
 </style>

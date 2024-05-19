@@ -47,10 +47,11 @@ function handleUpdateTaskComplete() {
       <p class="slogan">Nice to have you here again.</p>
     </div>
   </section>
+
   <ShowProfileComponent :showContent="false" />
-  <section>
+  <section >
     <article v-if="showNewTaskComponent">
-      <NewTaskComponent />
+      <NewTaskComponent class="newTaskcomponent" />
     </article>
     <article ref="updateTaskComponent" v-else>
       <UpdateTaskComponent
@@ -65,6 +66,7 @@ function handleUpdateTaskComplete() {
 </template>
 
 <style scoped>
+
 h1 {
   color: var(--purple-dark);
 }
@@ -84,9 +86,13 @@ h1 {
   justify-content: center;
   gap: 10px;
 }
+.newTaskcomponent{
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
 .update-task-component {
   margin-top: 60px;
-  
+  margin-bottom: 60px;
 }
 footer {
   position: fixed;
@@ -100,5 +106,27 @@ img {
 }
 .slogan {
   font-size: 12px;
+}
+@media only screen and (max-width: 768px){
+.dashboard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h1{
+  font-size: 15px;
+  text-align: center;
+}
+.dashboard img{
+  width: 80px;
+  height: auto;
+}
+.slogan {
+  font-size: 10px;
+  text-align: center;
+}
+
+
+
 }
 </style>

@@ -35,7 +35,7 @@ onMounted(() => {
 
 //traerme los datos asociados al id de la task
 async function bringTaskById(taskId) {
-  const tasksData = tasks.value 
+  const tasksData = tasks.value
   const findTask = tasksData.find((task) => task.id === taskId)
   if (findTask) {
     updatedTitle.value = findTask.title
@@ -57,23 +57,20 @@ async function updateTaskById() {
   )
 
   await taskStore.fetchTasks(user.value.data.user.id)
-  
+
   actionDone.value = true
   setTimeout(() => {
     actionDone.value = false
   }, 2000)
   emit('update-task-complete')
   //console.log('upadet!')
-  
 }
-
 </script>
 
 <template>
-  
   <section class="to-dos">
-    <p class="component-name" >Edit your Task</p>
-    <form class= "form" @submit.prevent="updateTaskById">
+    <p class="component-name">Edit your Task</p>
+    <form class="form" @submit.prevent="updateTaskById">
       <div class="form-elements">
         <label>Task</label>
         <input type="text" id="updatedTitle" v-model="updatedTitle" />
@@ -95,14 +92,13 @@ async function updateTaskById() {
         <button type="submit" value="Update Task">Update Task</button>
       </div>
     </form>
-   
   </section>
   <transition name="slide-fade">
-      <div v-if="actionDone" class="success-notification">
-        <img src="@/assets/check_imago_color.png" alt="check">
-        <p>Task updated successfully!</p>
-      </div>
-    </transition>
+    <div v-if="actionDone" class="success-notification">
+      <img src="@/assets/check_imago_color.png" alt="check" />
+      <p>Task updated successfully!</p>
+    </div>
+  </transition>
 </template>
 
 <style scoped>
@@ -126,17 +122,16 @@ async function updateTaskById() {
   width: 80%;
   height: 450px;
   border: solid 4px var(--purple);
-  border-radius: 0px 0px 30px 30px;;
+  border-radius: 0px 0px 30px 30px;
   box-shadow: var(--shadow);
   color: var(--gray);
   margin: 0 auto;
 }
-.form{
+.form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 60%;
-  
 }
 .form-elements {
   display: flex;
@@ -236,5 +231,36 @@ h3 {
 .slide-fade-enter, .slide-fade-leave-to /* .slide-fade-leave-active in <2.1.8 */ {
   transform: translateY(-20px);
   opacity: 0;
+}
+@media only screen and (max-width: 768px) {
+  .component-name {
+    font-size: 15px;
+    align-content: center;
+  }
+  .to-dos {
+    height: 400px;
+  }
+  button {
+    height: 30px;
+    font-size: 12px;
+  }
+  label {
+    font-size: 12px;
+  }
+  input {
+    font-size: 9px;
+  }
+  .selector {
+    font-size: 9px;
+  }
+  .success-notification {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+  .success-notification p {
+    font-size: 12px;
+  }
 }
 </style>

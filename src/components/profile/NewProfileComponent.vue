@@ -1,7 +1,7 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '../../stores/user.js'
-import { ref} from 'vue'
+import { ref } from 'vue'
 
 const userStore = useUserStore()
 const { profile } = storeToRefs(userStore)
@@ -14,7 +14,6 @@ const email = ref('') //profile.value.email
 const avatar_url = ref('')
 
 const actionDone = ref(false)
-
 
 const submitNewProfile = async () => {
   try {
@@ -33,10 +32,11 @@ const submitNewProfile = async () => {
     website.value = ''
     email.value = ''
     avatar_url.value = ''
+
     actionDone.value = true
     const user_id = useUserStore().user.data.user.id
     await useUserStore().fetchProfile(user_id)
-    
+
     setTimeout(() => {
       actionDone.value = false
     }, 2000)
@@ -58,7 +58,7 @@ setTimeout(() => {
       <form class="form" @submit.prevent="submitNewProfile">
         <div class="form-elements">
           <label>Name</label>
-          <input type="text" placeholder="Your name" id="name" v-model="name"/>
+          <input type="text" placeholder="Your name" id="name" v-model="name" />
         </div>
         <div class="form-elements">
           <label>Username</label>
@@ -83,7 +83,9 @@ setTimeout(() => {
           <input type="text" placeholder="Your avatar" id="avatar_url" v-model="avatar_url" />
         </div>
         <div class="form-elements">
-          <button @click="createProfile" type="submit" value="Create Profile">Create Profile</button>
+          <button @click="createProfile" type="submit" value="Create Profile">
+            Create Profile
+          </button>
         </div>
       </form>
     </article>
@@ -144,6 +146,8 @@ input {
   border: none;
   box-shadow: var(--shadow);
   text-indent: 10px;
+  font-size: 12px;
+  color: var(--gray);
 }
 
 button {
@@ -206,5 +210,29 @@ h3 {
 .slide-fade-enter, .slide-fade-leave-to /* .slide-fade-leave-active in <2.1.8 */ {
   transform: translateY(-20px);
   opacity: 0;
+}
+@media only screen and  (max-width: 720px){
+  .component-name {
+    font-size: 15px;
+    align-content: center;
+  }
+  .profile {
+    font-size: 12px;
+  }
+  button {
+    font-size: 15px;
+  }
+  input {
+    font-size: 10px;
+  }
+  .success-notification {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+  .success-notification p {
+    font-size: 12px;
+  }
 }
 </style>
