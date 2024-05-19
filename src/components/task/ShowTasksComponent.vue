@@ -43,7 +43,7 @@ const emitEditTask = (taskId) => {
       <p class="component-name">Your tasks</p>
     </div>
     <div v-if="!tasks">
-      <p>No tasks available</p>
+      <p class="no-tasks">No tasks available</p>
     </div>
     <div v-for="task in tasks" :key="task.id" class="todo-list" :class="getTaskClass(task.status)">
       <div class="task-details">
@@ -167,6 +167,10 @@ h4 {
 .green-border {
   border: 5px solid var(--green);
 }
+.no-tasks{
+font-size: 15px;
+color: var( --light);
+}
 .button-profile {
   width: 40px;
   height: 40px;
@@ -222,8 +226,11 @@ h4 {
     align-items: center;
     justify-content: space-evenly;
   }
+  .no-tasks{
+font-size: 12px;
+  }
 
-  h4 {
+  h4{
     font-size: 14px;
   }
   .task-details p {

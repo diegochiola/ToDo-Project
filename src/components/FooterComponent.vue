@@ -17,6 +17,13 @@ const userStore = useUserStore();
       <li><a href="#">Terms</a></li>
     </ul>
   </div>
+  <div class="logo">
+    <router-link to="/">
+      <a href="#" class="link off"
+        ><img src="../assets/tasklist_logo_yellow.png" alt="tasklist logo"
+      /></a>
+    </router-link>
+  </div>
 </template>
 
 <style scoped>
@@ -31,6 +38,7 @@ div {
   max-width: 100vw;
   background-color: var(--purple);
   color: var(--white);
+  padding: 10px;
 }
 li {
   list-style: none;
@@ -44,4 +52,39 @@ a {
 a:hover {
   color: var(--yellow);
 }
+.logo{
+  display: none;
+}
+@media only screen and (max-width: 768px) {
+
+  .footer {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  padding: 10px;
+  }
+  .logo{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--purple);
+    align-items: center;
+
+  }
+  .link img {
+  filter: saturate(0%);
+  width: 50px;
+  height: auto;
+}
+
+.link:hover img {
+  filter: saturate(100%);
+  cursor: pointer;
+}
+li {
+  font-size: 9px;
+}
+
+}
+
+
 </style>
