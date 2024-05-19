@@ -12,6 +12,8 @@ const { tasks } = storeToRefs(taskStore)
 
 const actionDone = ref(false)
 const actionMarkAsDone = ref(false)
+const  isDone = ref(false)
+const isTaskDone = (status) => status === 'Done';
 
 const formatDate = (createdAt) => {
   const date = new Date(createdAt)
@@ -24,13 +26,19 @@ const formatDate = (createdAt) => {
   }
   return date.toLocaleDateString('en-US', options)
 }
-async function markAsDone(taskId){
-  await taskStore.updateTask(taskId, null, 'Done', null)
-  await taskStore.fetchTasks(user.value.data.user.id)
-  actionMarkAsDone.value = true
-  setTimeout(() => {
-    actionMarkAsDone.value = false
-  }, 2000)
+async function markAsDone(taskId) {
+  const success = await taskStore.updateTaskStatus(taskId, 'Done');
+  if (success) {
+    await taskStore.fetchTasks(user.value.data.user.id);
+    actionMarkAsDone.value = true;
+    isDone.value = true;
+    setTimeout(() => {
+      actionMarkAsDone.value = false;
+    }, 2000);
+  } else {
+    console.error('Failed to mark task as done');
+  
+  }
 }
 
 function getTaskClass(status) {
@@ -73,7 +81,7 @@ const emitEditTask = (taskId) => {
         <p>Created at: {{ formatDate(task.created_at) }}</p>
       </div>
       <div class="buttons">
-        <button @click="markAsDone(task.id)" class="button-profile link">
+        <button @click="markAsDone(task.id)" class="button-profile link" :class="{ 'done': isTaskDone(task.status) }">
           <img src="@/assets/markAsDone.png" alt="mark as done" />
         </button>
         <button @click="emitEditTask(task.id)" class="button-profile link">
@@ -132,6 +140,10 @@ button {
 button:hover {
   cursor: pointer;
   color: var(--yellow);
+}
+button.done {
+  background-color: var(--green); 
+  
 }
 .todo-list {
   display: flex;

@@ -64,6 +64,22 @@ export const useTaskStore = defineStore('tasks', {
       console.error('Error updating a task:', error.message)
       alert('An error occurred while updating the task. Please try again later.')
     }
+  },
+  async updateTaskStatus(taskId, newStatus) {
+    try {
+      const { error } = await supabase
+        .from('tasks')
+        .update({ status: newStatus })
+        .eq('id', taskId);
+
+      if (error) {
+        throw error;
+      }
+      return true; 
+    } catch (error) {
+      console.error('Error updating task status:', error.message);
+      return false;
+    }
   }
 }
 })
