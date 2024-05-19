@@ -187,8 +187,8 @@ function zoomOut() {
   gap: 15px;
 }
 .button-profile {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -252,12 +252,16 @@ function zoomOut() {
 }
 .profile-detail{
   flex-direction: column;
+  align-items: center;
 }
 
 .button-profile img{
   width:20px;
   height: auto;
 }
+.buttons {
+    justify-content: center;
+  }
 
 
 

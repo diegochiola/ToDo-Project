@@ -108,7 +108,8 @@ a:hover {
   }
   h1 {
   color: var(--purple);
-  font-size: 25px;
+  font-size: 20px;
+  text-align: center;
 }
 .welcome img {
   width: 100px;
@@ -125,7 +126,16 @@ a:hover {
     display: none;
 
 }
+.change-component{
+  flex-direction: column;
+}
+p {
+  font-size: 9px;
+}
+a {
 
+  font-size: 9px;
+}
 
 
 

@@ -167,9 +167,9 @@ h4 {
 .green-border {
   border: 5px solid var(--green);
 }
-.no-tasks{
-font-size: 15px;
-color: var( --light);
+.no-tasks {
+  font-size: 15px;
+  color: var(--light);
 }
 .button-profile {
   width: 40px;
@@ -226,11 +226,11 @@ color: var( --light);
     align-items: center;
     justify-content: space-evenly;
   }
-  .no-tasks{
-font-size: 12px;
+  .no-tasks {
+    font-size: 12px;
   }
 
-  h4{
+  h4 {
     font-size: 14px;
   }
   .task-details p {
@@ -256,6 +256,15 @@ font-size: 12px;
 
   .green-border {
     border: 3px solid var(--green);
+  }
+  .success-notification {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+  .success-notification p {
+    font-size: 12px;
   }
 }
 </style>

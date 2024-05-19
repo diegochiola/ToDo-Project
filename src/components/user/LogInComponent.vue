@@ -46,10 +46,6 @@ const handleSubmit = async () => {
           v-model="password"
           required
         />
-
-        <div>
-          <a href="#" class="forgot">Forgot password?</a>
-        </div>
       </div>
       <div>
         <button type="submit form-elements">Log in</button>
@@ -131,10 +127,21 @@ button:hover {
 
   .login{
   width: 100%;
+  height: auto;
 
   }
-
-
+  h1 {
+  font-size: 15px;
+}
+label{
+  font-size: 12px;
+}
+input{
+  font-size: 10px;
+}
+button {
+  font-size: 12px;
+}
 
 
 

@@ -109,6 +109,7 @@ img {
 }
 h1{
   font-size: 15px;
+  text-align: center;
 }
 .dashboard img{
   width: 80px;

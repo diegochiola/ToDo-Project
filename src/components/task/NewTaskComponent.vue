@@ -13,7 +13,12 @@ const description = ref('')
 const actionDone = ref(false)
 
 const submitNewTask = async () => {
-  await taskStore.addTask(useUserStore().user.data.user.id, title.value, status.value, description.value)
+  await taskStore.addTask(
+    useUserStore().user.data.user.id,
+    title.value,
+    status.value,
+    description.value
+  )
   title.value = ''
   status.value = ''
   description.value = ''
@@ -137,7 +142,6 @@ button {
   background-color: var(--purple);
   color: var(--white);
   margin-top: 20px;
-  
 }
 button:hover {
   cursor: pointer;
@@ -207,31 +211,35 @@ h3 {
   transform: translateY(-20px);
   opacity: 0;
 }
-@media only screen and  (max-width: 768px){
-
- 
-.component-name{
-  font-size: 15px;
-  align-content: center;
-}
-.to-dos{
-  height: 400px;
-  
-}
-button{
-  height: 30px;
-  font-size: 12px;
-}
-label {
-  font-size: 12px;;
-}
-input {
-font-size: 9px;
-}
-.selector{
-  font-size: 9px;
-}
-
-
+@media only screen and (max-width: 768px) {
+  .component-name {
+    font-size: 15px;
+    align-content: center;
+  }
+  .to-dos {
+    height: 400px;
+  }
+  button {
+    height: 30px;
+    font-size: 12px;
+  }
+  label {
+    font-size: 12px;
+  }
+  input {
+    font-size: 9px;
+  }
+  .selector {
+    font-size: 9px;
+  }
+  .success-notification {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+  .success-notification p {
+    font-size: 12px;
+  }
 }
 </style>

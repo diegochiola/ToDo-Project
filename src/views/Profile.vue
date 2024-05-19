@@ -102,4 +102,9 @@ function handleProfileDeleted() {
   width: 100%;
   height: 60px;
 }
+@media only screen and (max-width: 768px){
+  .component{
+    font-size: 15px;
+  }
+}
 </style>

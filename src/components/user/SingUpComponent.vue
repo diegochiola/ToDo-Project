@@ -120,10 +120,20 @@ button:hover {
 
 .login{
 width: 100%;
-
+height: auto;
 }
-
-
+h1 {
+  font-size: 15px;
+}
+label{
+  font-size: 12px;
+}
+input{
+  font-size: 10px;
+}
+button {
+  font-size: 12px;
+}
 
 
 
