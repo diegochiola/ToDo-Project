@@ -34,7 +34,8 @@ export const useTaskStore = defineStore('tasks', {
         user_id: user_id,
         title: title,
         status: status,
-        description: description
+        description: description,
+        created_at: new Date()
       }
     ])
     if (error) {
@@ -43,7 +44,10 @@ export const useTaskStore = defineStore('tasks', {
     }
   },
   async deleteTask(id) {
-    const { error } = await supabase.from('tasks').delete().eq('id', id)
+    const { error } = await supabase
+    .from('tasks')
+    .delete()
+    .eq('id', id)
     if (error) {
       console.error('Error deleting a task:', error.message)
       alert('An error occurred while deleting the task. Please try again later.')
@@ -52,7 +56,9 @@ export const useTaskStore = defineStore('tasks', {
   async updateTask( id, updatedTitle, updatedStatus, updatedDescription) {
     const { error } = await supabase
       .from('tasks')
-      .update({ title: updatedTitle, status: updatedStatus, description: updatedDescription })
+      .update({ title: updatedTitle, 
+        status: updatedStatus, 
+        description: updatedDescription })
       .eq('id', id)
     if (error) {
       console.error('Error updating a task:', error.message)
