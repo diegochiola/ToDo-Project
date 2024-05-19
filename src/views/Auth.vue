@@ -93,7 +93,7 @@ a:hover {
   color: var(--yellow);
 }
 
-@media only screen and  (max-width: 768px) {
+@media only screen and  (max-width: 720px) {
   .auth {
   gap: 0px;
  
@@ -120,7 +120,7 @@ a:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width:100%;
+ 
   }
   .login-components img {
     display: none;

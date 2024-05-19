@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { supabase } from '../supabase'
 import router from '@/router'
+import defaultAvatar from '@/assets/defaultAvatar.png'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -33,8 +34,9 @@ export const useUserStore = defineStore('user', {
             username: username,
             website: null,
             email: email,
-            avatar_url: null
+            avatar_url: defaultAvatar
           }
+          console.log('Default Avatar URL:', defaultAvatar);
           await this.createProfile(profileData)
           this.profile = profileData
           this.user = data.user

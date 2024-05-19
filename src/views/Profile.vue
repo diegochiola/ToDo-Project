@@ -11,6 +11,8 @@ const showUpdateProfileComponent = ref(false)
 const showNewProfileComponent = ref(false)
 const profileLoaded = ref(false)
 const userStore = useUserStore()
+console.log(userStore)
+
 
 async function loadProfileData() {
   try {

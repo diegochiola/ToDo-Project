@@ -241,7 +241,7 @@ function zoomOut() {
   transform: translateY(-20px);
   opacity: 0;
 }
-@media only screen and (max-width: 768px){
+@media only screen and  (max-width: 720px){
   .profile-details{
     flex-direction: column;
     justify-content: center;

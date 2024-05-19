@@ -11,6 +11,7 @@ const confirmPassword = ref('')
 
 
 
+
 </script>
 
 <template>
@@ -51,6 +52,7 @@ const confirmPassword = ref('')
       <button type="submit">Sing Up</button>
     </div>
   </form>
+
 </template>
 
 <style scoped>
@@ -116,11 +118,12 @@ button:hover {
   cursor: pointer;
 }
 
-@media only screen and  (max-width: 768px) {
+@media only screen and  (max-width: 720px) {
 
 .login{
-width: 100%;
-height: auto;
+width: 250px;
+height: 450px;
+
 }
 h1 {
   font-size: 15px;
