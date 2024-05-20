@@ -11,7 +11,7 @@ import FooterComponent from '../components/FooterComponent.vue'
     <article class="error">
       <div class="not-found">
         <p class="title">We lost this page. </p>
-        <img src="@/assets/notFound.png" alt="not found image" />
+        <img src="../assets/notFound.png" alt="not found image" />
         <p>
           We searched high and low but couldn't find what you`re looking for.
         </p>
@@ -21,7 +21,7 @@ import FooterComponent from '../components/FooterComponent.vue'
       <div class="logo">
     <router-link to="/">
       <a href="#" class="link off"
-        ><img src="@/assets/tasklist_logo_yellow.png" alt="tasklist logo"
+        ><img src="../assets/tasklist_logo_yellow.png" alt="tasklist logo"
       /></a>
     </router-link>
   </div>
@@ -39,6 +39,7 @@ import FooterComponent from '../components/FooterComponent.vue'
  align-items: center;
  padding: 60px;
  height: 90vh;
+ margin-bottom: 60px;
 }
 .not-found {
   display: flex;
@@ -55,7 +56,8 @@ import FooterComponent from '../components/FooterComponent.vue'
 }
 .title{
   color:var(--purple-dark);
-  font-size: 20px;
+  font-size: 25px;
+  font-weight: 500;
 }
 .find{
   color: var(--purple-dark)

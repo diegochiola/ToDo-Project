@@ -14,12 +14,12 @@ function toggleUser() {
   <section class="auth">
     <div class="welcome">
       <h1>Welcome to </h1>
-    <img src="@/assets/tasklist_logo_color.png" alt="logo tasklist color">
+    <img src="../assets/tasklist_logo_color.png" alt="logo tasklist color">
     </div>
     
     <article class="login-components">
       <div>
-        <img src="@/assets/tasklist_login.png" alt="image of a man with tasklist">
+        <img src="../assets/tasklist_login.png" alt="image of a man with tasklist">
       </div>
       <div v-if="hasUser">
       <LogInComponent />
