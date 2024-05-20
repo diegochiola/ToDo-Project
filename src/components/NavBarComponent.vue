@@ -55,7 +55,7 @@ const handleLogout = async () => {
         </li>
         <li>
           <a href="#" @click="handleLogout" class="link">
-            <img src="../assets/taskList_logout_yellow.png" alt="logout" />
+            <img src="../assets/taskList_logOut_yellow.png" alt="logout" />
           </a>
         </li>
       </ul>
