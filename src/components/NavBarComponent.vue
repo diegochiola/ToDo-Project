@@ -29,7 +29,7 @@ const handleLogout = async () => {
     <div class="nav-list">
       <router-link to="/">
         <a href="#" class="link"
-          ><img src="../assets/tasklist_logo_yellow.png" alt="tasklist logo"
+          ><img src="../assets/taskList_logo_yellow.png" alt="tasklist logo"
         /></a>
       </router-link>
 
@@ -55,7 +55,7 @@ const handleLogout = async () => {
         </li>
         <li>
           <a href="#" @click="handleLogout" class="link">
-            <img src="../assets/tasklist_logout_yellow.png" alt="logout" />
+            <img src="../assets/taskList_logout_yellow.png" alt="logout" />
           </a>
         </li>
       </ul>
