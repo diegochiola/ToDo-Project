@@ -17,7 +17,6 @@ console.log(userStore)
 async function loadProfileData() {
   try {
     if (useUserStore().profile) {
-      const user_id = useUserStore().user.data.user.id
       await useUserStore().fetchProfile(useUserStore().user.data.user.id)
       profileLoaded.value = true
       if (!useUserStore().profile) {

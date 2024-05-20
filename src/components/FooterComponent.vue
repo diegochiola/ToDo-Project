@@ -35,7 +35,7 @@ const userStore = useUserStore()
     <div class="logo">
       <router-link to="/">
         <a href="#" class="link off"
-          ><img src="../assets/tasklist_logo_yellow.png" alt="tasklist logo"
+          ><img src="../assets/taskList_logo_yellow.png" alt="tasklist logo"
         /></a>
       </router-link>
     </div>
