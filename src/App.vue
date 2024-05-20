@@ -3,24 +3,25 @@ import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia' //coge el dato d euna store y lo convierte en ref para usarlo
 import { useRouter } from 'vue-router'
 import { useUserStore } from './stores/user.js'
-import NavBarComponent from './components/NavBarComponent.vue'
-import TaskComponent from './components/TaskComponent.vue'
-
-import TaskComponent from './components/TaskComponent.vue'
+import { useTaskStore } from './stores/task.js'
 
 const router = useRouter()
 const userStore = useUserStore()
+const taskStore = useTaskStore()
 const { user } = storeToRefs(userStore)
- 
-onMounted(async () => { //cuando el html haya cargado
+
+onMounted(async () => {
   try {
-    await userStore.fetchUser() // here we call fetch user
-    if (!user.value) {
-      // redirect them to logout if the user is not there
-      router.push({ path: '/auth' });
+    await userStore.fetchUser()
+
+    if (!user.value.data.user) {
+      router.push({ path: '/auth' })
     } else {
-      // continue to dashboard
-      router.push({ path: '/' });
+      await userStore.fetchProfile(useUserStore().user.data.user.id)
+      if (!userStore.profile) {
+        await taskStore.fetchTasks(useUserStore().user.data.user.id) 
+        router.push({ path: '/' })
+      }
     }
   } catch (e) {
     console.log(e)
@@ -29,15 +30,7 @@ onMounted(async () => { //cuando el html haya cargado
 </script>
 
 <template>
-
-<section>
-    <NavBarComponent />
-    <TaskComponent />
-    <router-view class="app-main" /> <!-- your routes will load inside of these tags -->
-</section>
-
+  <router-view />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
