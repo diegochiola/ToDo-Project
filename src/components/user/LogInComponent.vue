@@ -57,13 +57,14 @@ const handleSubmit = async () => {
         <button type="submit form-elements">Log in</button>
       </div>
     </form>
-  </article>
-  <transition name="slide-fade">
+    <transition name="slide-fade">
     <div v-if="actionDone" class="success-notification">
       <img src="@/assets/check_imago_color.png" alt="check" />
-      <p>Login successfully!</p>
+      <p>Login successful!</p>
     </div>
   </transition>
+  </article>
+ 
 </template>
 
 <style scoped>
@@ -125,9 +126,6 @@ button:hover {
   cursor: pointer;
   color: var(--yellow);
 }
-
-
-
 .success-notification {
   position: fixed;
   z-index: 11100;

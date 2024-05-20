@@ -13,8 +13,8 @@ const description = ref('')
 const actionDone = ref(false)
 
 const submitNewTask = async () => {
-  const currentUser = useUserStore().user;
-  if (!currentUser || !currentUser.data || !currentUser.data.user) {
+  //const currentUser = useUserStore().user;
+  if (!useUserStore().user || !useUserStore().user.data || !useUserStore().user.data.user) {
     console.error('User data is not available');
     return;
   }
@@ -77,13 +77,14 @@ const submitNewTask = async () => {
         <button type="submit" value="Add Task">Add Task</button>
       </div>
     </form>
-  </section>
-  <transition name="slide-fade">
+    <transition name="slide-fade">
     <div v-if="actionDone" class="success-notification">
       <img src="@/assets/check_imago_color.png" alt="check" />
       <p>The task has been added successfully!</p>
     </div>
   </transition>
+  </section>
+  
 </template>
 
 <style scoped>

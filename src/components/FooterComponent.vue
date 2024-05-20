@@ -7,37 +7,39 @@ const userStore = useUserStore()
 </script>
 
 <template>
-  <article >
-    <ul class="footer">
-      <li>
-        <router-link to="/notfound">
-          <a href="#">About</a>
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/notfound">
-          <a href="#">Contact</a>
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/notfound">
-          <a href="#">Privacy</a>
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/notfound">
-          <a href="#">Terms</a>
-        </router-link>
-      </li>
-    </ul>
-  </article>
-  <div class="logo">
-    <router-link to="/">
-      <a href="#" class="link off"
-        ><img src="../assets/tasklist_logo_yellow.png" alt="tasklist logo"
-      /></a>
-    </router-link>
-  </div>
+  <section>
+    <article>
+      <ul class="footer">
+        <li>
+          <router-link to="/notfound">
+            <a href="#">About</a>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/notfound">
+            <a href="#">Contact</a>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/notfound">
+            <a href="#">Privacy</a>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/notfound">
+            <a href="#">Terms</a>
+          </router-link>
+        </li>
+      </ul>
+    </article>
+    <div class="logo">
+      <router-link to="/">
+        <a href="#" class="link off"
+          ><img src="../assets/tasklist_logo_yellow.png" alt="tasklist logo"
+        /></a>
+      </router-link>
+    </div>
+  </section>
 </template>
 
 <style scoped>
@@ -45,7 +47,6 @@ div {
   width: 100vw;
 }
 .footer {
-  
   display: flex;
   align-items: center;
   justify-content: space-around;

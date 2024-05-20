@@ -29,7 +29,8 @@ const formatDate = (createdAt) => {
 async function markAsDone(taskId) {
   const success = await taskStore.updateTaskStatus(taskId, 'Done');
   if (success) {
-    await taskStore.fetchTasks(user.value.data.user.id);
+    
+    await taskStore.fetchTasks(useUserStore().user.data.user.id);
     actionMarkAsDone.value = true;
     isDone.value = true;
     setTimeout(() => {
@@ -70,7 +71,7 @@ const emitEditTask = (taskId) => {
     <div class="Section">
       <p class="component-name">Your tasks</p>
     </div>
-    <div v-if="!tasks">
+    <div v-if="!tasks || tasks.length === 0">
       <p class="no-tasks">No tasks available</p>
     </div>
     <div v-for="task in tasks" :key="task.id" class="todo-list" :class="getTaskClass(task.status)">
@@ -92,8 +93,7 @@ const emitEditTask = (taskId) => {
         </button>
       </div>
     </div>
-  </article>
-  <transition name="slide-fade">
+    <transition name="slide-fade">
     <div v-if="actionMarkAsDone" class="success-notification">
       <img src="@/assets/check_imago_color.png" alt="check" />
       <p>Task Done!</p>
@@ -105,6 +105,8 @@ const emitEditTask = (taskId) => {
       <p>Task deleted successfully!</p>
     </div>
   </transition>
+  </article>
+
 </template>
 
 <style scoped>
