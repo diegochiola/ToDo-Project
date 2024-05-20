@@ -57,7 +57,7 @@ function handleProfileDeleted() {
     <NavBarComponent />
     <article>
       <div class="component">
-        <img src="../assets/profile_imago_yellow.png" alt="profile imago" />
+        <img src="@/assets/profile_imago_yellow.png" alt="profile imago" />
         <p>My Profile</p>
       </div>
 
