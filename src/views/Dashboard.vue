@@ -92,7 +92,7 @@ h1 {
 }
 .update-task-component {
   margin-top: 60px;
-  margin-bottom: 90px;
+  
 }
 footer {
   position: fixed;

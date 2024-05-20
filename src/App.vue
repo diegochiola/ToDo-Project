@@ -17,9 +17,9 @@ onMounted(async () => {
     if (!user.value.data.user) {
       router.push({ path: '/auth' })
     } else {
+      await userStore.fetchProfile(useUserStore().user.data.user.id)
       if (!userStore.profile) {
-        await userStore.fetchProfile(useUserStore().user.data.user.id)
-        await taskStore.fetchTasks(useUserStore().user.data.user.id) //agregar la llamada a las tasks
+        await taskStore.fetchTasks(useUserStore().user.data.user.id) 
         router.push({ path: '/' })
       }
     }

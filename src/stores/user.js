@@ -27,8 +27,8 @@ export const useUserStore = defineStore('user', {
         })
         if (error) throw error
         if (data) {
-        console.log('User created successfully! Check your email for verification')
-         const profileData= {
+          console.log('User created successfully! Check your email for verification')
+          const profileData = {
             user_id: data.user.id,
             name: null,
             username: username,
@@ -36,14 +36,13 @@ export const useUserStore = defineStore('user', {
             email: email,
             avatar_url: defaultAvatar
           }
-          console.log('Default Avatar URL:', defaultAvatar);
+          console.log('Default Avatar URL:', defaultAvatar)
           await this.createProfile(profileData)
           this.profile = profileData
           this.user = data.user
-          console.log(this.user)
-          console.log(this.profile)
+
           router.push('/')
-         console.log('User and profile created successfully!')
+          console.log('User and profile created successfully!')
         }
       } catch (error) {
         console.error('Error creating user:', error.message)
@@ -58,7 +57,6 @@ export const useUserStore = defineStore('user', {
       })
       if (error) throw error
       if (data) {
-
         this.user = data
         console.log('User:', this.user)
       }
@@ -74,7 +72,6 @@ export const useUserStore = defineStore('user', {
           router.push('/auth')
           this.user = null
           this.profile = null
-          this.$store.tasks.tasks = null;
         }
       } catch (error) {
         console.error('Error al cerrar sesión:', error)
@@ -83,10 +80,7 @@ export const useUserStore = defineStore('user', {
     async createProfile(profileData) {
       try {
         console.log(profileData)
-        const { data, error } = await supabase
-        .from('profiles')
-        .insert(profileData)
-        .single()
+        const { data, error } = await supabase.from('profiles').insert(profileData).single()
         if (error) {
           throw new Error(error.message)
         }
@@ -98,9 +92,7 @@ export const useUserStore = defineStore('user', {
     async fetchProfile(user_id) {
       console.log(user_id)
       try {
-        const { data, error } = await supabase.from('profiles')
-        .select('*')
-        .eq('user_id', user_id)
+        const { data, error } = await supabase.from('profiles').select('*').eq('user_id', user_id)
         if (error) {
           throw new Error(error.message)
         }

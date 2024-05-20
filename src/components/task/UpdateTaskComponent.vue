@@ -48,8 +48,7 @@ async function updateTaskById() {
     updatedDescription.value.charAt(0).toUpperCase() + updatedDescription.value.slice(1)
 
   await taskStore.updateTask(currentTaskId.value, upperTitle, updatedStatus.value, upperDescription)
-
-  await taskStore.fetchTasks(user.value.data.user.id)
+  await taskStore.fetchTasks(useUserStore().user.data.user.id)
 
   actionDone.value = true
   setTimeout(() => {
@@ -85,13 +84,13 @@ async function updateTaskById() {
         <button type="submit" value="Update Task">Update Task</button>
       </div>
     </form>
-  </section>
-  <transition name="slide-fade">
+    <transition name="slide-fade">
     <div v-if="actionDone" class="success-notification">
       <img src="@/assets/check_imago_color.png" alt="check" />
       <p>Task updated successfully!</p>
     </div>
   </transition>
+  </section>
 </template>
 
 <style scoped>
