@@ -42,7 +42,7 @@ function handleUpdateTaskComplete() {
     <div class="dashboard-container">
       <div class="dashboard">
         <h1>Welcome to</h1>
-      <img src="../assets/tasklist_logo_color.png" alt="tasklist logo" />
+      <img src="@/assets/tasklist_logo_color.png" alt="tasklist logo" />
       </div>
       <p class="slogan">Nice to have you here again.</p>
     </div>
