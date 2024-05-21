@@ -48,6 +48,7 @@ async function updateTaskById() {
     updatedDescription.value.charAt(0).toUpperCase() + updatedDescription.value.slice(1)
 
   await taskStore.updateTask(currentTaskId.value, upperTitle, updatedStatus.value, upperDescription)
+  console.log(useUserStore().user.data.user.id)
   await taskStore.fetchTasks(useUserStore().user.data.user.id)
 
   actionDone.value = true

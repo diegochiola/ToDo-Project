@@ -247,7 +247,7 @@ function zoomOut() {
     justify-content: center;
   }
   .profile-info{
-  font-size: 10px;
+  font-size: 15px;
   border-radius: 0 0px 30px 0;
 }
 .profile-detail{

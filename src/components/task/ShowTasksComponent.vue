@@ -52,7 +52,7 @@ function getTaskClass(status) {
 }
 async function deleteTaskById(taskId) {
   await taskStore.deleteTask(taskId)
-  await taskStore.fetchTasks(user.value.data.user.id)
+  await taskStore.fetchTasks(useUserStore().user.data.user.id)
   actionDone.value = true
   setTimeout(() => {
     actionDone.value = false
@@ -184,7 +184,7 @@ h4 {
   text-align: left;
 }
 .task-details p.created-at {
-  font-size: 12px;
+  font-size: 15px;
   color: var(--light-gray);
 }
 .buttons {
@@ -217,6 +217,7 @@ h4 {
 }
 .no-tasks {
   font-size: 15px;
+  padding-bottom: 10px;
   color: var(--light);
 }
 .button-profile {
@@ -279,10 +280,10 @@ h4 {
   }
 
   h4 {
-    font-size: 14px;
+    font-size: 16px;
   }
   .task-details p {
-    font-size: 12px;
+    font-size: 14px;
   }
   .task-details {
     padding-left: 0px;
