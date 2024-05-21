@@ -266,7 +266,7 @@ h4 {
   transform: translateY(-20px);
   opacity: 0;
 }
-@media only screen and (max-width: 768px) {
+@media (max-width: 480px){
   .component-name {
     font-size: 15px;
   }
@@ -281,9 +281,11 @@ h4 {
 
   h4 {
     font-size: 16px;
+    text-align: center;
   }
   .task-details p {
     font-size: 14px;
+    text-align: center;
   }
   .task-details {
     padding-left: 0px;
@@ -291,7 +293,6 @@ h4 {
   .task-button {
     width: 25px;
     height: auto;
-
     margin-top: 10px;
     margin-bottom: 10px;
   }

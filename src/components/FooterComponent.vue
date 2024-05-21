@@ -64,7 +64,7 @@ a:hover {
 .logo {
   display: none;
 }
-@media only screen and (max-width: 768px) {
+@media (max-width: 480px){
   .footer {
     display: flex;
     flex-direction: row;

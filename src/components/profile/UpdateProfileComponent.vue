@@ -252,8 +252,8 @@ h3 {
   opacity: 0;
 }
 
-@media only screen and  (max-width: 720px){
-  .component-name {
+@media (max-width: 480px){
+    .component-name {
     font-size: 15px;
     align-content: center;
   }

@@ -58,8 +58,8 @@ function handleUpdateTaskComplete() {
         />
       </article>
       <ShowTasksComponent class="update-task-component" @edit-task="handleEditTask" />
-      <FooterComponent />
     </section>
+    <FooterComponent />
 </template>
 
 <style scoped>
@@ -117,7 +117,7 @@ img {
     height: auto;
   }
   .slogan {
-    font-size: 10px;
+    font-size: 14px;
     text-align: center;
   }
 }

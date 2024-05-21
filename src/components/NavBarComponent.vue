@@ -161,7 +161,7 @@ a:hover {
   opacity: 0;
 }
 
-@media only screen and (max-width: 768px) {
+@media (max-width: 480px){
   .nav-list {
     gap: 10px;
   }

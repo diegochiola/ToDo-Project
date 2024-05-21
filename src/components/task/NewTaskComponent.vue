@@ -1,10 +1,9 @@
 <script setup>
 import { ref } from 'vue'
-
+import { useUserStore } from '../../stores/user.js';
 import { useTaskStore } from '../../stores/task.js'
 const taskStore = useTaskStore()
 
-import { useUserStore } from '../../stores/user.js'
 const userStore = useUserStore()
 
 const title = ref('')
@@ -221,9 +220,9 @@ h3 {
   transform: translateY(-20px);
   opacity: 0;
 }
-@media only screen and (max-width: 768px) {
-  .component-name {
-    font-size: 15px;
+@media (max-width: 480px){
+    .component-name {
+    font-size: 18px;
     align-content: center;
   }
   .to-dos {
@@ -231,16 +230,16 @@ h3 {
   }
   button {
     height: 30px;
-    font-size: 12px;
+    font-size: 14px;
   }
   label {
-    font-size: 12px;
+    font-size: 14px;
   }
   input {
-    font-size: 9px;
+    font-size: 12px;
   }
   .selector {
-    font-size: 9px;
+    font-size: 12px;
   }
   .success-notification {
     flex-direction: column;

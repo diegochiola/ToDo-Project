@@ -40,9 +40,8 @@ export const useUserStore = defineStore('user', {
           await this.createProfile(profileData)
           this.profile = profileData
           this.user = data.user
-
-          router.push('/')
           console.log('User and profile created successfully!')
+          router.push('/')
         }
       } catch (error) {
         console.error('Error creating user:', error.message)
@@ -80,7 +79,7 @@ export const useUserStore = defineStore('user', {
     async createProfile(profileData) {
       try {
         console.log(profileData)
-        const { data, error } = await supabase.from('profiles').insert(profileData).single()
+        const { error } = await supabase.from('profiles').insert(profileData).single()
         if (error) {
           throw new Error(error.message)
         }
