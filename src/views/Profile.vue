@@ -52,7 +52,7 @@ function handleProfileDeleted() {
 </script>
 
 <template>
-  <section>
+  <section class="min-h">
     <NavBarComponent />
     <article>
       <div class="component">
@@ -105,6 +105,10 @@ footer {
   bottom: 0;
   width: 100%;
   height: 60px;
+}
+
+.min-h{
+  min-height: 96vh;
 }
 @media only screen and (max-width: 768px){
   .component{

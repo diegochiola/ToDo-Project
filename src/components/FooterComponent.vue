@@ -32,13 +32,6 @@ const userStore = useUserStore()
         </li>
       </ul>
     </article>
-    <div class="logo">
-      <router-link to="/">
-        <a href="#" class="link off"
-          ><img src="../assets/taskList_logo_yellow.png" alt="tasklist logo"
-        /></a>
-      </router-link>
-    </div>
   </section>
 </template>
 
@@ -71,10 +64,10 @@ a:hover {
 .logo {
   display: none;
 }
-@media only screen and (max-width: 768px) {
+@media (max-width: 480px){
   .footer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: auto;
     padding: 10px;
   }
@@ -95,7 +88,7 @@ a:hover {
     cursor: pointer;
   }
   li {
-    font-size: 9px;
+    font-size: 12px;
   }
 }
 </style>

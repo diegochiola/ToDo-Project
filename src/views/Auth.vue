@@ -42,7 +42,7 @@ function toggleUser() {
 
 <style scoped>
 .auth {
-  padding-top: 60px;
+  padding-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,7 +69,7 @@ h1 {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 50px;
+  gap: 20px;
   width: 100%;
 }
 .change-component {
@@ -94,6 +94,13 @@ a:hover {
 }
 
 @media only screen and  (max-width: 720px) {
+  .login-components img {
+    display: none;
+
+}
+}
+@media (max-width: 480px){
+
   .auth {
   gap: 0px;
  
@@ -104,7 +111,7 @@ a:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
   }
   h1 {
   color: var(--purple);
@@ -122,19 +129,16 @@ a:hover {
     justify-content: center;
  
   }
-  .login-components img {
-    display: none;
 
-}
 .change-component{
   flex-direction: column;
 }
 p {
-  font-size: 9px;
+  font-size: 12px;
 }
 a {
 
-  font-size: 9px;
+  font-size: 12px;
 }
 
 

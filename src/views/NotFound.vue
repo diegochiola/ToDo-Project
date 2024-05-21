@@ -7,7 +7,6 @@ import FooterComponent from '../components/FooterComponent.vue'
 <template>
   <section>
     <NavBarComponent />
-    
     <article class="error">
       <div class="not-found">
         <p class="title">We lost this page. </p>
@@ -38,7 +37,7 @@ import FooterComponent from '../components/FooterComponent.vue'
  justify-content: space-around;
  align-items: center;
  padding: 60px;
- height: 90vh;
+ height: 76vh;
  margin-bottom: 60px;
 }
 .not-found {
@@ -65,11 +64,12 @@ import FooterComponent from '../components/FooterComponent.vue'
 .logo{
     display: flex;
     align-items: flex-start;
-    background-color: var(--white);
     padding: 10px;
     height: 50px;
+    width:auto;
     border-radius: 60px;
-    box-shadow: var(--shadow);
+    
+
 
 }
 .link img {

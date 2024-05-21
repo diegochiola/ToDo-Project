@@ -241,13 +241,13 @@ function zoomOut() {
   transform: translateY(-20px);
   opacity: 0;
 }
-@media only screen and  (max-width: 720px){
-  .profile-details{
+@media (max-width: 480px){
+    .profile-details{
     flex-direction: column;
     justify-content: center;
   }
   .profile-info{
-  font-size: 10px;
+  font-size: 15px;
   border-radius: 0 0px 30px 0;
 }
 .profile-detail{

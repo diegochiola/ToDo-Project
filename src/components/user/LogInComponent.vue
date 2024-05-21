@@ -158,22 +158,24 @@ button:hover {
   transform: translateY(-20px);
   opacity: 0;
 }
-@media only screen and (max-width: 720px) {
+
+
+@media (max-width: 480px){
   .login {
     width: 250px;
 height: 450px;
   }
   h1 {
-    font-size: 15px;
+    font-size: 18px;
   }
   label {
-    font-size: 12px;
+    font-size: 14px;
   }
   input {
-    font-size: 10px;
+    font-size: 12px;
   }
   button {
-    font-size: 12px;
+    font-size: 14px;
   }
   .success-notification {
     flex-direction: column;
@@ -182,7 +184,7 @@ height: 450px;
     gap: 15px;
   }
   .success-notification p {
-    font-size: 12px;
+    font-size: 16px;
   }
 }
 </style>

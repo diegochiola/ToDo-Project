@@ -106,7 +106,7 @@ const handleSubmit = async () => {
     <transition name="slide-fade">
       <div v-if="actionDone" class="success-notification">
         <img src="@/assets/check_imago_color.png" alt="check" />
-        <p>Successful registration! Check your email and confirm</p>
+        <p>Successful registration! Please, first check your email and confirm</p>
       </div>
     </transition>
   </section>
@@ -212,22 +212,22 @@ button:hover {
   opacity: 0;
 }
 
-@media only screen and (max-width: 720px) {
+@media (max-width: 480px){
   .login {
     width: 250px;
     height: 450px;
   }
   h1 {
-    font-size: 15px;
+    font-size: 18px;
   }
   label {
-    font-size: 12px;
+    font-size: 14px;
   }
   input {
-    font-size: 10px;
+    font-size: 12px;
   }
   button {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 </style>

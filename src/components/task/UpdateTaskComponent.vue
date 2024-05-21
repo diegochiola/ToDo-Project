@@ -48,6 +48,7 @@ async function updateTaskById() {
     updatedDescription.value.charAt(0).toUpperCase() + updatedDescription.value.slice(1)
 
   await taskStore.updateTask(currentTaskId.value, upperTitle, updatedStatus.value, upperDescription)
+  console.log(useUserStore().user.data.user.id)
   await taskStore.fetchTasks(useUserStore().user.data.user.id)
 
   actionDone.value = true
@@ -224,9 +225,9 @@ h3 {
   transform: translateY(-20px);
   opacity: 0;
 }
-@media only screen and (max-width: 768px) {
-  .component-name {
-    font-size: 15px;
+@media (max-width: 480px){
+    .component-name {
+    font-size: 18px;
     align-content: center;
   }
   .to-dos {
@@ -234,16 +235,16 @@ h3 {
   }
   button {
     height: 30px;
-    font-size: 12px;
+    font-size: 14px;
   }
   label {
-    font-size: 12px;
+    font-size: 14px;
   }
   input {
-    font-size: 9px;
+    font-size: 12px;
   }
   .selector {
-    font-size: 9px;
+    font-size: 12px;
   }
   .success-notification {
     flex-direction: column;
@@ -252,7 +253,7 @@ h3 {
     gap: 15px;
   }
   .success-notification p {
-    font-size: 12px;
+    font-size: 16px;
   }
 }
 </style>

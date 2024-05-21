@@ -16,7 +16,6 @@ const updateTaskComponent = ref(null)
 import { useUserStore } from './../stores/user.js'
 const userStore = useUserStore()
 
-
 function handleEditTask(taskId) {
   selectedTaskId.value = Number(taskId)
   console.log(selectedTaskId.value)
@@ -31,42 +30,39 @@ function handleUpdateTaskComplete() {
   setTimeout(() => {
     showNewTaskComponent.value = true
   }, 2000)
-
 }
 </script>
 
 <template>
-  <NavBarComponent />
- 
-  <section>
-    <div class="dashboard-container">
-      <div class="dashboard">
-        <h1>Welcome to</h1>
-      <img src="../assets/taskList_logo_color.png" alt="tasklist logo" />
-      </div>
-      <p class="slogan">Nice to have you here again.</p>
-    </div>
-  </section>
+    <NavBarComponent />
 
-  <ShowProfileComponent :showContent="false" />
-  <section >
-    <article v-if="showNewTaskComponent">
-      <NewTaskComponent class="newTaskcomponent" />
-    </article>
-    <article ref="updateTaskComponent" v-else>
-      <UpdateTaskComponent
-        :taskId="selectedTaskId"
-        @update-task-complete="handleUpdateTaskComplete"
-      />
-    </article>
-    <ShowTasksComponent class="update-task-component" @edit-task="handleEditTask" />
-    
+    <section>
+      <div class="dashboard-container">
+        <div class="dashboard">
+          <h1>Welcome to</h1>
+          <img src="../assets/taskList_logo_color.png" alt="tasklist logo" />
+        </div>
+        <p class="slogan">Nice to have you here again.</p>
+      </div>
+    </section>
+
+    <ShowProfileComponent :showContent="false" />
+    <section>
+      <article v-if="showNewTaskComponent">
+        <NewTaskComponent class="newTaskcomponent" />
+      </article>
+      <article ref="updateTaskComponent" v-else>
+        <UpdateTaskComponent
+          :taskId="selectedTaskId"
+          @update-task-complete="handleUpdateTaskComplete"
+        />
+      </article>
+      <ShowTasksComponent class="update-task-component" @edit-task="handleEditTask" />
+    </section>
     <FooterComponent />
-  </section>
 </template>
 
 <style scoped>
-
 h1 {
   color: var(--purple-dark);
 }
@@ -77,7 +73,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap:5px;
+  gap: 5px;
 }
 .dashboard {
   display: flex;
@@ -86,13 +82,12 @@ h1 {
   justify-content: center;
   gap: 10px;
 }
-.newTaskcomponent{
+.newTaskcomponent {
   margin-top: 60px;
   margin-bottom: 60px;
 }
 .update-task-component {
   margin-top: 60px;
-  
 }
 footer {
   position: fixed;
@@ -107,26 +102,23 @@ img {
 .slogan {
   font-size: 12px;
 }
-@media only screen and (max-width: 768px){
-.dashboard{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-h1{
-  font-size: 15px;
-  text-align: center;
-}
-.dashboard img{
-  width: 80px;
-  height: auto;
-}
-.slogan {
-  font-size: 10px;
-  text-align: center;
-}
-
-
-
+@media only screen and (max-width: 768px) {
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h1 {
+    font-size: 18px;
+    text-align: center;
+  }
+  .dashboard img {
+    width: 80px;
+    height: auto;
+  }
+  .slogan {
+    font-size: 14px;
+    text-align: center;
+  }
 }
 </style>
