@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { useUserStore } from '../../stores/user.js';
+import { useUserStore } from '../../stores/user.js'
 import { useTaskStore } from '../../stores/task.js'
 const taskStore = useTaskStore()
 
@@ -10,15 +10,25 @@ const title = ref('')
 const status = ref('')
 const description = ref('')
 const actionDone = ref(false)
+const isTitleValid = ref(true)
+
+const validateTitle = (title) => {
+  return title.trim().length > 3
+}
 
 const submitNewTask = async () => {
   //const currentUser = useUserStore().user;
-  if (!useUserStore().user || !useUserStore().user.data || !useUserStore().user.data.user) {
-    console.error('User data is not available');
-    return;
+  isTitleValid.value = validateTitle(title.value)
+  console.log(isTitleValid)
+  if (!isTitleValid.value) {
+    return
   }
-  const upperTitle = title.value.charAt(0).toUpperCase() + title.value.slice(1);
-  const upperDescription = description.value.charAt(0).toUpperCase() + description.value.slice(1);
+  if (!useUserStore().user || !useUserStore().user.data || !useUserStore().user.data.user) {
+    console.error('User data is not available')
+    return
+  }
+  const upperTitle = title.value.charAt(0).toUpperCase() + title.value.slice(1)
+  const upperDescription = description.value.charAt(0).toUpperCase() + description.value.slice(1)
 
   await taskStore.addTask(
     useUserStore().user.data.user.id,
@@ -45,6 +55,9 @@ const submitNewTask = async () => {
       <div class="form-elements">
         <label>What's on your task list?</label>
         <input type="text" placeholder="e.g Grocery Shopping" id="title" v-model="title" required />
+        <span v-if="!isTitleValid" class="error-message">
+          Please add a valid title with more than 3 characters
+        </span>
       </div>
       <div class="form-elements">
         <label>Description </label>
@@ -77,13 +90,12 @@ const submitNewTask = async () => {
       </div>
     </form>
     <transition name="slide-fade">
-    <div v-if="actionDone" class="success-notification">
-      <img src="@/assets/check_imago_color.png" alt="check" />
-      <p>The task has been added successfully!</p>
-    </div>
-  </transition>
+      <div v-if="actionDone" class="success-notification">
+        <img src="@/assets/check_imago_color.png" alt="check" />
+        <p>The task has been added successfully!</p>
+      </div>
+    </transition>
   </section>
-  
 </template>
 
 <style scoped>
@@ -192,6 +204,11 @@ h3 {
   margin-bottom: 20px;
 }
 
+.error-message {
+  color: var(--yellow);
+  font-size: 10px;
+  padding: 0;
+}
 .success-notification {
   position: fixed;
   z-index: 11100;
@@ -220,8 +237,8 @@ h3 {
   transform: translateY(-20px);
   opacity: 0;
 }
-@media (max-width: 480px){
-    .component-name {
+@media (max-width: 480px) {
+  .component-name {
     font-size: 18px;
     align-content: center;
   }
