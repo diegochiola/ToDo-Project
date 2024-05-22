@@ -21,6 +21,10 @@
 
 ![Recording 2024-05-22 at 21 56 21](https://github.com/diegochiola/ToDo-Project/assets/140075204/cc8ba27d-9090-4903-8067-fe7ab77f72a8)
 
+### CRUD: task ✅
+
+![TaskList_taskCRUD](https://github.com/diegochiola/ToDo-Project/assets/140075204/f55cc10b-7a25-4c15-a21a-d6fd1913d40b)
+
 
 ##Using Vue 3 in Vite
 
