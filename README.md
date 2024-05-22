@@ -1,7 +1,8 @@
 ![](https://github.com/diegochiola/ToDo-Project/blob/main/src/assets/taskList_logo_white.png?raw=true)
 # TaskList  
 
-![](https://github.com/diegochiola/ToDo-Project/blob/main/src/assets/taskList_login.png?raw=true) 
+![Recording 2024-05-22 at 22 04 06](https://github.com/diegochiola/ToDo-Project/assets/140075204/b86d86bf-8f57-4ba1-b3a0-9f4f2fbd5dcd)
+
 
 
 ### Built with  🛠️
@@ -16,13 +17,15 @@
 
 ![Canva](https://img.shields.io/badge/Canva-%2300C4CC.svg?style=for-the-badge&logo=Canva&logoColor=white) ![Adobe Illustrator](https://img.shields.io/badge/adobe%20illustrator-%23FF9A00.svg?style=for-the-badge&logo=adobe%20illustrator&logoColor=white)
 
+### Responsiveness 💻📲
+
+![Recording 2024-05-22 at 21 56 21](https://github.com/diegochiola/ToDo-Project/assets/140075204/cc8ba27d-9090-4903-8067-fe7ab77f72a8)
 
 
-## Recommended IDE Setup
-
-### Using Vue 3 in Vite
+##Using Vue 3 in Vite
 
 This template should help get you started developing with Vue 3 in Vite.
+## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
@@ -72,5 +75,4 @@ Diego Chiola FULLSTACK WEB Developer
 [TOCM]
 
 [TOC]
-
 
