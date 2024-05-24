@@ -8,9 +8,9 @@ TaskList is a simple and efficient task management application that allows users
 ### Links
 [taskList-website](https://tasklistwebsite.netlify.app)
 
-[taskList-presentation](https://github.com/diegochiola/ToDo-Project)
+[github repository](https://github.com/diegochiola/ToDo-Project)
 
-[github repository](https://www.canva.com/design/DAGF-rPaH0c/QznRMq6a9ay0TTdARawdfg/edit?utm_content=DAGF-rPaH0c&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+[taskList-presentation](https://www.canva.com/design/DAGF-rPaH0c/QznRMq6a9ay0TTdARawdfg/edit?utm_content=DAGF-rPaH0c&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 
 
