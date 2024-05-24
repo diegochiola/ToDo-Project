@@ -7,21 +7,20 @@ import { useTaskStore } from './stores/task.js'
 
 const router = useRouter()
 const userStore = useUserStore()
-const taskStore = useTaskStore()
 const { user } = storeToRefs(userStore)
+const taskStore = useTaskStore()
 
 onMounted(async () => {
   try {
     await userStore.fetchUser()
 
-    if (!user.value.data.user) {
+    if (!user.value) {
       router.push({ path: '/auth' })
     } else {
-      await userStore.fetchProfile(useUserStore().user.data.user.id)
-      if (!userStore.profile) {
-        await taskStore.fetchTasks(useUserStore().user.data.user.id) 
-        router.push({ path: '/' })
-      }
+      await userStore.fetchProfile()
+
+      await taskStore.fetchTasks()
+      router.push({ path: '/' })
     }
   } catch (e) {
     console.log(e)

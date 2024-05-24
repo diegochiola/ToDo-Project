@@ -30,7 +30,7 @@ async function markAsDone(taskId) {
   const success = await taskStore.updateTaskStatus(taskId, 'Done');
   if (success) {
     
-    await taskStore.fetchTasks(useUserStore().user.data.user.id);
+    await taskStore.fetchTasks();
     actionMarkAsDone.value = true;
     isDone.value = true;
     setTimeout(() => {
@@ -52,7 +52,7 @@ function getTaskClass(status) {
 }
 async function deleteTaskById(taskId) {
   await taskStore.deleteTask(taskId)
-  await taskStore.fetchTasks(useUserStore().user.data.user.id)
+  await taskStore.fetchTasks()
   actionDone.value = true
   setTimeout(() => {
     actionDone.value = false

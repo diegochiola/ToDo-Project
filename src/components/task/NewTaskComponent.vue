@@ -23,15 +23,10 @@ const submitNewTask = async () => {
   if (!isTitleValid.value) {
     return
   }
-  if (!useUserStore().user || !useUserStore().user.data || !useUserStore().user.data.user) {
-    console.error('User data is not available')
-    return
-  }
   const upperTitle = title.value.charAt(0).toUpperCase() + title.value.slice(1)
   const upperDescription = description.value.charAt(0).toUpperCase() + description.value.slice(1)
 
   await taskStore.addTask(
-    useUserStore().user.data.user.id,
     upperTitle,
     status.value,
     upperDescription
@@ -41,7 +36,7 @@ const submitNewTask = async () => {
   description.value = ''
   actionDone.value = true
   //console.log(userStore.user.data.user.id)
-  await taskStore.fetchTasks(useUserStore().user.data.user.id)
+  await taskStore.fetchTasks()
   setTimeout(() => {
     actionDone.value = false
   }, 2000)

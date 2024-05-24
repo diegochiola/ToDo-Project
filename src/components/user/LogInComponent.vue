@@ -16,10 +16,9 @@ const handleSubmit = async () => {
   try {
     await userStore.login(email.value, password.value)
    
-    if (userStore.user.user.id) {
-      //await userStore.fetchProfile(); agregar el perfil al logearme
-      await taskStore.fetchTasks(userStore.user.user.id)
-      await userStore.fetchProfile(userStore.user.user.id)
+    if (userStore.user) {
+      await taskStore.fetchTasks()
+      await userStore.fetchProfile()
       actionDone.value = true
       console.log('Login successful')
       setTimeout(() => {

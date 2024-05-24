@@ -20,8 +20,7 @@ async function loadProfileData() {
   try {
     if (useUserStore().profile) {
       const profile = useUserStore().profile
-      const user_id = useUserStore().user.data.user.id
-      await userStore.fetchProfile(user_id)
+      await userStore.fetchProfile()
       updatedName.value = profile.name
       updatedUsername.value = profile.username
       updatedWebsite.value = profile.website
@@ -44,7 +43,6 @@ async function submitUpdateProfile() {
     return
   }
   const profileData = {
-    user_id: useUserStore().user.data.user.id,
     name: updatedName.value,
     username: updatedUsername.value,
     website: updatedWebsite.value,
@@ -55,8 +53,7 @@ async function submitUpdateProfile() {
   try {
     await useUserStore().updateProfile(profileData)
     console.log('Profile updated successfully')
-    const user_id = useUserStore().user.data.user.id
-    await userStore.fetchProfile(user_id)
+    await userStore.fetchProfile()
     actionDone.value = true
     setTimeout(() => {
       actionDone.value = false

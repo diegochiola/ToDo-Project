@@ -2,36 +2,34 @@
 
 import { defineStore } from 'pinia'
 import { supabase } from '../supabase'
+import { useUserStore } from "../stores/user.js";
 
 //declaramos la store como: "tasks"
 export const useTaskStore = defineStore('tasks', {
   state: () => ({
-    tasks: null
+    tasks:[],
   }),
   actions: {
-    async fetchTasks(user_id) {
+    async fetchTasks() {
       try {
-        const { data: tasks, error } = await supabase
+        const { data: tasks } = await supabase
           .from('tasks')
           .select('*')
-          .eq('user_id', user_id)
+          .eq('user_id', useUserStore().user.id)
           .order('id', { ascending: false })
-        if (error) {
-          throw error;
-        }
-        this.tasks = tasks;
+          this.tasks = tasks;
       } catch (error) {
         console.error('Error fetching tasks:', error.message);
       }
     },
-  async addTask(user_id, title, status, description) {
+  async addTask( title, status, description) {
     if (title.trim() === '') {
       alert('Please add a valid task title')
       return
     }
     const { error } = await supabase.from('tasks').insert([
       {
-        user_id: user_id,
+        user_id: useUserStore().user.id,
         title: title,
         status: status,
         description: description,
@@ -43,15 +41,16 @@ export const useTaskStore = defineStore('tasks', {
       alert('An error occurred while adding the task. Please try again later.')
     }
   },
-  async deleteTask(id) {
+  async deleteTask(taskId) {
     const { error } = await supabase
     .from('tasks')
     .delete()
-    .eq('id', id)
+    .eq('id', taskId)
     if (error) {
       console.error('Error deleting a task:', error.message)
       alert('An error occurred while deleting the task. Please try again later.')
     }
+    //this.tasks = this.tasks.filter((task) => task.id !== taskId);
   },
   async updateTask( id, updatedTitle, updatedStatus, updatedDescription) {
     const { error } = await supabase

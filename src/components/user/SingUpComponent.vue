@@ -49,7 +49,7 @@ const handleSubmit = async () => {
     }
     await userStore.signUp(username.value, email.value, password.value, confirmPassword.value)
     actionDone.value = true
-    console.log('SingUP successful, please confirm your email')
+    console.log('Sing up successful, please confirm your email')
     setTimeout(() => {
       actionDone.value = false
     }, 2000)
