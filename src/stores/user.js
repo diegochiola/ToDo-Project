@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import { supabase } from '../supabase'
 import router from '@/router'
 import defaultAvatar from '@/assets/defaultAvatar.png'
+import { useTaskStore } from "../stores/task.js";
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -12,10 +13,10 @@ export const useUserStore = defineStore('user', {
 
   actions: {
     async fetchUser() {
-      const user = await supabase.auth.getUser()
-      this.user = user
-      console.log(this.user)
+      const { data, error } = await supabase.auth.getUser();
+      this.user = data.user;
     },
+
     async signUp(username, email, password, confirmPassword) {
       if (password !== confirmPassword) {
         throw new Error('Passwords do not match')
@@ -56,10 +57,13 @@ export const useUserStore = defineStore('user', {
       })
       if (error) throw error
       if (data) {
-        this.user = data
+        this.user = data.user
+        router.push('/')
+        const taskStore = useTaskStore();
+        await taskStore.fetchTasks();
         console.log('User:', this.user)
       }
-      router.push('/')
+     
     },
     async logOut() {
       try {
