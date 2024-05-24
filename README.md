@@ -61,6 +61,21 @@ TaskList is a simple and efficient task management application that allows users
 Demo:
 ![TaskList_taskCRUD](https://github.com/diegochiola/ToDo-Project/assets/140075204/f55cc10b-7a25-4c15-a21a-d6fd1913d40b)
 
+### Form validations 📝
+ - Sing Up validation.
+
+Demo:
+
+![singup-validation](https://github.com/diegochiola/ToDo-Project/assets/140075204/da8297bd-4acc-4970-8b65-eb8b3255ac36)
+
+ - New Task validation.
+
+Demo:
+
+![newtask-validation](https://github.com/diegochiola/ToDo-Project/assets/140075204/2d16e76f-7296-4efa-abe6-a8fd1daf2969)
+
+
+
 ### Responsiveness 💻📲
 
 ![Recording 2024-05-22 at 21 56 21](https://github.com/diegochiola/ToDo-Project/assets/140075204/cc8ba27d-9090-4903-8067-fe7ab77f72a8)
