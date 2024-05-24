@@ -28,7 +28,7 @@ export const useUserStore = defineStore('user', {
         })
         if (error) throw error
         if (data) {
-          console.log('User created successfully! Check your email for verification')
+          alert('User created successfully! Please check your email for verification')
           const profileData = {
             user_id: data.user.id,
             name: null,
