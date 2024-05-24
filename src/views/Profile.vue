@@ -11,13 +11,14 @@ const showUpdateProfileComponent = ref(false)
 const showNewProfileComponent = ref(false)
 const profileLoaded = ref(false)
 const userStore = useUserStore()
-console.log(userStore)
+
+
 
 
 async function loadProfileData() {
   try {
-    if (useUserStore().profile) {
-      await useUserStore().fetchProfile(useUserStore().user.data.user.id)
+    if (userStore.profile) {
+      await useUserStore().fetchProfile()
       profileLoaded.value = true
       if (!useUserStore().profile) {
         showNewProfileComponent.value = true

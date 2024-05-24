@@ -21,9 +21,9 @@ const showName = ref(false)
 const showWebsite = ref(false)
 async function deleteProfileById() {
   try {
-    await userStore.deleteProfile(useUserStore().user.data.user.id)
+    await userStore.deleteProfile()
     console.log('Se ha eliminado el perfil')
-    await userStore.fetchProfile(useUserStore().user.data.user.id)
+    await userStore.fetchProfile()
     actionDone.value = true
     setTimeout(() => {
       actionDone.value = false

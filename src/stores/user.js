@@ -77,7 +77,7 @@ export const useUserStore = defineStore('user', {
           this.profile = null
         }
       } catch (error) {
-        console.error('Error al cerrar sesión:', error)
+        console.error('Logging out error:', error)
       }
     },
     async createProfile(profileData) {
@@ -92,15 +92,22 @@ export const useUserStore = defineStore('user', {
       }
     },
 
-    async fetchProfile(user_id) {
-      console.log(user_id)
+    async fetchProfile() {
+      if (!this.user) return; 
+      console.log('Fetching profile...')
+      console.log(this.user.id)
       try {
-        const { data, error } = await supabase.from('profiles').select('*').eq('user_id', user_id)
+        const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .match({user_id: this.user.id})
+        .single()
+
         if (error) {
           throw new Error(error.message)
         }
-        this.profile = data[0]
-        console.log('The profile is: ' + this.profile)
+        this.profile = data;
+        console.log('The profile is: ' + data)
       } catch (error) {
         throw new Error('Failed to fetch profile or not profile created yet')
       }
@@ -108,23 +115,25 @@ export const useUserStore = defineStore('user', {
 
     async updateProfile(profileData) {
       console.log(profileData)
-      try {
-        const { data, error } = await supabase
+
+        const { error } = await supabase
           .from('profiles')
           .update(profileData)
-          .eq('user_id', profileData.user_id)
+          .match({user_id: this.user.id})
         if (error) {
           throw new Error(error.message)
         }
-        this.profile = data
-      } catch (error) {
-        throw new Error('Failed to update profile')
-      }
+        this.profile = profileData
+      
     },
 
-    async deleteProfile(user_id) {
+    async deleteProfile() {
       try {
-        const { error } = await supabase.from('profiles').delete().eq('user_id', user_id).single()
+        const { error } = await supabase
+        .from('profiles')
+        .delete()
+        .match({user_id: this.user.id})
+        .single()
         if (error) {
           throw new Error(error.message)
         }
